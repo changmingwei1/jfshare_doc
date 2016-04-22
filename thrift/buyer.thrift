@@ -2,6 +2,16 @@ namespace java com.jfshare.finagle.thrift.buyer
 
 include "result.thrift"
 
+struct AuthInfo{
+    1:string token,
+    2:string ppInfo
+}
+
+struct AuthInfoResult{
+    1:result.Result result,
+    2:AuthInfo authInfo
+}
+
 struct ThirdpartyUser{
 	1:string signinName,
 	2:string userName,
@@ -55,10 +65,9 @@ struct BuyerResult{
     2:Buyer buyer,
     3:LoginLog loginLog,
     4:optional bool value,
-	5:optional ThirdpartyUser thirdUser
+    5:optional ThirdpartyUser thirdUser,
+    6:optional AuthInfo authInfo
 }
-
-
 
 /*买家服务*/
 service BuyerServ {
@@ -67,9 +76,18 @@ service BuyerServ {
 
     /*注册*/
     result.Result signin(1:Buyer buyer);
+    
+    /*new注册*/
+    result.Result newSignin(1:Buyer buyer);
 
     /*登陆*/
     BuyerResult login(1:Buyer buyer, 2:LoginLog loginLog);
+
+    /*登陆*/
+    BuyerResult newLogin(1:Buyer buyer, 2:LoginLog loginLog);
+
+    /*登陆*/
+    BuyerResult smsLogin(1:Buyer buyer, 2:LoginLog loginLog);
 
     /*注销*/
     result.Result logout(1:LoginLog loginLog);
@@ -91,9 +109,19 @@ service BuyerServ {
 	
 	/*重置用户密码*/
     result.Result resetBuyerPwd(1:string newPwd, 2:Buyer buyer);
+
+    /*重置用户密码*/
+    result.Result newResetBuyerPwd(1:string newPwd, 2:Buyer buyer);
+
 	/*绑定第三方登录账号*/
     BuyerResult signinThirdParty(1:LoginLog loginLog, 2:ThirdpartyUser thirdUser);
 	
 	/*账号是否绑定第三方账号*/
     BuyerResult isBindThirdParty(1:string thirdType, 2:LoginLog loginLog);
+    
+    /* 获取鉴权信息*/
+    AuthInfoResult getAuthInfo(1:AuthInfo authInfo, 2:Buyer buyer, 3:LoginLog loginLog);
+
+    /* 验证鉴权 */
+    result.Result validAuth(1:LoginLog loginLog, 2:AuthInfo authInfo);
 }
