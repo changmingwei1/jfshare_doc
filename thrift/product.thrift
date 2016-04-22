@@ -11,12 +11,20 @@ struct ProductSkuItem {
     4:optional string orgPrice,
     5:optional string vPicture,
     6:optional string skuName,
+    /* 重量 单位：kg*/
+    7:optional string weight,
+    /* 参考售价 */
+    8:optional string refPrice,
+    /* 仓库ID */
+    9:optional string storehouseId,
+    /* sku编码 */
+    10:optional string skuNum;
 }
 
 /*商品sku*/
 struct ProductSku {
-     1:optional map<string, ProductSkuItem> productSkuMap, /*K-V:skunum-ProductSkuItem*/
-
+//     1:optional map<string, ProductSkuItem> productSkuMap, /*K-V:skunum-ProductSkuItem*/
+     1:optional list<ProductSkuItem> skuItems,
      /**sku总**/
      2:optional string sellerClassNum,    /*商家填写的sku编码*/
      3:optional string shelf,    /*货架*/
@@ -29,6 +37,9 @@ struct ProductSku {
      10:optional string vPicture, /*sku图片*/
      11:optional string skuName,
      12:optional string skuNum,
+     /* 参考售价 */
+     13:optional string refPrice
+
 }
 
 struct ProductSkuResult{
@@ -46,7 +57,8 @@ struct Product {
 	7:optional string imgKey=",,,,,",
 	8:optional string detailKey,
 	9:optional i32 maxBuyLimit,	
-	10:optional i32 activeState,	
+	10:optional i32 activeState,
+	/* 1.积分现金够的商品,2.普通商品,3.虚拟商品 */
 	11:optional i32 type,
 	12:optional string remark,
 
@@ -61,9 +73,18 @@ struct Product {
 
 	19:optional ProductSku productSku,  /*商品sku信息*/
 	20:optional string productUrl,
-        21:optional string tags,    /*商品关键字，空格分隔*/
+    21:optional string tags,    /*商品关键字，空格分隔*/
 	22:optional string detailContent /*商品详情内容*/
-        23:optional string productSnapshootId,
+    23:optional string productSnapshootId,
+
+    /* 仓库， 可以存多个，多个以英文 “,” 隔开*/
+    24:optional string storehouseIds,
+    /* 邮费模板ID */
+    25:optional string postageId,
+
+
+
+
 
 }
 
@@ -171,7 +192,10 @@ service ProductServ {
 
 	/* 商品概要信息列表查询*/
 	ProductSurveyResult productSurveyQuery(1:ProductSurveyQueryParam param);
-	
+
+	/* 按点击量查询商品列表 */
+	ProductSurveyResult productSurveyQueryByHit(1:ProductSurveyQueryParam param);
+
 	/* 管理后台查询商品概要信息列表查询*/
 	ProductSurveyResult productSurveyBackendQuery(1:ProductSurveyQueryParam param);
 	

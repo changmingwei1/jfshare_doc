@@ -12,7 +12,9 @@ struct StockItem {
 	2:i32 count,
 	
 	/*商品sku锁定数量*/
-	3:i32 lockCount
+	3:i32 lockCount,
+	/* 仓库ID */
+    4:optional string storehouseId
 }
  
 struct StockInfo {

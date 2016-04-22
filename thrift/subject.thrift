@@ -299,7 +299,24 @@ struct SubjectRefDisplayInfo {
 	2:i32 displayId
 }
 
+/************************* 以下是类目属性相关结构 ***********************/
+/* 类目属性查询参数 */
+struct SubjectAttributeQueryParam {
 
+}
+
+/* 类目属性查询结果 */
+struct SubjectAttributeResult {
+    /*结果信息*/
+    1:result.Result result,
+    /*类目属性信息*/
+    3:list<SubjectAttribute> subjectAttributes
+}
+
+/**
+* 类目服务中的redis缓存被注释掉了，需要放开
+*
+**/
 service SubjectServ{
 	/*添加归属类目*/
 	result.Result add(1:SubjectInfo subject);
@@ -386,5 +403,17 @@ service SubjectServ{
 	
 	/*根据表现类目ID查询归属类目信息*/
 	SubjectQueryResult querySubjectsRelation(1:i32 displayId, 2:Page page);
-	
+
+/************************* 以下是类目属性相关接口 ***********************/
+
+    /*添加属性*/
+    result.Result addSubjectAttribute(1:SubjectAttribute atrribute);
+    /*修改属性*/
+    result.Result updateSubjectAttribute(1:SubjectAttribute atrribute);
+    /*删除属性*/
+	result.Result deleteSubjectAttribute(1:SubjectAttribute atrribute);
+	/*批量删除属性*/
+    result.Result deleteSubjectAttributeBatch(1:list<SubjectAttribute> atrributeList);
+	/*查询属性信息*/
+	SubjectAttributeResult querySubjectAttribute(1:SubjectAttributeQueryParam param);
 }
