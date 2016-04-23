@@ -1,4 +1,4 @@
-namespace java com.zhe800.finagle.thrift.baseTemplate
+namespace java com.jfshare.finagle.thrift.baseTemplate
 
 include "result.thrift"
 
