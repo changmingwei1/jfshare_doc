@@ -9,21 +9,23 @@ struct SubjectNode {
 	1:i32 id,
 	/*类目名称*/
 	2:string name,
+	/*类目图标*/
+	3:string img_key,
 	/*父类目，引入类目ID,默认为0表示一级类目*/
-	3:i32 pid,
+	4:i32 pid,
 	/*类目排序,显示时同级类目的排序序号*/
-	4:i32 sorted,
+	5:i32 sorted,
 	/*是否是叶子节点*/
-	5:i32 isLeaf
+	6:i32 isLeaf
 	/*对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"} 可以直接用 Map 解析 */
-	6:optional string displayIds
+	7:optional string displayIds
 	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
 	 *  新增：卖家创建/编辑商品、报名时不显示
 	 *  删除：卖家创建/编辑商品、报名时仍显示
 	 *  已发布：卖家创建/编辑商品、报名时显示
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
-	7:optional i32 status
+	8:optional i32 status
 }
 
 /*归属类目信息*/
@@ -32,37 +34,41 @@ struct SubjectInfo {
 	1:i32 id,
 	/*类目名称*/
 	2:string name,
+	/*类目图标*/
+	3:string img_key,
 	/*父类目，引入类目ID,默认为0表示一级类目*/
-	3:i32 pid,
+	4:i32 pid,
 	/*类目排序,显示时同级类目的排序序号*/
-	4:i32 sorted,
+	5:i32 sorted,
 	/*类目级数*/
-	5:i32 level,
+	6:i32 level,
 	/*是否叶子节点 1:是  0:否        */
-	6:i32 isLeaf,
+	7:i32 isLeaf,
 	/*备注*/
-	7:string demo,
+	8:string demo,
 	/*创建时间*/
-	8:string createTime,
+	9:string createTime,
 	/*创建人*/
-	9:i32 creator,
+	10:i32 creator,
 	/*最后修改时间*/
-	10:string updateTime,
+	11:string updateTime,
 	/*最后修改人*/
-	11:i32 updater,
+	12:i32 updater,
 	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
 	 *  新增：卖家创建/编辑商品、报名时不显示
 	 *  删除：卖家创建/编辑商品、报名时仍显示
 	 *  已发布：卖家创建/编辑商品、报名时显示
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
-	12:i32 status,
+	13:i32 status,
 	/*类目路径*/
-	13:optional string path,
+	14:optional string path,
+	/*类目对应属性*/
+	15:string attributes,
 	/*对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"}  可以直接用 Map 解析 */
-	14:optional string displayIds,
+	16:optional string displayIds,
 	/*类目父树路径集合*/
-	15:optional list<SubjectNode> subjectNodes
+	17:optional list<SubjectNode> subjectNodes
 }
 
 /*属性信息*/
@@ -167,16 +173,21 @@ struct DisplaySubjectNode {
 	1:i32 id,
 	/*类目名称*/
 	2:string name,
-	/*父类目，引入类目ID,默认为0表示一级类目*/
-	3:i32 pid,
-	/*类目排序,显示时同级类目的排序序号*/
-	4:i32 sorted,
-	/*是否叶子节点*/
-	5:i32 isLeaf,
 	/*类目图标*/
-	6:string image,
-	/*归属类目，包含的归属类目id集合，以逗号隔开*/
-	7:string subjectIds
+	3:string img_key,
+	/*父类目，引入类目ID,默认为0表示一级类目*/
+	4:i32 pid,
+	/*类目排序,显示时同级类目的排序序号*/
+	5:i32 sorted,
+	/*是否是叶子节点*/
+	6:i32 isLeaf
+	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
+	 *  新增：卖家创建/编辑商品、报名时不显示
+	 *  删除：卖家创建/编辑商品、报名时仍显示
+	 *  已发布：卖家创建/编辑商品、报名时显示
+	 *  已删除：卖家创建/编辑商品、报名时不显示
+	 */
+	7:optional i32 status
 } 
 
 /*表现类目信息*/
@@ -185,34 +196,39 @@ struct DisplaySubjectInfo {
 	1:i32 id,
 	/*类目名称*/
 	2:string name,
-	/*父类目，引入类目ID,默认为0表示一级类目*/
-	3:i32 pid,
-	/*类目排序,显示时同级类目的排序序号*/
-	4:i32 sorted,
-	/*类目级数*/
-	5:i32 level,
-	/*是否叶子节点*/
-	6:i32 isLeaf,
-	/*归属类目，包含的归属类目id集合，以逗号隔开*/
-	7:string subjectIds,
-	/*类目路径*/
-	8:string path,
 	/*类目图标*/
-	9:string image,
+	3:string img_key,
+	/*父类目，引入类目ID,默认为0表示一级类目*/
+	4:i32 pid,
+	/*类目排序,显示时同级类目的排序序号*/
+	5:i32 sorted,
+	/*类目级数*/
+	6:i32 level,
+	/*是否叶子节点 1:是  0:否        */
+	7:i32 isLeaf,
 	/*备注*/
-	10:string demo,
+	8:string demo,
 	/*创建时间*/
-	11:string createTime,
+	9:string createTime,
 	/*创建人*/
-	12:i32 creator,
+	10:i32 creator,
 	/*最后修改时间*/
-	13:string updateTime,
+	11:string updateTime,
 	/*最后修改人*/
-	14:i32 updater,
-	/*是否已删除，0:未；1：已*/
-	15:i32 deleted,
-	/*类目路径集合*/
-	16:optional list<DisplaySubjectNode> displaySubjectNodes
+	12:i32 updater,
+	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
+	 *  新增：卖家创建/编辑商品、报名时不显示
+	 *  删除：卖家创建/编辑商品、报名时仍显示
+	 *  已发布：卖家创建/编辑商品、报名时显示
+	 *  已删除：卖家创建/编辑商品、报名时不显示
+	 */
+	13:i32 status,
+	/*类目路径*/
+	14:optional string path,
+	/*类目对应属性*/
+	15:string attributes,
+	/*类目父树路径集合*/
+	16:optional list<SubjectNode> subjectNodes
 }
 
 

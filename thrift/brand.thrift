@@ -40,7 +40,7 @@ struct BrandResult{
 /*品牌*/
 service BrandServ {
     /* 添加品牌 */
-	result.StringResult addBrand(1:BrandInfo brand);
+	result.Result addBrand(1:BrandInfo brand);
 	/* 修改品牌 */
 	result.Result updateBrand(1:BrandInfo brand);
 	/* 删除品牌 */
