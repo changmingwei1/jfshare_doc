@@ -61,14 +61,16 @@ struct SubjectInfo {
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
 	13:i32 status,
+	/*删除状态*/
+	14:i32 deleted,
 	/*类目路径*/
-	14:optional string path,
+	15:optional string path,
 	/*类目对应属性*/
-	15:string attributes,
+	16:string attributes,
 	/*对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"}  可以直接用 Map 解析 */
-	16:optional string displayIds,
+	17:optional string displayIds,
 	/*类目父树路径集合*/
-	17:optional list<SubjectNode> subjectNodes
+	18:optional list<SubjectNode> subjectNodes
 }
 
 /*属性信息*/
@@ -143,6 +145,21 @@ struct SubjectQueryParam {
 	2:string name,
 	/*状态*/
 	3:i32 status
+}
+
+/*品牌类目对应关系*/
+struct BrandSubjectKey {
+	/*品牌ID*/
+	1:i32 bId,
+	/*类目ID*/
+	2:i32 sId,
+}
+
+
+/*品牌类目对应关系参数*/
+struct BrandSubjectParam {
+	/*对应关系集合*/
+	1:list<BrandSubjectKey> brandSubjects,
 }
 
 /*分页对象*/
@@ -223,12 +240,14 @@ struct DisplaySubjectInfo {
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
 	13:i32 status,
+	/*删除状态*/
+	14:i32 deleted,
 	/*类目路径*/
-	14:optional string path,
+	15:optional string path,
 	/*类目对应属性*/
-	15:string attributes,
+	16:string attributes,
 	/*类目父树路径集合*/
-	16:optional list<SubjectNode> subjectNodes
+	17:optional list<SubjectNode> subjectNodes
 }
 
 
@@ -318,7 +337,8 @@ struct SubjectRefDisplayInfo {
 /************************* 以下是类目属性相关结构 ***********************/
 /* 类目属性查询参数 */
 struct SubjectAttributeQueryParam {
-
+	/*归属类目ID*/
+	1:i32 subjectId,
 }
 
 /* 类目属性查询结果 */
@@ -420,6 +440,10 @@ service SubjectServ{
 	/*根据表现类目ID查询归属类目信息*/
 	SubjectQueryResult querySubjectsRelation(1:i32 displayId, 2:Page page);
 
+	/*品牌相关的类目*/
+	SubjectQueryResult queryBrandSubject(1:brand.BrandInfo brand);
+	/*更新品牌和类目的关系，上传最终结果，非增量*/
+	result.Result updateBrandSubject(1:BrandSubjectParam bsParam);
 /************************* 以下是类目属性相关接口 ***********************/
 
     /*添加属性*/
@@ -432,4 +456,6 @@ service SubjectServ{
     result.Result deleteSubjectAttributeBatch(1:list<SubjectAttribute> atrributeList);
 	/*查询属性信息*/
 	SubjectAttributeResult querySubjectAttribute(1:SubjectAttributeQueryParam param);
+	/*某一类目属性应用于同级同父节点的其他类目*/
+	result.Result applyAttributeToSuperAll(1:SubjectInfo subject);
 }
