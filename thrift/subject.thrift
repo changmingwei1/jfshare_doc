@@ -147,19 +147,12 @@ struct SubjectQueryParam {
 	3:i32 status
 }
 
-/*品牌类目对应关系*/
-struct BrandSubjectKey {
-	/*品牌ID*/
-	1:i32 bId,
-	/*类目ID*/
-	2:i32 sId,
-}
-
-
 /*品牌类目对应关系参数*/
 struct BrandSubjectParam {
+	/*品牌ID*/
+	1:i32 bId,
 	/*对应关系集合*/
-	1:list<BrandSubjectKey> brandSubjects,
+	2:list<i32> Subjects,
 }
 
 /*分页对象*/
