@@ -23,7 +23,6 @@ struct ProductSkuItem {
 
 /*商品sku*/
 struct ProductSku {
-//     1:optional map<string, ProductSkuItem> productSkuMap, /*K-V:skunum-ProductSkuItem*/
      1:optional list<ProductSkuItem> skuItems,
      /**sku总**/
      2:optional string sellerClassNum,    /*商家填写的sku编码*/
