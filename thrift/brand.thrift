@@ -40,13 +40,11 @@ struct BrandResult{
 /*品牌*/
 service BrandServ {
     /* 添加品牌 */
-	result.StringResult addBrand(1:BrandInfo brand);
+	result.Result addBrand(1:BrandInfo brand);
 	/* 修改品牌 */
 	result.Result updateBrand(1:BrandInfo brand);
 	/* 删除品牌 */
 	result.Result deleteBrand(1:i32 id);
-	/* 删除品牌 BrandInfo实体中需要给id赋值 */
-	result.Result deleteBrandBatch(1:list<BrandInfo> brands);
 
 	/*查询所有品牌*/
     BrandResult query();
@@ -54,5 +52,6 @@ service BrandServ {
 	BrandResult queryByPage(1:QueryParam param);
 	/*批量查询*/
 	BrandResult queryBatch(1:list<i32> idList);
-
+	/*查询类目下的品牌*/
+	BrandResult queryBySubject(1:i32 id)
 }
