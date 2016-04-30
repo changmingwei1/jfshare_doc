@@ -62,11 +62,12 @@ struct OrderConfirmResult {
 }
 
 
-/*交易服务*/
+/* 交易服务 */
 service TradeServ {
-	/*订单确认*/
-        OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
 
-        /*买家商品历史购买量*/
-	result.StringResult buyCount(1:i32 userId, 2:string productId);
+	 /* 订单确认 */
+    OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
+
+    /* 买家商品历史购买量 */
+	result.StringResult buyCount(1:i32 userId, 2:string productId, 3:string storehouseId);
 }
