@@ -28,18 +28,10 @@ struct StorehouseQueryParam {
 
 /* 邮费信息 */
 struct Postage {
-    /* 记录ID */
-	1:i32 id,
-	/* 卖家ID */
-	2:i32 sellerId,
-	/* 模板ID */
-	3:i32 templateId,
-	/* 邮费名称 */
-	4:string name,
-	/* 支持的省份 多个以英文 “,” 隔开*/
-	5:string supportProvince,
+    /* 支持的省份 多个以英文 “,” 隔开 */
+	1:string supportProvince,
     /* 计费规则 */
-    6:string rule
+    2:string rule
 
 }
 
@@ -68,16 +60,7 @@ struct PostageTemplateQueryParam {
     /* 邮费名称 */
     4:optional string name
 }
-/* 查询邮费参数 */
-struct PostageQueryParam {
-    /* 记录ID */
-    1:i32 id,
-    /* 卖家ID */
-    2:i32 sellerId,
-    /* 模板ID */
-    3:i32 templateId
 
-}
 
 /* 仓库接口返回值 */
 struct StorehouseResult {
@@ -85,17 +68,12 @@ struct StorehouseResult {
 	2:optional list<Storehouse> storehouseList
 }
 
-/* 邮费接口返回值 */
+/* 邮费模板接口返回值 */
 struct PostageTemplateResult {
 	1:result.Result result,
 	2:optional list<PostageTemplate> postageTemplateList
 }
 
-/* 邮费接口返回值 */
-struct PostageResult {
-	1:result.Result result,
-	2:optional list<Postage> postageList
-}
 
 
 
@@ -132,15 +110,15 @@ service BaseTemplateServ{
 
 
     /* 添加邮费 */
-	result.StringResult addPostage(1:Postage postage);
+	/* result.StringResult addPostage(1:Postage postage); *
 	/* 修改邮费 */
-	result.Result updatePostage(1:Postage postage);
+	/* result.Result updatePostage(1:Postage postage); */
 	/* 删除邮费 */
-	result.Result deletePostage(1:i32 sellerId, 2:i32 id);
+	/* result.Result deletePostage(1:i32 sellerId, 2:i32 id); */
 	/* 删除邮费 Postage实体中需要给sellerId和id赋值，否则删除失败 */
-	result.Result deletePostageBatch(1:list<Postage> postageList);
+	/* result.Result deletePostageBatch(1:list<Postage> postageList); */
 	/* 查询邮费 */
-	PostageResult queryPostage(1:PostageQueryParam param);
+	/* PostageResult queryPostage(1:PostageQueryParam param); */
 	/* 获取邮费信息 */
-    PostageResult getPostage(1:list<i32> postageIds);
+    /* PostageResult getPostage(1:list<i32> postageIds); */
 }
