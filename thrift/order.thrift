@@ -172,7 +172,11 @@ struct OrderInfo {
 	24:optional i32 storehouseId,
 	
 	/*运费模板*/
-	25:optional 
+	25:optional i32 postageTemplateId,
+	/*运费*/
+	26:optional string postage,
+	/* 参考售价 */
+ 	27:optional string refPrice
 }
 
 /*订单*/
@@ -214,8 +218,7 @@ struct Order {
 	34:optional i32 activeState,
 
 	35:list<OrderInfo> productList,
-	36:optional i32 thirdScore,
-	37:optional string postage
+	36:optional i32 thirdScore
 }
 
 /*订单查询条件*/
