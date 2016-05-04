@@ -16,7 +16,7 @@ struct ProductSkuItem {
     /* 参考售价 */
     8:optional string refPrice,
     /* 仓库ID */
-    9:optional string storehouseId,
+    9:optional i32 storehouseId,
     /* sku编码 */
     10:optional string skuNum;
 }
@@ -80,7 +80,7 @@ struct Product {
     /* 仓库， 可以存多个，多个以英文 “,” 隔开*/
     24:optional string storehouseIds,
     /* 邮费模板ID */
-    25:optional string postageId,
+    25:optional i32 postageId
 
 
 
