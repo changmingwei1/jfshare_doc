@@ -17,7 +17,9 @@ struct AfterSale {
 	/* 申请原因 */
 	6:string reason,
 	/* 售后状态 根据实际情况定义  如 1：新建（待审核）   2：审核通过  3：审核不通过  99：已完成 */
-	7:i32 state
+	7:i32 state,
+	/* 商品sku编码 */
+	8:string skuNum
 }
 
 

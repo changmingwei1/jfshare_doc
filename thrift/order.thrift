@@ -167,6 +167,16 @@ struct OrderInfo {
 
 	/*兑换多少现金*/
 	23:optional string exchangeCash,
+	
+	/*仓库id*/
+	24:optional i32 storehouseId,
+	
+	/*运费模板*/
+	25:optional i32 postageTemplateId,
+	/*运费*/
+	26:optional string postage,
+	/* 参考售价 */
+ 	27:optional string refPrice
 }
 
 /*订单*/
@@ -208,7 +218,7 @@ struct Order {
 	34:optional i32 activeState,
 
 	35:list<OrderInfo> productList,
-	36:optional i32 thirdScore,
+	36:optional i32 thirdScore
 }
 
 /*订单查询条件*/
