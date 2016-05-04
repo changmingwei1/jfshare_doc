@@ -9,6 +9,7 @@ struct SystemMessage{
     3:optional string content,
     4:optional string beginDate,
     5:optional string endDate,
+    /*1:未开始  2:进行中  3:已结束*/
     6:optional i32 status,
     7:optional i32 pushTarget,
     8:optional string createTime
