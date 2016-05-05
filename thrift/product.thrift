@@ -16,13 +16,14 @@ struct ProductSkuItem {
     /* 参考售价 */
     8:optional string refPrice,
     /* 仓库ID */
-    9:optional string storehouseId,
+    9:optional i32 storehouseId,
     /* sku编码 */
     10:optional string skuNum;
 }
 
 /*商品sku*/
 struct ProductSku {
+ /*  1:optional map<string, ProductSkuItem> productSkuMap, K-V:skunum-ProductSkuItem*/
      1:optional list<ProductSkuItem> skuItems,
      /**sku总**/
      2:optional string sellerClassNum,    /*商家填写的sku编码*/
@@ -79,7 +80,7 @@ struct Product {
     /* 仓库， 可以存多个，多个以英文 “,” 隔开*/
     24:optional string storehouseIds,
     /* 邮费模板ID */
-    25:optional string postageId,
+    25:optional i32 postageId
 
 
 

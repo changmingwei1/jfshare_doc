@@ -57,16 +57,118 @@ struct BuyInfo {
 /*订单确认结果*/
 struct OrderConfirmResult {
 	1:result.Result result,
-	2:optional list<string> orderIdList, /*订单id列表*/
-	3:optional string extend, /*返回订单价格和时间*/
+	/*订单id列表*/
+	2:optional list<string> orderIdList, 
+	 /*返回订单价格和时间*/
+	3:optional string extend
+	
+}
+
+/***********************积分抵现相关数据结构**************************/
+struct ExchangeProduct {
+	/* 商品名称 */
+	1:string productId, 
+	/* sku编码 */
+	2:string skuNum,
+	/* 金额（扣除其他优惠， 不含运费） */
+	3:string price
 }
 
 
-/*交易服务*/
-service TradeServ {
-	/*订单确认*/
-        OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
+struct ExchangeRule {
+	/* 兑换比例, 最多可兑换总金额的百分比 */
+	1:string percent,
 
-        /*买家商品历史购买量*/
+    /* 例如： 100积分兑换1元  score=100, cash=1 */
+	/* 多少积分 */
+	2:string score,
+	
+	/* 兑换多少现金 */
+	3:string cash,
+	
+	/* 例如：可兑换金额不超过2元 maxExchangeCash=2 */
+	/* 若当前时间不在兑换活动期间 maxExchangeCash=0 */
+	/* 可兑换现金限制 */
+	4:optional string maxExchangeCash
+}
+
+struct ExchangeParam {
+	/* 用户ID */
+	1:i32 userId,                   
+	
+	/* 商品列表 */
+	2:list<ExchangeProduct> productList,             
+	
+	/* 订单价格（扣除其他优惠， 不含运费）*/ 
+	3:string amount,                    
+	
+	/* 使用多少积分来抵现金 */
+	4:string score,
+
+	/* 交易类型码 */
+	5:optional string tradeCode
+}
+
+struct ExchangeDetail{
+	1:string productId, 
+	
+	2:string skuNum,
+	
+	3:string price, 
+	
+	4:i32 count,
+	
+	/*积分*/
+	5:string score,     
+	
+	/*兑换的现金*/
+	6:string amount,    
+	
+	/*规则（兑换比例）*/
+	7:ExchangeRule rule       
+}
+
+struct ExchangeResult {
+    1:result.Result result,
+
+	/*总积分*/
+	2:string totalScore,
+
+	/*可兑换的积分*/
+	3:string exchangeScore,
+          
+	/*抵了多少现金*/
+	4:string amount,          
+	
+	/*具体到某一个商品上积分可抵现金的信息*/
+	5:list<ExchangeDetail>  exchangeDetailList
+
+}
+
+struct ExchangeRuleResult {
+	1:result.Result result,
+
+	/*规则*/
+	2:ExchangeRule exchangeRule
+}
+
+
+/* 交易服务 */
+service TradeServ {
+
+	 /* 订单确认 */
+    OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
+
+    /* 买家商品历史购买量 */
 	result.StringResult buyCount(1:i32 userId, 2:string productId);
+	
+	/*获取兑换规则*/
+	ExchangeRuleResult getExchangeRule();
+	
+	/*计算可抵现的积分*/
+	ExchangeResult getExchangeScore(1:ExchangeParam param);       
+    
+	/*计算可抵多少现金*/
+	ExchangeResult score2cash(1:ExchangeParam param);
+	
 }

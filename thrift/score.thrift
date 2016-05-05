@@ -37,16 +37,18 @@ struct ScoreTrade {
 }
 
 struct ScoreTradeQueryParam {
+	/* 用户ID */
+    1:i32 userId,
     /* 交易时间 */
-    1:string tradeTime,
+    2:string tradeTime,
     /* 积分收入、支出标识 0: 全部 1：收入  2：支出 */
-    2:i32 inOrOut,
+    3:i32 inOrOut,
     /** 交易类型  0：全部
       *  1:电积分兑换聚分享积分    2:聚分享积分兑换电信积分
       *  3:线下消费抵扣           4:线上消费抵扣
       *  5:聚分享商城购物累积积分  6:聚分享商城活动赠送积分
       */
-    3:i32 type,
+    4:i32 type,
 }
 
 /* 获取用户积分数量 */
@@ -66,9 +68,9 @@ struct ScoreTradeResult {
 
 service ScoreServ {
     /* 收入积分 */
-    result.StringResult income(1:Score score);
+    result.StringResult income(1:ScoreTrade scoreTrade);
     /* 支出积分 */
-    result.StringResult expenditure(1:Score score);
+    result.StringResult expenditure(1:ScoreTrade scoreTrade);
 
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
