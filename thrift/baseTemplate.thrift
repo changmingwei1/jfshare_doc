@@ -30,7 +30,7 @@ struct StorehouseQueryParam {
 struct Postage {
     
 	1:string supportProvince,
-    /* 计费规则 */
+	
     /**
     *  计费规则：
     *
