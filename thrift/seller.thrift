@@ -1,6 +1,7 @@
 namespace java com.jfshare.finagle.thrift.seller
 
 include "result.thrift"
+include "pagination.thrift"
 
 struct Seller {
     1:i32 sellerId,
