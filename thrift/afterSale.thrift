@@ -50,7 +50,7 @@ service AfterSaleServ {
     /* 申请售后 */
     result.StringResult request(1:AfterSale afterSale);
     /* 售后通过 */
-    result.StringResult pass(2:AfterSale afterSale);
+    result.StringResult auditPass(1:AfterSale afterSale);
 
     /* 查询售后 */
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
