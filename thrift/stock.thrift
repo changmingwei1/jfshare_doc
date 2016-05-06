@@ -103,9 +103,7 @@ struct QueryParam {
 	/* 仓库id */
 	2:i32 storehouseId, 
 	/* sku编码 */
-	3:string skuNum,
-	/* 查询维度, product-商品维度, storehouse-仓库维度, sku-sku维度 */
-	4:string queryType
+	3:string skuNum
 }
 
 /* service */
