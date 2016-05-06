@@ -17,7 +17,7 @@ enum OrderCancelReason {
 	/*卖家缺货*/
 	out_of_stock=4,
 	
-	/*同城见面交易*/
+	/*同城见面交易*/	
 	face_to_face_deal=5,
 	
 	/*其他原因*/
@@ -465,6 +465,61 @@ struct PayStateResult {
     2:optional PayState payState,
 }
 
+struct DeliverVirParam {
+    1:i32 sellerId,
+    2:string orderId
+}
+
+struct BatchDeliverFailInfo {
+	1:i32 index,
+	2:string orderId,
+	3:string desc,
+	4:Order order
+}
+
+struct BatchDeliverResult {
+	1:result.Result result,
+	2:optional list<BatchDeliverFailInfo> failInfo
+}
+
+struct BatchDeliverParam {
+	1:i32 deliverType,
+	2:list<Order> orderList,
+	3:string fileName,
+	4:string fileKey
+}
+
+struct ExportOrderInfo {
+  /*主键*/
+  1:optional i32 id, 
+  /*卖家Id*/
+  2:optional i32 sellerId,
+  /*导出时间*/
+  3:string createTime,
+  /*导入、导出状态: -1异常, 0正在进行, 1成功，2 终止，3 部分失败，4 其他情况*/
+  4:i32 opState, 
+   /*下载key路径*/
+  5:string opUrl,
+   /*查询条件*/
+  6:OrderQueryConditions conditions,
+  /*实际成功记录数*/
+  7:optional i32 actualCount,
+   /*总应处理记录数*/
+  8:optional i32 totalCount,
+  /*文件系统类型*/
+  9:optional i32 fsType
+}
+
+/*订单导出结果*/
+struct ExportOrderResult {
+  1:result.Result result,
+  /*总数量*/
+  2:optional i32 total,        
+  /*总页数*/
+  3:optional i32 pageCount,
+  4:optional list<ExportOrderInfo> exportOrderInfo
+}
+
 /*订单服务*/
 /*
   userType: 1（买家）、2（卖家）、3 (系统)
@@ -477,13 +532,25 @@ service OrderServ{
 	result.Result updateDeliverInfo(1:i32 userType, 2:i32 userId, 3:DeliverInfo deliverInfo) 
 
 	/*发货(卖家)*/
-	result.Result deliver(1:i32 sellerId, 2:DeliverInfo deliverInfo)                  
+	result.Result deliver(1:i32 sellerId, 2:DeliverInfo deliverInfo)     
+
+	/*虚拟商品发货*/
+	result.Result deliverVir(1:DeliverVirParam param)
+	
+	/*卖家修改订单物流、运单号、物流名称*/
+	result.Result updateExpressInfo(1:i32 sellerId, 2:string orderId, 3:string expressId, 4:string expressNo, 5:string expressName)
+	
+	/*批量发货*/
+	BatchDeliverResult batchDeliver(1:i32 sellerId, 2:BatchDeliverParam param); 
 	
 	/*确认收货(买家、系统)*/
 	result.Result confirmReceipt(1:i32 userType, 2:i32 userId, 3:string orderId)   
 	
 	/*取消订单(买家、系统)*/
-	result.Result cancelOrder(1:i32 userType, 2:i32 userId, 3:string orderId, 4:i32 reason)        
+	result.Result cancelOrder(1:i32 userType, 2:i32 userId, 3:string orderId, 4:i32 reason)     
+
+	/*查询导出订单信息*/
+	ExportOrderResult queryExportOrderInfo(1:i32 sellerId, 2:OrderQueryConditions conditions)	
 
 	/*查询订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQuery(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions)  
@@ -508,7 +575,7 @@ service OrderServ{
 	/*接收支付完成*/
 	result.StringResult payFinish(1:string payRes);
 
-        /*支付进度查询*/
+	/*支付进度查询*/
 	PayStateResult payState(1:PayState payState);
 }
 
