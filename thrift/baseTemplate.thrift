@@ -28,9 +28,27 @@ struct StorehouseQueryParam {
 
 /* 邮费信息 */
 struct Postage {
-    /* 支持的省份 多个以英文 “,” 隔开 */
+    
 	1:string supportProvince,
     /* 计费规则 */
+    /**
+    *  计费规则：
+    *
+    *  商品计费规则json格式
+    *  { number:2,     【件, 千克】
+    *    postage:10,   【运费】
+    *    addNumber:2,  【增加   件, 千克】
+    *    addPostage:5  【增加运费】
+    *  }
+    *
+    * 商家计费规则json格式
+    *  { number:2,      【多少件以下】，【多少重量以下】
+    *  	 amount: 10,    【多少钱以上】
+    *  	 limit:1,       【是否类推, 1类推， 0不类推】
+    *  	 postage:10,    【运费】
+    *  }
+    *
+    */
     2:string rule
 
 }
@@ -43,10 +61,14 @@ struct PostageTemplate {
 	2:i32 sellerId,
 	/* 邮费模板名称 */
 	3:string name,
-	/* 类型 1：按件数  2：按件数上不封顶  3：按重量  4：按重量上不封顶*/
+	/* 类型 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
     4:i32 type,
     /* 邮费信息 */
-    5:list<Postage> postageList
+    5:list<Postage> postageList,
+    /* 分组： 1：商品邮费模板  2：店铺邮费模板 */
+    6:i32 group,
+    /* 模板描述 */
+    7:optional string desc
 }
 
 /* 查询邮费模板参数 */
