@@ -219,12 +219,14 @@ struct ProductCardResult {
 
 struct ProductCardViewListResult {
 	1:result.Result result,
-	2:list<ProductCardView> cardViewList
+	2:list<ProductCardView> cardViewList,
+	3:pagination.Pagination pagination
 }
 
 struct ProductCardStatisticsResult {
 	1:result.Result result,
-	2:list<ProductCardStatistics> cardtatisticsList
+	2:list<ProductCardStatistics> cardtatisticsList,
+	3:pagination.Pagination pagination
 }
 
 struct ProductOpt {
