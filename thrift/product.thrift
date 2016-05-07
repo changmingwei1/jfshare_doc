@@ -120,7 +120,8 @@ struct ProductSurvey {
 	10:string imgUrl,
 	11:optional string viceName,
 	12:optional string createTime,
-	13:optional i32 sellerId
+	13:optional i32 sellerId,
+	14:optional i32 type
 }
 
 struct ProductSurveyQueryParam {
@@ -160,7 +161,7 @@ struct ProductCard {
 	/* 商品ID */
 	1:string productId,
 	/* 卡号 */
-	2:string card_number,
+	2:string cardNumber,
 	/* 密码 */
 	3:string password
 }
@@ -169,7 +170,7 @@ struct ProductCardView {
 	/* 商品ID */
 	1:string productId,
 	/* 卡号 */
-	2:string card_number,
+	2:string cardNumber,
 	/* 密码 */
 	3:string password,
 	/* 是否已发放  1：未发放 2：已发放 */
@@ -261,7 +262,7 @@ service ProductServ {
 	ProductResult queryHotSKU(1:string productId, 2:string skuNum, 3:ProductRetParam param);
 
 	/*查询商品指定sku*/
-	ProductResult queryHotSKUV(1:ProductSkuParam skuParam, 2:ProductRetParam param);
+	ProductResult queryHotSKUV1(1:ProductSkuParam skuParam, 2:ProductRetParam param);
 
 	/*查询商品详情*/
 	result.StringResult queryProductDetail(1:ProductDetailParam param);
@@ -294,15 +295,18 @@ service ProductServ {
 	ProductSurveyResult productSurveyQueryBatch(1:ProductSurveyQueryBatchParam param);
 
 	/* 获取虚拟商品卡密（关键接口） */
-	ProductCardResult getProductCard(ProductCardParam param);
+	ProductCardResult getProductCard(1:ProductCardParam param);
 
 	/* 查询虚拟商品卡密，根据transactionId，查询卡密信息 */
-	ProductCardResult queryProductCard(ProductCardParam param);
+	ProductCardResult queryProductCard(1:ProductCardParam param);
 
 	/* 查询虚拟商品卡密统计列表，管理专用 */
-	ProductCardStatisticsResult statisticsProductCard(ProductCardStatisticsParam param);
+	ProductCardStatisticsResult statisticsProductCard(1:ProductCardStatisticsParam param, 2:pagination.Pagination page);
 
 	/* 查询单个虚拟商品卡密列表，管理专用 */
-	ProductCardViewListResult queryProductCardViewList(ProductCardViewParam param);
+	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination page);
+
+    /* 使用虚拟商品卡密 */
+	result.Result useProductCard(1:ProductCard productCard);
 
 }
