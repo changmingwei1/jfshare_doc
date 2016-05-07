@@ -301,10 +301,10 @@ service ProductServ {
 	ProductCardResult queryProductCard(1:ProductCardParam param);
 
 	/* 查询虚拟商品卡密统计列表，管理专用 */
-	ProductCardStatisticsResult statisticsProductCard(1:ProductCardStatisticsParam param, 2:pagination.Pagination page);
+	ProductCardStatisticsResult statisticsProductCard(1:ProductCardStatisticsParam param, 2:pagination.Pagination pagination);
 
 	/* 查询单个虚拟商品卡密列表，管理专用 */
-	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination page);
+	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
 
     /* 使用虚拟商品卡密 */
 	result.Result useProductCard(1:ProductCard productCard);
