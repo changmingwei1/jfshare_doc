@@ -520,6 +520,18 @@ struct ExportOrderResult {
   4:optional list<ExportOrderInfo> exportOrderInfo
 }
 
+struct BatchDeliverFailInfo {
+	1:i32 index,
+	2:string orderId,
+	3:string desc,
+	4:Order order
+}
+
+struct BatchDeliverResult {
+  1:result.Result result,
+  2:optional list<BatchDeliverFailInfo> failInfo
+}
+
 /*订单服务*/
 /*
   userType: 1（买家）、2（卖家）、3 (系统)
@@ -577,6 +589,13 @@ service OrderServ{
 
 	/*支付进度查询*/
 	PayStateResult payState(1:PayState payState);
+
+       /*批量导出订单*/
+	result.StringResult batchExportOrder(1:i32 sellerId, 2:OrderQueryConditions conditions);
+       /*  批量发货   
+        *  templateType模板类型: 0 普通
+	*/
+	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:list<Order> orderList, 3:i32 templateType); 
 }
 
 
