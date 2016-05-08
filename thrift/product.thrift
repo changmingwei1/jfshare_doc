@@ -173,8 +173,8 @@ struct ProductCardView {
 	2:string cardNumber,
 	/* 密码 */
 	3:string password,
-	/* 是否已发放  1：未发放 2：已发放 */
-	4:i32 isUsed
+	/* 是否已发放  1：未发放 2：已发放 3：已使用 */
+	4:i32 state
 }
 
 struct ProductCardViewParam {
@@ -184,8 +184,8 @@ struct ProductCardViewParam {
 	2:string productId,
 	/* 卡号（虚拟商品序列号） */
 	3:string cardNumber,
-	/* 是否已发放  0：全部  1：未发放 2：已发放 */
-	4:i32 isUsed
+	/* 是否已发放  0：全部  1：未发放 2：已发放 3：已使用 */
+	4:i32 state
 }
 
 struct ProductCardStatistics {
@@ -308,7 +308,7 @@ service ProductServ {
 	/* 查询单个虚拟商品卡密列表，管理专用 */
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
 
-    /* 使用虚拟商品卡密 */
+    /* 使用虚拟商品卡密， 需要sellerId和cardNumber */
 	result.Result useProductCard(1:ProductCard productCard);
 
 }
