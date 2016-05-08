@@ -158,12 +158,14 @@ struct ProductSurveyResult {
 }
 
 struct ProductCard {
+	/* 卖家ID */
+	1:i32 sellerId,
 	/* 商品ID */
-	1:string productId,
+	2:string productId,
 	/* 卡号 */
-	2:string cardNumber,
+	3:string cardNumber,
 	/* 密码 */
-	3:string password
+	4:string password
 }
 
 struct ProductCardView {
