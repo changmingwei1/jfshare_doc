@@ -540,9 +540,6 @@ service OrderServ{
 	/*卖家修改订单物流、运单号、物流名称*/
 	result.Result updateExpressInfo(1:i32 sellerId, 2:string orderId, 3:string expressId, 4:string expressNo, 5:string expressName)
 	
-	/*批量发货*/
-	BatchDeliverResult batchDeliver(1:i32 sellerId, 2:BatchDeliverParam param); 
-	
 	/*确认收货(买家、系统)*/
 	result.Result confirmReceipt(1:i32 userType, 2:i32 userId, 3:string orderId)   
 	
@@ -577,6 +574,12 @@ service OrderServ{
 
 	/*支付进度查询*/
 	PayStateResult payState(1:PayState payState);
+
+       /*批量导出订单*/
+	result.StringResult batchExportOrder(1:i32 sellerId, 2:OrderQueryConditions conditions);
+
+       /*批量发货*/
+	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
 }
 
 
