@@ -41,7 +41,7 @@ struct Postage {
     *    addPostage:5  【增加运费】
     *  }
     *
-    * 商家计费规则json格式
+    *  商家计费规则json格式
     *  { number:2,      【多少件以下】，【多少重量以下】
     *  	 amount: 10,    【多少钱以上】
     *  	 limit:1,       【是否类推, 1类推， 0不类推】
@@ -77,10 +77,25 @@ struct PostageTemplateQueryParam {
     1:i32 id,
     /* 卖家ID */
     2:i32 sellerId,
-    /* 类型 1：按件数  2：按件数上不封顶  3：按重量  4：按重量上不封顶*/
+    /* 类型 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
     3:i32 type,
     /* 邮费名称 */
-    4:optional string name
+    4:optional string name,
+	/* 分组： 1：商品邮费模板  2：店铺邮费模板 */
+    5:i32 group,
+}
+
+struct CalculatePostageParam {
+	/* 邮费模板 */
+	1:i32 templateId,
+	/* 件数 */
+	2:i32 number,
+	/* 重量 */
+	3:i32 weight,
+	/* 订单金额 */
+	4:string orderAmount,
+	/* 发往省份 */
+	5:string sendToProvince
 }
 
 
@@ -129,6 +144,9 @@ service BaseTemplateServ{
     PostageTemplateResult queryPostageTemplate(1:PostageTemplateQueryParam param);
     /* 获取邮费模板信息 */
     PostageTemplateResult getPostageTemplate(1:list<i32> postageTemplateIds);
+	/* 计算邮费 */
+	result.StringResult calculatePostage(CalculatePostageParam param);
+	
 
 
     /* 添加邮费 */

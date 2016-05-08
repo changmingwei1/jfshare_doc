@@ -281,7 +281,7 @@ service ProductServ {
 	ProductSurveyResult productSurveyQuery(1:ProductSurveyQueryParam param);
 
 	/* 按点击量查询商品列表 */
-	ProductSurveyResult productSurveyQueryByHit(1:ProductSurveyQueryParam param);
+	ProductSurveyResult productSurveyQueryByClick(1:ProductSurveyQueryParam param);
 
 	/* 管理后台查询商品概要信息列表查询*/
 	ProductSurveyResult productSurveyBackendQuery(1:ProductSurveyQueryParam param);
