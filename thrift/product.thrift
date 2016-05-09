@@ -130,6 +130,7 @@ struct ProductSurveyQueryParam {
 	3:optional string productName,       
 	4:optional i32 activeState,
 	5:optional pagination.Pagination pagination,
+	/* 排序： create_time DESC:按创建时间降序   cur_price DESC:按现价降序   cur_price ASC:按现价升序  click_rate DESC:按点击量降序 */
 	6:optional string sort,
 	7:optional i32 subjectId,
 	8:optional i32 brandId,
