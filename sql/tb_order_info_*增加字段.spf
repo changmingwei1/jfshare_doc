@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>colorIndex</key>
+			<integer>4</integer>
+			<key>database</key>
+			<string>jfshare</string>
+			<key>host</key>
+			<string>120.24.153.155</string>
+			<key>kcid</key>
+			<string>1410935718537586297</string>
+			<key>name</key>
+			<string>jfshare_test</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK0HCBUWFxgZHSQoLDA0VSRudWxs0wkK
+			CwwQFFdOUy5rZXlzWk5TLm9iamVjdHNWJGNsYXNzow0OD4ACgAOA
+			BKMREhOABYAGgAiADFR0eXBlVHJvd3NUa2V5c18QJlNlbGVjdGlv
+			bkRldGFpbFR5cGVQcmltYXJ5S2V5ZWREZXRhaWxz0wkKCxobHKCg
+			gAfSHh8gIVokY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxl
+			RGljdGlvbmFyeaMgIiNcTlNEaWN0aW9uYXJ5WE5TT2JqZWN00goL
+			JSehJoAJgAvSCykqK1lOUy5zdHJpbmeAClJpZNIeHy0uXxAPTlNN
+			dXRhYmxlU3RyaW5noy0vI1hOU1N0cmluZ9IeHzEyXk5TTXV0YWJs
+			ZUFycmF5ozEzI1dOU0FycmF50h4fIjWiIiNfEA9OU0tleWVkQXJj
+			aGl2ZXLRODlUZGF0YYABAAgAEQAaACMALQAyADcARQBLAFIAWgBl
+			AGwAcAByAHQAdgB6AHwAfgCAAIIAhwCMAJEAugDBAMIAwwDFAMoA
+			1QDeAPQA+AEFAQ4BEwEVARcBGQEeASgBKgEtATIBRAFIAVEBVgFl
+			AWkBcQF2AXkBiwGOAZMAAAAAAAACAQAAAAAAAAA6AAAAAAAAAAAA
+			AAAAAAABlQ==
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1240, 663}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `postage` int(11) DEFAULT '0' COMMENT '邮费',ADD `postage_template_id` int(11) DEFAULT '0' COMMENT '运费模板id',ADD `storehouse_id` int(11) DEFAULT '0 COMMENT '仓库id';") AS create_sql
+FROM information_schema.TABLES WHERE table_name like 'tb_order_info_%'
+    </string>
+			<key>table</key>
+			<string>tb_postage</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name,"ADD `postage` int(11) DEFAULT '0' COMMENT '邮费',ADD `postage_template_id` int(11) DEFAULT '0' COMMENT '运费模板id',ADD `storehouse_id` int(11) DEFAULT '0 COMMENT '仓库id';") AS create_sql
+FROM information_schema.TABLES WHERE table_name like 'tb_order_info_%'</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," 
+ADD `postage` int(11) DEFAULT '0' COMMENT '邮费',
+ADD `postage_template_id` int(11) DEFAULT '0' COMMENT '运费模板id',
+ADD `storehouse_id` int(11) DEFAULT '0' COMMENT '仓库id',
+;") AS create_sql
+FROM information_schema.TABLES WHERE table_name like 'tb_order_info_%'</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `audit_pass_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单审核通过时间',ADD `ext_date_1` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '扩展时间字段';") AS create_sql
+    FROM information_schema.TABLES WHERE table_name like 'tb_order_info_%'</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `audit_pass_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单审核通过时间',ADD `ext_date_1` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '扩展时间字段';") AS create_sql
+    FROM information_schema.TABLES WHERE table_name = 'tb_order_info_%'</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `audit_pass_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单审核通过时间',ADD `ext_date_1` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '扩展时间字段';") AS create_sql
+    FROM information_schema.TABLES WHERE table_name = 'tb_order_info%'</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `audit_pass_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单审核通过时间',ADD `ext_date_1` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '扩展时间字段';") AS create_sql
+    FROM information_schema.TABLES</string>
+		<string>SELECT CONCAT("ALTER TABLE ",table_name," ADD `audit_pass_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单审核通过时间',ADD `ext_date_1` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '扩展时间字段';") AS create_sql
+    FROM information_schema.TABLES WHERE table_name = 'tb_order_info'</string>
+		<string>select * from tb_user_thirdparty</string>
+		<string>select count(*) from tb_order_record where create_time between '2015-01-01' and '2016-04-01'</string>
+		<string>select count(*) from tb_order_record</string>
+		<string>select * from tb_product_attribute</string>
+		<string>select * from tb_product_attributes</string>
+		<string>select * from tb_subject</string>
+		<string>select * from `tb_express_trace`</string>
+		<string>select * from `tb_express`</string>
+		<string>select * from tb_product</string>
+		<string>show global variables like 'wait_timeout'</string>
+		<string>set global wait_timeout=1814400</string>
+		<string>select version()</string>
+		<string>select * from tb_seller</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.6.27-log</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
