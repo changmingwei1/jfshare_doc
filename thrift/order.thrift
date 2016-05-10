@@ -176,7 +176,10 @@ struct OrderInfo {
 	/*运费*/
 	26:optional string postage,
 	/* 参考售价 */
- 	27:optional string refPrice
+ 	27:optional string refPrice,
+ 	/* 第三方积分抵现比率 如:10，1分抵10分钱*/
+   28:optional string thirdExchangeRate
+ 	
 }
 
 /*订单*/

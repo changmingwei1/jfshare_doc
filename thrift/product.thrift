@@ -80,7 +80,9 @@ struct Product {
     /* 仓库， 可以存多个，多个以英文 “,” 隔开*/
     24:optional string storehouseIds,
     /* 邮费模板ID */
-    25:optional i32 postageId
+    25:optional i32 postageId,
+    /* 第三方积分抵现比率 如:10，1分抵10分钱*/
+    26:optional string thirdExchangeRate
 
 
 
