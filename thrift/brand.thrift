@@ -32,6 +32,11 @@ struct BrandResult{
 	4:optional list<BrandInfo> brandInfo
 }
 
+struct BrandInfoResult{
+	1:result.Result result,
+	2:BrandInfo brandInfo
+}
+
 /**
 * 1.对于单个brand，需要在redis进行缓存，hash结构 key: 例如 brand:1
 * 2.修改和删除brand后，需要清除缓存
@@ -40,7 +45,7 @@ struct BrandResult{
 /*品牌*/
 service BrandServ {
     /* 添加品牌 */
-	result.Result addBrand(1:BrandInfo brand);
+	BrandInfoResult addBrand(1:BrandInfo brand);
 	/* 修改品牌 */
 	result.Result updateBrand(1:BrandInfo brand);
 	/* 删除品牌 */
