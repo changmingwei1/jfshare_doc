@@ -137,6 +137,14 @@ struct SubjectTreeResult {
 	2:list<SubjectNode> subjectNodes
 }
 
+/*归属类目树结果批量信息*/
+struct SubjectTreeBatchResult {
+	/*结果信息*/
+	1:result.Result result,
+	/*类目父树或者子树集合，子查父包含当前类目，父查子不包含当前类目*/
+	2:list<list<SubjectNode>> subjectNodeTrees
+}
+
 /*归属类目查询条件*/
 struct SubjectQueryParam {
 	/*父节点ID*/
@@ -269,6 +277,14 @@ struct DisplaySubjectTreeResult {
 	2:list<DisplaySubjectNode> displaySubjectNodes
 }
 
+/*表现类目树批量结果*/
+struct DisplaySubjectTreeBatchResult {
+	/*结果信息*/
+	1:result.Result result,
+	/*类目父树或者子树集合，子查父包含当前类目，父查子不包含当前类目*/
+	2:list<list<DisplaySubjectNode>> displaySubjectNodeTrees
+}
+
 /*归属类目查询条件*/
 struct DisplaySubjectQueryParam {
 	/*父节点ID*/
@@ -339,7 +355,14 @@ struct SubjectAttributeResult {
     /*结果信息*/
     1:result.Result result,
     /*类目属性信息*/
-    3:list<SubjectAttribute> subjectAttributes
+    2:list<SubjectAttribute> subjectAttributes
+}
+
+struct SubjectAttributeInfoResult {
+    /*结果信息*/
+    1:result.Result result,
+    /*类目属性信息*/
+    2:SubjectAttribute subjectAttribute
 }
 
 /**
@@ -348,7 +371,7 @@ struct SubjectAttributeResult {
 **/
 service SubjectServ{
 	/*添加归属类目*/
-	result.Result add(1:SubjectInfo subject);
+	SubjectInfoResult add(1:SubjectInfo subject);
 	
 	/*更新归属类目*/
 	result.Result update(1:SubjectInfo subject);
@@ -368,6 +391,9 @@ service SubjectServ{
 	/*根据id查询，查询此节点所属路径*/
 	SubjectTreeResult getSuperTree(1:i32 subjectId);
 	
+	/*根据id查询，批量查询此节点所属路径*/
+	SubjectTreeBatchResult getBatchSuperTree(1:list<i32> subjectIds);
+	
 	/*根据id查询，查询此节点下所有的叶子节点*/
 	SubjectTreeResult getLeavesById(1:i32 subjectId);
 	
@@ -384,7 +410,7 @@ service SubjectServ{
 	SubjectQueryResult querySubjects(1:SubjectQueryParam queryParam, 2:Page page);
 	
 	/*添加表现类目，参数需要类目实体和类目标识*/
-	result.Result add4dis(1:DisplaySubjectParam displaySubjectParam);
+	SubjectInfoResult add4dis(1:DisplaySubjectParam displaySubjectParam);
 	
 	/*更新表现类目，参数需要类目实体和类目标识*/
 	result.Result update4dis(1:DisplaySubjectParam displaySubjectParam);
@@ -400,6 +426,9 @@ service SubjectServ{
 	
 	/*根据id查询，查询此节点所属路径，参数需要类目实体（有id即可）和类目标识*/
 	DisplaySubjectTreeResult getSuperTree4dis(1:DisplaySubjectParam displaySubjectParam);
+	
+	/*根据id查询，批量查询此节点所属路径*/
+	DisplaySubjectTreeBatchResult getBatchSuperTree4dis(1:list<DisplaySubjectInfo> subjectInfos);
 	
 	/*根据传入的 后台类目Id获取前台结构  对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"} 可以直接用 Map 解析   */
 	result.StringResult getDisplayIdsBySubjectId(1:i32 subjectId);
@@ -440,7 +469,7 @@ service SubjectServ{
 /************************* 以下是类目属性相关接口 ***********************/
 
     /*添加属性*/
-    result.Result addSubjectAttribute(1:SubjectAttribute atrribute);
+    SubjectAttributeInfoResult addSubjectAttribute(1:SubjectAttribute atrribute);
     /*修改属性*/
     result.Result updateSubjectAttribute(1:SubjectAttribute atrribute);
     /*删除属性*/
