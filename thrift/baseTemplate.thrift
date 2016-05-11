@@ -85,17 +85,34 @@ struct PostageTemplateQueryParam {
     5:i32 group,
 }
 
-struct CalculatePostageParam {
+/* 商品邮费基础数据 */
+struct ProductPostageBasic {
+	/* 商品ID */
+	1:string productId,
 	/* 邮费模板 */
-	1:i32 templateId,
+	2:i32 templateId,
 	/* 件数 */
-	2:i32 number,
-	/* 重量 */
-	3:i32 weight,
-	/* 订单金额 */
-	4:string orderAmount,
+	3:i32 number,
+	/* 商品总重量 */
+	4:double weight,
+	/* 商品总金额 */
+	5:string amount,
+}
+
+/* 商品邮费计算结果 */
+struct ProductPostageReturn {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 邮费 */
+	2:string postage
+}
+
+/* 邮费计算参数 */
+struct CalculatePostageParam {
+	/* 商品商品邮费基础数据集合 */
+	1:list<ProductPostageBasic> productPostageBasicList,
 	/* 发往省份 */
-	5:string sendToProvince
+	2:string sendToProvince
 }
 
 
@@ -109,6 +126,15 @@ struct StorehouseResult {
 struct PostageTemplateResult {
 	1:result.Result result,
 	2:optional list<PostageTemplate> postageTemplateList
+}
+
+
+struct CalculatePostageResult {
+	1:result.Result result,
+	/* 单个商品邮费，如果按商家邮费优惠计算，此结构没有运费金额 */
+	2:list<ProductPostageReturn> ProductPostageReturnList,
+	/* 总邮费 */
+	3:string totalPostage
 }
 
 
@@ -145,7 +171,7 @@ service BaseTemplateServ{
     /* 获取邮费模板信息 */
     PostageTemplateResult getPostageTemplate(1:list<i32> postageTemplateIds);
 	/* 计算邮费 */
-	result.StringResult calculatePostage(CalculatePostageParam param);
+	CalculatePostageResult calculatePostage(CalculatePostageParam param);
 	
 
 
