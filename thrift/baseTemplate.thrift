@@ -99,8 +99,14 @@ struct ProductPostageBasic {
 	5:string amount,
 }
 
-/* 商品邮费计算结果 */
-struct ProductPostageReturn {
+/* 卖家维度邮费基础数据 */
+struct SellerPostageBasic {
+	/* 商品维度邮费基础数据集合 */
+	1:list<ProductPostageBasic> productPostageBasicList
+}
+
+/* 卖家维度邮费计算结果 */
+struct SellerPostageReturn {
 	/* 卖家ID */
 	1:i32 sellerId,
 	/* 邮费 */
@@ -109,8 +115,8 @@ struct ProductPostageReturn {
 
 /* 邮费计算参数 */
 struct CalculatePostageParam {
-	/* 商品商品邮费基础数据集合 */
-	1:list<ProductPostageBasic> productPostageBasicList,
+	/* 卖家维度邮费基础数据集合 */
+	1:list<SellerPostageBasic> sellerPostageBasicList,
 	/* 发往省份 */
 	2:string sendToProvince
 }
@@ -131,8 +137,8 @@ struct PostageTemplateResult {
 
 struct CalculatePostageResult {
 	1:result.Result result,
-	/* 单个商品邮费，如果按商家邮费优惠计算，此结构没有运费金额 */
-	2:list<ProductPostageReturn> ProductPostageReturnList,
+	/* 单个卖家邮费 */
+	2:list<SellerPostageReturn> sellerPostageReturnList,
 	/* 总邮费 */
 	3:string totalPostage
 }

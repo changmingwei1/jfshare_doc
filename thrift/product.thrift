@@ -168,7 +168,9 @@ struct ProductCard {
 	/* 卡号 */
 	3:string cardNumber,
 	/* 密码 */
-	4:string password
+	4:string password,
+	/* 商品sku编码 */
+	5:string skuNum,
 }
 
 struct ProductCardView {
@@ -179,7 +181,9 @@ struct ProductCardView {
 	/* 密码 */
 	3:string password,
 	/* 是否已发放  1：未发放 2：已发放 3：已使用 */
-	4:i32 state
+	4:i32 state,
+	/* 商品sku编码 */
+	5:string skuNum
 }
 
 struct ProductCardViewParam {
@@ -190,16 +194,24 @@ struct ProductCardViewParam {
 	/* 卡号（虚拟商品序列号） */
 	3:string cardNumber,
 	/* 是否已发放  0：全部  1：未发放 2：已发放 3：已使用 */
-	4:i32 state
+	4:i32 state,
+	/* 商品sku编码 */
+	5:string skuNum
 }
 
 struct ProductCardStatistics {
 	1:string productId,
 	2:string productName,
+	/* 总数量 */
 	3:i32 total,
+	/* 未发放数量 */
 	4:i32 usedNum,
+	/* 已发放数量 */
 	5:i32 unusedNum,
+	/* 导入时间 */
 	6:string createTime
+	/* 商品sku编码 */
+	7:string skuNum,
 }
 
 struct ProductCardStatisticsParam {
@@ -213,7 +225,9 @@ struct ProductCardParam {
 	/* 交易唯一标识 */
 	2:string transactionId,
 	/* 获取卡密个数 */
-	3:i32 num
+	3:i32 num,
+	/* 商品sku编码 */
+	4:string skuNum,
 }
 
 
