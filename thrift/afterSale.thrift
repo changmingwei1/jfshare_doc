@@ -19,7 +19,15 @@ struct AfterSale {
 	/* 售后状态 根据实际情况定义  如 1：新建（待审核）   2：审核通过  3：审核不通过  99：已完成 */
 	7:i32 state,
 	/* 商品sku编码 */
-	8:string skuNum
+	8:string skuNum,
+	/* 用户申请退货的备注信息 */
+	9:string userComment,
+	/* 用户申请退货时间 */
+	10:string applyTime,
+	/* 审核退货申请的备注信息 */
+	11:string approveComment,
+	/* 审核处理时间*/
+	12:string approveTime
 }
 
 
@@ -36,7 +44,9 @@ struct AfterSaleQueryParam {
     /* 申请类型 */
     5:i32 type,
     /* 售后状态 */
-    6:i32 state
+    6:i32 state,
+    /* 商品SKU编码 */
+    7:string skuNum
 }
 
 /* 获取用户积分数量 */
