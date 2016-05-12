@@ -7,7 +7,27 @@ struct Seller {
     1:i32 sellerId,
     2:string loginName,
     3:string sellerName,
-	4:string pwdEnc
+    4:string pwdEnc,
+    5:string companyName,
+    6:string shopName,
+    7:string contactName,
+    /* 开户银行 */
+    8:string openBank,
+    /* 户名 */
+    9:string accountHolder,
+    /* 银行帐号 */
+    10:string accountNumber,
+    11:string remark,
+    12:i32 provinceId,
+    13:string provinceName,
+    14:i32 cityId,
+    15:string cityName,
+    16:i32 countyId,
+    17:string countyName,
+    18:string address,
+    19:string mobile,
+    20:string tel,
+    21:string email
 }
 
 /*登陆请求参数*/

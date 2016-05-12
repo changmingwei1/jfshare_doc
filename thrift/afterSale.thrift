@@ -55,6 +55,16 @@ struct AfterSaleResult {
     2:list<AfterSale> afterSaleList
 }
 
+struct AfterSaleOrder{
+    1:i32 userId,
+    2:string orderId,
+    3:i32 sellerId
+}
+
+struct AfterSaleOrderResult{
+    1:result.Result result,
+    2:list<AfterSaleOrder> afterSaleOrders
+}
 
 service AfterSaleServ {
     /* 申请售后 */
@@ -64,4 +74,7 @@ service AfterSaleServ {
 
     /* 查询售后 */
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
+
+    /* 查询售后订单*/
+    AfterSaleOrderResult queryAfterSaleOrder(1:i32 userType, 2:i32 userId);
 }
