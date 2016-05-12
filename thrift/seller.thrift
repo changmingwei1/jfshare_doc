@@ -62,7 +62,9 @@ struct SellersResult {
 /*卖家服务*/
 service SellerServ {
     /*查询卖家*/
-    SellerResult querySeller(1:i32 sellerId, 2:SellerRetParam param);   
+    SellerResult querySeller(1:i32 sellerId, 2:SellerRetParam param);  
+    
+    SellerResult querySellerList(1:Seller seller, 2:pagination.Pagination pagination);
      /*批量查询卖家*/
     SellersResult querySellerBatch(1:list<i32> sellerIds, 2:SellerRetParam param);   
 	
