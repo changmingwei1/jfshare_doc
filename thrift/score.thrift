@@ -39,17 +39,20 @@ struct ScoreTrade {
 struct ScoreTradeQueryParam {
 	/* 用户ID */
     1:i32 userId,
-    /* 交易时间 */
-    2:string tradeTime,
+    /* 开始时间 */
+    2:string startTime,
+    /* 结束时间 */
+    3:string endTime,
     /* 积分收入、支出标识 0: 全部 1：收入  2：支出 */
-    3:i32 inOrOut,
+    4:i32 inOrOut,
     /** 交易类型  0：全部
       *  1:电积分兑换聚分享积分    2:聚分享积分兑换电信积分
       *  3:线下消费抵扣           4:线上消费抵扣
       *  5:聚分享商城购物累积积分  6:聚分享商城活动赠送积分
       */
-    4:i32 type,
+    5:i32 type,
 }
+
 
 /* 获取用户积分数量 */
 struct ScoreResult {
@@ -66,6 +69,7 @@ struct ScoreTradeResult {
 }
 
 
+
 service ScoreServ {
     /* 收入积分 */
     result.StringResult income(1:ScoreTrade scoreTrade);
@@ -75,7 +79,8 @@ service ScoreServ {
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
     /* 查询积分交易记录*/
-    ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
+    ScoreTradResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
+    
 
     /* 积分兑换的定义 */
 }
