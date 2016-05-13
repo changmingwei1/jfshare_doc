@@ -39,16 +39,18 @@ struct ScoreTrade {
 struct ScoreTradeQueryParam {
 	/* 用户ID */
     1:i32 userId,
-    /* 交易时间 */
-    2:string tradeTime,
+    /* 开始时间 */
+    2:string startTime,
+    /* 结束时间 */
+    3:string endTime,
     /* 积分收入、支出标识 0: 全部 1：收入  2：支出 */
-    3:i32 inOrOut,
+    4:i32 inOrOut,
     /** 交易类型  0：全部
       *  1:电积分兑换聚分享积分    2:聚分享积分兑换电信积分
       *  3:线下消费抵扣           4:线上消费抵扣
       *  5:聚分享商城购物累积积分  6:聚分享商城活动赠送积分
       */
-    4:i32 type,
+    5:i32 type,
 }
 
 /* 获取用户积分数量 */
@@ -64,7 +66,39 @@ struct ScoreTradeResult {
     /* 分页信息 */
     3:pagination.Pagination pageination
 }
+/* 查询积分结构20160510 */
+struct ScoreUser {
+    /* 用户ID */
+    1:i32 userId,
+    /* 手机号 */
+    2:string mobile,
+    /* 创建时间 */
+    3:string createTime,
+    /* 积分值 0: 全部 1：0积分  2：0以上积分 */
+    4:i32 amount,
+}
 
+/* 查询积分参数20160510 */
+struct ScoreUserQueryParam {
+    /* 用户ID */
+    1:i32 userId,
+    /* 手机号 */
+    2:string mobile,
+    /* 开始时间 */
+    3:string startTime,
+    /* 结束时间 */
+    4:string endTime,
+    /* 积分值  0:全部   1:0积分  2:0以上积分 */
+    5:i32 amount,
+}
+
+/* 查询积分返回结果20160510 */
+struct ScoreUserResult {
+    1:result.Result result,
+    2:list<ScoreUser> scoreUsers,
+    /* 分页信息 */
+    3:pagination.Pagination pageination
+}
 
 service ScoreServ {
     /* 收入积分 */
@@ -76,6 +110,8 @@ service ScoreServ {
     ScoreResult getScore(1:i32 userId);
     /* 查询积分交易记录*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
+    /* 查询积分记录20160510 */
+    ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
 
     /* 积分兑换的定义 */
 }

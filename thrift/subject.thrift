@@ -17,15 +17,17 @@ struct SubjectNode {
 	5:i32 sorted,
 	/*是否是叶子节点*/
 	6:i32 isLeaf
+	/*商品类型*/
+	7:i32 commodity,
 	/*对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"} 可以直接用 Map 解析 */
-	7:optional string displayIds
+	8:optional string displayIds
 	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
 	 *  新增：卖家创建/编辑商品、报名时不显示
 	 *  删除：卖家创建/编辑商品、报名时仍显示
 	 *  已发布：卖家创建/编辑商品、报名时显示
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
-	8:optional i32 status
+	9:optional i32 status
 }
 
 /*归属类目信息*/
@@ -65,12 +67,14 @@ struct SubjectInfo {
 	14:i32 deleted,
 	/*类目路径*/
 	15:optional string path,
+	/*商品类型*/
+	16:i32 commodity,
 	/*类目对应属性*/
-	16:string attributes,
+	17:string attributes,
 	/*对应的前台类目Ids，多个以","隔开  结构如：{"main":"1,2,3", "wireless":"4,5,6"}  可以直接用 Map 解析 */
-	17:optional string displayIds,
+	18:optional string displayIds,
 	/*类目父树路径集合*/
-	18:optional list<SubjectNode> subjectNodes
+	19:optional list<SubjectNode> subjectNodes
 }
 
 /*属性信息*/
@@ -199,13 +203,15 @@ struct DisplaySubjectNode {
 	5:i32 sorted,
 	/*是否是叶子节点*/
 	6:i32 isLeaf
+	/*商品类型*/
+	7:i32 commodity,
 	/*类目状态 1: 新增   2：删除   3：已发布    4：已删除
 	 *  新增：卖家创建/编辑商品、报名时不显示
 	 *  删除：卖家创建/编辑商品、报名时仍显示
 	 *  已发布：卖家创建/编辑商品、报名时显示
 	 *  已删除：卖家创建/编辑商品、报名时不显示
 	 */
-	7:optional i32 status
+	8:optional i32 status
 } 
 
 /*表现类目信息*/
@@ -247,8 +253,10 @@ struct DisplaySubjectInfo {
 	15:optional string path,
 	/*类目对应属性*/
 	16:string attributes,
+	/*商品类型*/
+	17:i32 commodity,
 	/*类目父树路径集合*/
-	17:optional list<SubjectNode> subjectNodes
+	18:optional list<SubjectNode> subjectNodes
 }
 
 
