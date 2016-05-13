@@ -61,7 +61,8 @@ struct SellersResult {
 
 struct SellerListResult {
       1:result.Result result,
-      2:list<Seller> sellerList, 
+      2:list<Seller> sellerList,
+      3:pagination.Pagination pagination
 }
 
 /*卖家服务*/
