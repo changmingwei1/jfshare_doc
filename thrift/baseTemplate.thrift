@@ -101,8 +101,10 @@ struct ProductPostageBasic {
 
 /* 卖家维度邮费基础数据 */
 struct SellerPostageBasic {
+	/* 卖家ID */
+	1:i32 sellerId,
 	/* 商品维度邮费基础数据集合 */
-	1:list<ProductPostageBasic> productPostageBasicList
+	2:list<ProductPostageBasic> productPostageBasicList
 }
 
 /* 卖家维度邮费计算结果 */

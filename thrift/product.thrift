@@ -230,6 +230,12 @@ struct ProductCardParam {
 	4:string skuNum,
 }
 
+struct ProductCardImportParam {
+    /* 卖家ID */
+	1:i32 sellerId,
+	/* 文件路径 */
+	2:string path
+}
 
 struct ProductCardResult {
 	1:result.Result result,
@@ -314,6 +320,9 @@ service ProductServ {
 
 	/*根据商品id批量查询 param.fromType=1从db查询  param.fromType=2 从cache查询*/
 	ProductSurveyResult productSurveyQueryBatch(1:ProductSurveyQueryBatchParam param);
+	
+	/* 导入虚拟商品卡密 */
+	result.Result importProductCard(ProductCardImportParam param);
 
 	/* 获取虚拟商品卡密（关键接口） */
 	ProductCardResult getProductCard(1:ProductCardParam param);
