@@ -1,6 +1,7 @@
-namespace java com.jfshare.finagle.thrift.afterSale
+namespace java com.jfshare.finagle.thrift.aftersale
 
 include "result.thrift"
+include "pagination.thrift"
 
 /* 售后 */
 struct AfterSale {
@@ -63,7 +64,8 @@ struct AfterSaleOrder{
 
 struct AfterSaleOrderResult{
     1:result.Result result,
-    2:list<AfterSaleOrder> afterSaleOrders
+    2:list<AfterSaleOrder> afterSaleOrders,
+    3:pagination.Pagination pagination
 }
 
 service AfterSaleServ {
@@ -76,5 +78,5 @@ service AfterSaleServ {
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
 
     /* 查询售后订单*/
-    AfterSaleOrderResult queryAfterSaleOrder(1:i32 userType, 2:i32 userId);
+    AfterSaleOrderResult queryAfterSaleOrder(1:i32 userType, 2:i32 userId, 3:pagination.Pagination pagination);
 }
