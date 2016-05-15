@@ -129,7 +129,11 @@ struct ProductSurvey {
 	12:optional string createTime,
 	13:optional i32 sellerId,
 	14:optional i32 type,
-	15:optional i64 clickRate
+	15:optional i64 clickRate,
+	/* 仓库， 可以存多个，多个以英文 “,” 隔开*/
+    16:optional string storehouseIds,
+    /* 邮费模板ID */
+    17:optional i32 postageId
 }
 
 struct ProductSurveyQueryParam {
