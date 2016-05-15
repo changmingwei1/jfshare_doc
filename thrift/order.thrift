@@ -336,8 +336,10 @@ struct  OrderQueryConditions{
 	/*是否有卖家备注 0:全部，1:有卖家备注*/
 	32:optional i32 isHaveSellerComment,
 
-        /*导出来源：0 普通导出，1发货导出*/
-	33:optional i32 downType
+    /*导出来源：0 普通导出，1发货导出*/
+	33:optional i32 downType,
+	/*订单列表*/
+	34:optional list<string> orderIds
 }
 
 struct OrderCount {
