@@ -95,6 +95,11 @@ struct ProductResult {
       2:optional Product product
 }
 
+struct ProductBatchResult {
+	1:result.Result result,
+	2:list<Product> productList
+}
+
 struct ProductDetailParam {
   1:optional string detailKey,  /*优先依赖detailKey查询*/
   2:optional string productId
@@ -145,6 +150,7 @@ struct ProductSurveyQueryBatchParam {
 	2:i32 fromType
 }
 
+/* 获取sku参数 */
 struct ProductSkuParam {
 	/* 商品ID */
 	1:string productId,
@@ -152,6 +158,11 @@ struct ProductSkuParam {
 	2:string skuNum,
 	/* 仓库ID */
     3:i32 storehouseId,
+}
+
+/* 批量获取sku参数 */
+struct ProductSkuBatchParam {
+	1:list<ProductSkuParam> productSkuParams
 }
 
 struct ProductSurveyResult {
@@ -290,6 +301,9 @@ service ProductServ {
 
 	/*查询商品指定sku*/
 	ProductResult queryHotSKUV1(1:ProductSkuParam skuParam, 2:ProductRetParam param);
+	
+	/* 批量获取指定sku */
+	ProductBatchResult queryHotSKUBatch(1:ProductSkuBatchParam skuParam, 2:ProductRetParam param);
 
 	/*查询商品详情*/
 	result.StringResult queryProductDetail(1:ProductDetailParam param);

@@ -105,9 +105,9 @@ struct PostageTemplate {
     /* 邮费信息 */
     5:list<Postage> postageList,
     /* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    6:i32 group,
+    6:i32 templateGroup,
     /* 模板描述 */
-    7:optional string desc
+    7:optional string templateDesc
 }
 
 /* 查询邮费模板参数 */
@@ -121,7 +121,7 @@ struct PostageTemplateQueryParam {
     /* 邮费名称 */
     4:optional string name,
 	/* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    5:i32 group,
+    5:i32 templateGroup,
 }
 
 /* 商品邮费基础数据 */
