@@ -128,7 +128,8 @@ struct ProductSurvey {
 	11:optional string viceName,
 	12:optional string createTime,
 	13:optional i32 sellerId,
-	14:optional i32 type
+	14:optional i32 type,
+	15:optional i64 clickRate
 }
 
 struct ProductSurveyQueryParam {
