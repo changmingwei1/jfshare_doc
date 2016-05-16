@@ -24,6 +24,45 @@ struct StorehouseQueryParam {
     2:i32 sellerId
 }
 
+/* 仓库接口返回值 */
+struct StorehouseResult {
+	1:result.Result result,
+	2:optional list<Storehouse> storehouseList
+}
+
+/* 商品收货省份结构 */
+struct ProductRefProvince {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 商品ID */
+	2:string productId,
+	/* 商品信息中配置的仓库 */
+	3:string storehouseIds,
+	/* 发往省份 */
+	4:string sendToProvince
+}
+
+/* 获取商品发货仓库参数 */
+struct DeliverStorehouseParam {
+	1:list<ProductRefProvince> productRefProvinceList
+}
+
+/* 商品发货仓库实体结构 */
+struct ProductStorehouse {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 商品ID */
+	2:string productId,
+	/* 发货仓库ID，如果值为0，表示没有对应的发货仓库 */
+	3:i32 storehouseId
+}
+
+/* 获取商品发货仓库返回结果 */
+struct DeliverStorehouseResult {
+	1:result.Result result,
+	2:list<ProductStorehouse> productStorehouseList
+}
+
 /*********************** 以下是邮费相关结构 ***********************/
 
 /* 邮费信息 */
@@ -66,9 +105,9 @@ struct PostageTemplate {
     /* 邮费信息 */
     5:list<Postage> postageList,
     /* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    6:i32 group,
+    6:i32 templateGroup,
     /* 模板描述 */
-    7:optional string desc
+    7:optional string templateDesc
 }
 
 /* 查询邮费模板参数 */
@@ -82,7 +121,7 @@ struct PostageTemplateQueryParam {
     /* 邮费名称 */
     4:optional string name,
 	/* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    5:i32 group,
+    5:i32 templateGroup,
 }
 
 /* 商品邮费基础数据 */
@@ -124,11 +163,7 @@ struct CalculatePostageParam {
 }
 
 
-/* 仓库接口返回值 */
-struct StorehouseResult {
-	1:result.Result result,
-	2:optional list<Storehouse> storehouseList
-}
+
 
 /* 邮费模板接口返回值 */
 struct PostageTemplateResult {
@@ -162,6 +197,9 @@ service BaseTemplateServ{
 	StorehouseResult queryStorehouse(1:StorehouseQueryParam param);
 	/* 获取仓库信息 */
 	StorehouseResult getStorehouse(1:list<i32> storehouseIds);
+	/* 批量获取商品收货省份对应的发货仓库 */
+	DeliverStorehouseResult getDeliverStorehouse(1:DeliverStorehouseParam param);
+	
 
 
 /*********************** 以下是邮费相关结构 ***********************/
