@@ -135,7 +135,7 @@ struct ProductPostageBasic {
 	/* 商品总重量 */
 	4:double weight,
 	/* 商品总金额 */
-	5:string amount,
+	5:optional string amount
 }
 
 /* 卖家维度邮费基础数据 */
@@ -143,7 +143,9 @@ struct SellerPostageBasic {
 	/* 卖家ID */
 	1:i32 sellerId,
 	/* 商品维度邮费基础数据集合 */
-	2:list<ProductPostageBasic> productPostageBasicList
+	2:list<ProductPostageBasic> productPostageBasicList,
+	/* 订单总金额 */
+	5:optional string orderAmount
 }
 
 /* 卖家维度邮费计算结果 */
