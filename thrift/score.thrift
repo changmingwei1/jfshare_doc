@@ -100,18 +100,110 @@ struct ScoreUserResult {
     3:pagination.Pagination pageination
 }
 
+/* 兑出积分查询结构20160512_1 */
+struct CachAmount {
+    /* 总积分 */
+    1:i32 totalAmount,
+    /* 今日兑出积分 */
+    2:i32 CachAmount,
+}
+
+/* 兑出积分查询参数20160512_1 */
+struct CachAmountQueryParam {
+    /* 用户ID */
+    1:i32 userId, 
+}
+
+/* 兑出积分查询返回结果20160512_1 */
+struct CachAmountResult {
+    1:result.Result result,
+    2:CachAmount cachAmount,
+}
+
+/* 兑出积分调用接口结构20160512_2 */
+struct Status {
+    /* 状态 */
+    1:string status,
+}
+
+/* 兑出积分调用接口参数20160512_2 */
+struct CachAmountCallParam {
+    /* 用户ID */
+    1:i32 userId,
+    /* 兑出积分额 */
+    2:i32 CachAmount,
+    /* 手机号 */
+    3:string mobile, 
+}
+/* 兑出积分调用接口返回结果20160512_2 */
+struct StatusResult {
+    1:result.Result result,
+    2:Status status,
+}
+
+/* 兑入积分调用接口结构20160516_1 */
+struct ResponseScore {
+    /* 应用编码 */
+    1:string AppCode,
+    /* 请求时间 */
+    2:string ResponseDate,
+    /* 业务编号 */
+    3:string Sign,
+    /* 响应代码*/
+    4:string ErrCode,
+    /* 响应描述 */
+    5:string ErrMsg,
+}
+/* 兑入积分调用接口参数20160516_1 */
+struct ScoreRequestParam {
+    /* 应用编码 */
+    1:string AppCode,
+    /* 请求时间 */
+    2:string RequestDate,
+    /* 数据签名 */
+    3:string Sign,
+    /* 业务编号 */
+    4:string SpID,
+    /* 外部订单号 */
+    5:string OutOrderID,
+    /* 设备号 */
+    6:string DeviceNo,
+    /* 设备类型 */
+    7:string DeviceType,
+    /* 省编号 */
+    8:string ProvinceID,
+    /* 客户编号 */
+    9:string CustID,
+    /* 积分额 */
+    10:string Num,
+    /* 备注 */
+    11:string Remark,
+    
+    12:string ActiveID,
+    /* 过期时间 */
+    13:string ExpTime,   
+}
+/* 兑出积分兑入接口返回结果20160516_1 */
+struct ResponseScoreResult {
+    1:result.Result result,
+    2:ResponseScore responseScore,
+}
+
 service ScoreServ {
     /* 收入积分 */
     result.StringResult income(1:ScoreTrade scoreTrade);
     /* 支出积分 */
     result.StringResult expenditure(1:ScoreTrade scoreTrade);
-
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
     /* 查询积分交易记录*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
     /* 查询积分记录20160510 */
     ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
-
-    /* 积分兑换的定义 */
+    /* 兑出积分查询20160512_1 */
+    CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
+    /* 兑出积分调用接口20160512_2 */
+    StatusResult cachAmountCall(1:CachAmountCallParam param);   
+    /* 兑入积分调用接口20160516_1 */
+    ResponseScoreResult enterAmountCall(1:ScoreRequestParam param);
 }
