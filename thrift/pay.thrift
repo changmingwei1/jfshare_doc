@@ -27,6 +27,7 @@ struct PayReq {
     11:string custId, /*第三方客户id*/
     12:string custType, /*第三方客户类型*/
     13:optional string procustID, /*第三方省份ID*/
+	14:optional i32 score2cashAmount /*积分抵现部分金额*/
 }
 
 /*支付返回参数*/
