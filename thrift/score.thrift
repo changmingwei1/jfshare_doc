@@ -59,14 +59,14 @@ struct ScoreResult {
     2:Score sroce
 }
 
-/* 查询用户积分交易记录 */
+/* 查询用户积分交易明细记录 */
 struct ScoreTradeResult {
     1:result.Result result,
     2:list<ScoreTrade> scoreTrades,
     /* 分页信息 */
-    3:pagination.Pagination pageination
+    3:pagination.Pagination pagination
 }
-/* 查询积分结构20160510 */
+/* 查询积分列表结构20160510 */
 struct ScoreUser {
     /* 用户ID */
     1:i32 userId,
@@ -78,7 +78,7 @@ struct ScoreUser {
     4:i32 amount,
 }
 
-/* 查询积分参数20160510 */
+/* 查询积分列表参数20160510 */
 struct ScoreUserQueryParam {
     /* 用户ID */
     1:i32 userId,
@@ -92,12 +92,12 @@ struct ScoreUserQueryParam {
     5:i32 amount,
 }
 
-/* 查询积分返回结果20160510 */
+/* 查询积分列表返回结果20160510 */
 struct ScoreUserResult {
     1:result.Result result,
     2:list<ScoreUser> scoreUsers,
     /* 分页信息 */
-    3:pagination.Pagination pageination
+    3:pagination.Pagination pagination
 }
 
 /* 兑出积分查询结构20160512_1 */
@@ -197,6 +197,8 @@ struct ResponseScoreResult {
     2:ResponseScore responseScore,
 }
 
+
+
 service ScoreServ {
     /* 收入积分 */
     result.StringResult income(1:ScoreTrade scoreTrade);
@@ -204,9 +206,11 @@ service ScoreServ {
     result.StringResult expenditure(1:ScoreTrade scoreTrade);
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
-    /* 查询积分交易记录*/
+    /* 查询积分交易明细*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
-    /* 查询积分记录20160510 */
+    
+    
+    /* 查询积分列表20160510 */
     ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
     /* 兑出积分查询20160512_1 */
     CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
