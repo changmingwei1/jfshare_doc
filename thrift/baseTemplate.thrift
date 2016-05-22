@@ -75,16 +75,16 @@ struct Postage {
     *
     *  商品计费规则json格式
     *  { number:2,     【件, 千克】
-    *    postage:10,   【运费】
+    *    postage:10,   【运费，单位 元】
     *    addNumber:2,  【增加   件, 千克】
-    *    addPostage:5  【增加运费】
+    *    addPostage:5  【增加运费， 单位 元】
     *  }
     *
     *  商家计费规则json格式
     *  { number:2,      【多少件以下】，【多少重量以下】
-    *  	 amount: 10,    【多少钱以上】
+    *  	 amount: 10,    【多少钱以上，单位 元】
     *  	 limit:1,       【是否类推, 1类推， 0不类推】
-    *  	 postage:10,    【运费】
+    *  	 postage:10,    【运费，单位 元】
     *  }
     *
     */
