@@ -178,7 +178,10 @@ struct OrderInfo {
 	/* 参考售价 */
  	27:optional string refPrice,
  	/* 第三方积分抵现比率 如:10，1分抵10分钱*/
-   28:optional string thirdExchangeRate
+    28:optional string thirdExchangeRate,
+	/*运费金额*/
+	29:optional string postage
+    
  	
 }
 
@@ -336,8 +339,10 @@ struct  OrderQueryConditions{
 	/*是否有卖家备注 0:全部，1:有卖家备注*/
 	32:optional i32 isHaveSellerComment,
 
-        /*导出来源：0 普通导出，1发货导出*/
-	33:optional i32 downType
+    /*导出来源：0 普通导出，1发货导出*/
+	33:optional i32 downType,
+	/*订单列表*/
+	34:optional list<string> orderIds
 }
 
 struct OrderCount {
