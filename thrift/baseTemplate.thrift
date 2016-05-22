@@ -155,7 +155,9 @@ struct SellerPostageReturn {
 	/* 卖家ID */
 	1:i32 sellerId,
 	/* 邮费 */
-	2:string postage
+	2:string postage,
+	/* 商家邮费模板信息 */
+	3:optional string postageTemplate
 }
 
 /* 邮费计算参数 */
