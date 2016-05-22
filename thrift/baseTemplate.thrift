@@ -116,12 +116,14 @@ struct PostageTemplateQueryParam {
     1:i32 id,
     /* 卖家ID */
     2:i32 sellerId,
-    /* 类型 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
+    /* 类型 0：不作为查询条件 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
     3:i32 type,
     /* 邮费名称 */
     4:optional string name,
-	/* 分组： 1：商品邮费模板  2：店铺邮费模板 */
+	/* 分组： 0：不作为查询条件  1：商品邮费模板  2：店铺邮费模板 */
     5:i32 templateGroup,
+	/* 是否使用： 0：不作为查询条件  1：使用  2：未使用 */
+	6:optional i32 isUsed
 }
 
 /* 商品邮费基础数据 */
@@ -162,7 +164,10 @@ struct CalculatePostageParam {
 	2:string sendToProvince
 }
 
-
+struct SellerPostageTemplateParam {
+	/* 卖家ID */
+	1:list<i32> sellerIds
+}
 
 
 /* 邮费模板接口返回值 */
@@ -216,6 +221,10 @@ service BaseTemplateServ{
     PostageTemplateResult queryPostageTemplate(1:PostageTemplateQueryParam param);
     /* 获取邮费模板信息 */
     PostageTemplateResult getPostageTemplate(1:list<i32> postageTemplateIds);
+	/* 获取商家邮费模板，批量获取 */
+	PostageTemplateResult getSellerPostageTemplate(SellerPostageTemplateParam param);
+	/* 商家设置默认邮费模板，需要sellerId和邮费模板ID */
+	result.Result setDefaultPostageTemplate(PostageTemplate postageTemplate);
 	/* 计算邮费 */
 	CalculatePostageResult calculatePostage(CalculatePostageParam param);
 	
