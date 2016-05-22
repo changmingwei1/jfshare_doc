@@ -179,9 +179,9 @@ struct OrderInfo {
  	27:optional string refPrice,
  	/* 第三方积分抵现比率 如:10，1分抵10分钱*/
     28:optional string thirdExchangeRate,
-	/*运费金额*/
-	29:optional string postage
-    
+	/*运费扩展信息  JSON*/
+	29:optional string postageExt,
+	30:optional string weight
  	
 }
 
@@ -224,7 +224,9 @@ struct Order {
 	34:optional i32 activeState,
 
 	35:list<OrderInfo> productList,
-	36:optional i32 thirdScore
+	36:optional i32 thirdScore,
+	/*运费扩展信息  JSON*/
+	37:optional string postageExt,
 }
 
 /*订单查询条件*/
@@ -457,6 +459,11 @@ struct PayParam {
 	1:i32 userId,   /*买家ID*/
 	2:list<string> orderIdList, 
 	3:pay.PayChannel payChannel,  /*支付方式*/
+	/*兑换现金的积分*/
+	4:optional i32 exchangeScore,
+
+	/*兑换多少现金*/
+	5:optional string exchangeCash
 }
 
 /*支付进度*/
