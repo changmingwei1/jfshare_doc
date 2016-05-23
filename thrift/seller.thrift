@@ -100,4 +100,6 @@ service SellerServ {
 	
 	/*重置卖家密码*/
     result.Result resetSellerPwd(1:string newPwd, 2:Seller seller);	
+    /*增加会员信息*/
+    result.Result insertUserSellerReal(1:string userId, 2:string sellerId);	
 }
