@@ -95,6 +95,11 @@ struct ProductResult {
       2:optional Product product
 }
 
+struct ProductBatchResult {
+	1:result.Result result,
+	2:list<Product> productList
+}
+
 struct ProductDetailParam {
   1:optional string detailKey,  /*优先依赖detailKey查询*/
   2:optional string productId
@@ -123,7 +128,12 @@ struct ProductSurvey {
 	11:optional string viceName,
 	12:optional string createTime,
 	13:optional i32 sellerId,
-	14:optional i32 type
+	14:optional i32 type,
+	15:optional i64 clickRate,
+	/* 仓库， 可以存多个，多个以英文 “,” 隔开*/
+    16:optional string storehouseIds,
+    /* 邮费模板ID */
+    17:optional i32 postageId
 }
 
 struct ProductSurveyQueryParam {
@@ -145,6 +155,7 @@ struct ProductSurveyQueryBatchParam {
 	2:i32 fromType
 }
 
+/* 获取sku参数 */
 struct ProductSkuParam {
 	/* 商品ID */
 	1:string productId,
@@ -152,6 +163,11 @@ struct ProductSkuParam {
 	2:string skuNum,
 	/* 仓库ID */
     3:i32 storehouseId,
+}
+
+/* 批量获取sku参数 */
+struct ProductSkuBatchParam {
+	1:list<ProductSkuParam> productSkuParams
 }
 
 struct ProductSurveyResult {
@@ -230,6 +246,12 @@ struct ProductCardParam {
 	4:string skuNum,
 }
 
+struct ProductCardImportParam {
+    /* 卖家ID */
+	1:i32 sellerId,
+	/* 文件路径 */
+	2:string path
+}
 
 struct ProductCardResult {
 	1:result.Result result,
@@ -284,6 +306,9 @@ service ProductServ {
 
 	/*查询商品指定sku*/
 	ProductResult queryHotSKUV1(1:ProductSkuParam skuParam, 2:ProductRetParam param);
+	
+	/* 批量获取指定sku */
+	ProductBatchResult queryHotSKUBatch(1:ProductSkuBatchParam skuParam, 2:ProductRetParam param);
 
 	/*查询商品详情*/
 	result.StringResult queryProductDetail(1:ProductDetailParam param);
@@ -314,6 +339,9 @@ service ProductServ {
 
 	/*根据商品id批量查询 param.fromType=1从db查询  param.fromType=2 从cache查询*/
 	ProductSurveyResult productSurveyQueryBatch(1:ProductSurveyQueryBatchParam param);
+	
+	/* 导入虚拟商品卡密 */
+	result.Result importProductCard(ProductCardImportParam param);
 
 	/* 获取虚拟商品卡密（关键接口） */
 	ProductCardResult getProductCard(1:ProductCardParam param);

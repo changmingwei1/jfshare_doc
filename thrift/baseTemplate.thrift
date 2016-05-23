@@ -24,6 +24,45 @@ struct StorehouseQueryParam {
     2:i32 sellerId
 }
 
+/* 仓库接口返回值 */
+struct StorehouseResult {
+	1:result.Result result,
+	2:optional list<Storehouse> storehouseList
+}
+
+/* 商品收货省份结构 */
+struct ProductRefProvince {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 商品ID */
+	2:string productId,
+	/* 商品信息中配置的仓库 */
+	3:string storehouseIds,
+	/* 发往省份 */
+	4:string sendToProvince
+}
+
+/* 获取商品发货仓库参数 */
+struct DeliverStorehouseParam {
+	1:list<ProductRefProvince> productRefProvinceList
+}
+
+/* 商品发货仓库实体结构 */
+struct ProductStorehouse {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 商品ID */
+	2:string productId,
+	/* 发货仓库ID，如果值为0，表示没有对应的发货仓库 */
+	3:i32 storehouseId
+}
+
+/* 获取商品发货仓库返回结果 */
+struct DeliverStorehouseResult {
+	1:result.Result result,
+	2:list<ProductStorehouse> productStorehouseList
+}
+
 /*********************** 以下是邮费相关结构 ***********************/
 
 /* 邮费信息 */
@@ -66,9 +105,9 @@ struct PostageTemplate {
     /* 邮费信息 */
     5:list<Postage> postageList,
     /* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    6:i32 group,
+    6:i32 templateGroup,
     /* 模板描述 */
-    7:optional string desc
+    7:optional string templateDesc
 }
 
 /* 查询邮费模板参数 */
@@ -77,12 +116,14 @@ struct PostageTemplateQueryParam {
     1:i32 id,
     /* 卖家ID */
     2:i32 sellerId,
-    /* 类型 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
+    /* 类型 0：不作为查询条件 11：按件数  12：按重量  21：按订单件数+订单金额  22：按订单重量+订单金额 */
     3:i32 type,
     /* 邮费名称 */
     4:optional string name,
-	/* 分组： 1：商品邮费模板  2：店铺邮费模板 */
-    5:i32 group,
+	/* 分组： 0：不作为查询条件  1：商品邮费模板  2：店铺邮费模板 */
+    5:i32 templateGroup,
+	/* 是否使用： 0：不作为查询条件  1：使用  2：未使用 */
+	6:optional i32 isUsed
 }
 
 /* 商品邮费基础数据 */
@@ -96,13 +137,17 @@ struct ProductPostageBasic {
 	/* 商品总重量 */
 	4:double weight,
 	/* 商品总金额 */
-	5:string amount,
+	5:optional string amount
 }
 
 /* 卖家维度邮费基础数据 */
 struct SellerPostageBasic {
+	/* 卖家ID */
+	1:i32 sellerId,
 	/* 商品维度邮费基础数据集合 */
-	1:list<ProductPostageBasic> productPostageBasicList
+	2:list<ProductPostageBasic> productPostageBasicList,
+	/* 订单总金额 */
+	5:optional string orderAmount
 }
 
 /* 卖家维度邮费计算结果 */
@@ -110,7 +155,9 @@ struct SellerPostageReturn {
 	/* 卖家ID */
 	1:i32 sellerId,
 	/* 邮费 */
-	2:string postage
+	2:string postage,
+	/* 商家邮费模板信息 */
+	3:optional string postageTemplate
 }
 
 /* 邮费计算参数 */
@@ -121,12 +168,11 @@ struct CalculatePostageParam {
 	2:string sendToProvince
 }
 
-
-/* 仓库接口返回值 */
-struct StorehouseResult {
-	1:result.Result result,
-	2:optional list<Storehouse> storehouseList
+struct SellerPostageTemplateParam {
+	/* 卖家ID */
+	1:list<i32> sellerIds
 }
+
 
 /* 邮费模板接口返回值 */
 struct PostageTemplateResult {
@@ -160,6 +206,9 @@ service BaseTemplateServ{
 	StorehouseResult queryStorehouse(1:StorehouseQueryParam param);
 	/* 获取仓库信息 */
 	StorehouseResult getStorehouse(1:list<i32> storehouseIds);
+	/* 批量获取商品收货省份对应的发货仓库 */
+	DeliverStorehouseResult getDeliverStorehouse(1:DeliverStorehouseParam param);
+	
 
 
 /*********************** 以下是邮费相关结构 ***********************/
@@ -176,6 +225,10 @@ service BaseTemplateServ{
     PostageTemplateResult queryPostageTemplate(1:PostageTemplateQueryParam param);
     /* 获取邮费模板信息 */
     PostageTemplateResult getPostageTemplate(1:list<i32> postageTemplateIds);
+	/* 获取商家邮费模板，批量获取 */
+	PostageTemplateResult getSellerPostageTemplate(SellerPostageTemplateParam param);
+	/* 商家设置默认邮费模板，需要sellerId和邮费模板ID */
+	result.Result setDefaultPostageTemplate(PostageTemplate postageTemplate);
 	/* 计算邮费 */
 	CalculatePostageResult calculatePostage(CalculatePostageParam param);
 	

@@ -102,6 +102,11 @@ struct MsgCaptcha {
 	3:string captchaDesc
 }
 
+struct ShortMsg {
+	1:string mobile,
+	2:string content
+}
+
 service CommonServ{
 	/*获取省份信息*/
 	AreaInfoResult province()               
@@ -147,5 +152,8 @@ service CommonServ{
 	
 	/*获取二维码*/
 	CaptchaResult getQRCode(1:string id)
+	
+	/*发送短信*/
+	result.Result sendMsg(1:ShortMsg msg)
 	
 }
