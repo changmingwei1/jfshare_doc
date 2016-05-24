@@ -535,6 +535,53 @@ struct ExportOrderResult {
   4:optional list<ExportOrderInfo> exportOrderInfo
 }
 
+struct QueryScanOrderParam {
+	1:string startDate,
+	2:i32 sellerId,
+	/*每页的条数*/
+	3: i32 count,         
+
+	/*第几页*/
+	4: i32 curPage
+	
+}
+
+struct ScanOrderDetail {
+	//交易订单号
+	1:string orderId
+	//收款方式
+	2:string payTypeDesc,
+	/*支付时间*/
+	3:string paytime,
+	/*支付金额*/
+	4:string amount,
+	/*买家id*/
+	5:string userId
+}
+
+struct ScanOrderListResult{
+	1:result.Result result,
+	/*总数量*/
+	2:i32 total,          
+
+	/*页数*/
+	3:i32 pageCount,    
+
+	/*每页数量*/
+	4:i32 count,          
+
+	/*第几页*/
+	5:i32 curPage,             
+
+	6:list<ScanOrderDetail> scanOrderList,
+	
+	7:String totalAmount
+}
+
+struct ScanOrderDetailResult {
+	
+}
+
 /*订单服务*/
 /*
   userType: 1（买家）、2（卖家）、3 (系统)
@@ -595,6 +642,14 @@ service OrderServ{
 
        /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
+	
+	/*卖家查询扫码支付订单列表*/
+	ScanOrderListResult queryScanOrders(1: QueryScanOrderParam param)
+	
+	/*扫码支付订单明细*/
+	ScanOrderDetailResult queryScanOrderDetail(1:i32 sellerId, 2:orderId)
+	
+	
 }
 
 

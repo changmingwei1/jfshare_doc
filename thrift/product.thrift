@@ -293,6 +293,75 @@ struct ProductOpt {
 	7:optional string createTime
 }
 
+struct CaptchaQueryParam {
+	/*买家id*/
+	1:i32 sellerId,
+	/*分页条件*/
+	2:pagination.Pagination pagination,
+	
+	/*查询月份 格式:yyyyMM*/
+	3:optional string monthQuery,
+	/*商品id*/
+	4:optional string productId
+}
+
+struct AldCaptchaItem {
+	/*商品id*/
+	1:string productId,
+	/*商品名称*/
+	2:string productName,
+	/*已销售*/
+	3:i32 aldsold,
+	/*已验证*/
+	4:i32 aldCaptcha
+}
+
+struct DayAldCaptchaItem {
+	/*商品id*/
+	1:string productId,
+	/*商品名称*/
+	2:string productName,
+	/*已销售*/
+	3:i32 aldsold,
+	/*已验证*/
+	4:i32 aldCaptcha,
+	/*日期*/
+	5:string date
+}
+
+struct CaptchaListResult {
+	1:result.Result result,
+	2:i32 yedNum,
+	3:i32 thmonNum,
+	4:pagination.Pagination pagination,
+	5:list<AldCaptchaItem> itemList
+}
+
+struct DayCaptchaListResult {
+	1:result.Result result,
+	/*当月销售总数*/
+	2:i32 thsoldNum,
+	/*当月验证总数*/
+	3:i32 thmonNum,
+	4:pagination.Pagination pagination,
+	5:list<DayAldCaptchaItem> itemList
+}
+
+struct CaptchaDetal {
+	1:string captchaDate,
+	2:ProductCard card,
+	3:string mobile,
+	4:string nikeName
+}
+
+struct CaptchaDetalResult{
+	1:result.Result result,
+	2:string productName,
+	3:list<CaptchaDetal> captchaDetals
+	
+}
+
+
 /*商品基本信息*/
 service ProductServ {
 	/*查询商品*/
@@ -357,5 +426,11 @@ service ProductServ {
 
     /* 使用虚拟商品卡密， 需要sellerId和cardNumber */
 	result.Result useProductCard(1:ProductCard productCard);
-
+	
+	/*查询卖家虚拟商品验证列表*/
+	CaptchaListResult queryCaptchaList(1:CaptchaQueryParam param);
+	/*查询卖家虚拟商品验证列表—按月统计每天的验证总数(纬度：1:单个商品， 2全部商品．  查询条件：按月)*/
+   DayCaptchaListResult queryCaptchaTotalList(1:CaptchaQueryParam param);
+   /*卖家虚拟商品验证列表明细*/
+   CaptchaDetalResult queryCaptchaDetails(1:CaptchaQueryParam param);
 }
