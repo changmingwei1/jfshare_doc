@@ -12,7 +12,10 @@ struct SystemMessage{
     /*1:未开始  2:进行中  3:已结束*/
     6:optional i32 status,
     7:optional i32 pushTarget,
-    8:optional string createTime
+    8:optional string createTime,
+    /* 消息类型。0:系统消息， 1:订单消息， 2:url类 */
+    9:optional i32 msgType
+    10:string alert
 }
 
 struct SystemMessageResult{
@@ -23,7 +26,10 @@ struct SystemMessageResult{
 struct PushMessage{
     1:string title,
     2:string content,
-    3:string contentType
+    /* 消息类型。0:系统消息， 1:订单消息， 2:url类 */
+    3:i32 objType,
+    4:string alert
+    
 }
 
 struct AppUpgradeInfo{
