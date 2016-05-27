@@ -575,7 +575,7 @@ struct ScanOrderListResult{
 
 	6:list<ScanOrderDetail> scanOrderList,
 	
-	7:String totalAmount
+	7:string totalAmount
 }
 
 struct ScanOrderDetailResult {
@@ -643,11 +643,14 @@ service OrderServ{
        /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
 	
+	/*查询订单列表(管理中心)*/
+	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions)
+	
 	/*卖家查询扫码支付订单列表*/
-	ScanOrderListResult queryScanOrders(1: QueryScanOrderParam param)
+	ScanOrderListResult queryScanOrders(1:QueryScanOrderParam param)
 	
 	/*扫码支付订单明细*/
-	ScanOrderDetailResult queryScanOrderDetail(1:i32 sellerId, 2:orderId)
+	ScanOrderDetailResult queryScanOrderDetail(1:i32 sellerId, 2:string orderId)
 	
 	
 }

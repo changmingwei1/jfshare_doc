@@ -326,26 +326,20 @@ service ScoreServ {
     result.StringResult expenditure(1:ScoreTrade scoreTrade);
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
-<<<<<<< HEAD
+
     /* 查询积分交易明细*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
-    
-    
-    /* 查询积分列表20160510 */
-=======
+
     /* 查询积分交易记录*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
     /* 查询积分记录20160510 */
->>>>>>> 41361a00ab2fca8d4c0ca4367852e9afe12d2cdd
+
     ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
     /* 兑出积分查询20160512_1 */
     CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
     /* 兑出积分调用接口20160512_2 */
-<<<<<<< HEAD
     ResponseCachResult cachAmountCall(1:CachAmountCallParam param);   
-=======
     StatusResult cachAmountCall(1:CachAmountCallParam param);   
->>>>>>> 41361a00ab2fca8d4c0ca4367852e9afe12d2cdd
     /* 兑入积分调用接口20160516_1 */
     ResponseScoreResult enterAmountCall(1:ScoreRequestParam param);
 }

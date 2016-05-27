@@ -69,7 +69,7 @@ struct PayOrderInfo {
 	4:string sellerName,
 	
 	/*支付订单金额，单位元*/
-	5:string amount
+	5:string amount,
 	
 	/*[必填]交易类别码  Z0010:扫码支付*/
 	6:string tradeCode
