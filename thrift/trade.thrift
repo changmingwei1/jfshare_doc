@@ -180,6 +180,9 @@ service TradeServ {
 	 /* 订单确认 */
     OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
 
+    /*线下订单确认*/
+    OrderConfirmResult orderConfirmOffline(1:BuyInfo buyInfo);
+
     /* 买家商品历史购买量 */
 	result.StringResult buyCount(1:i32 userId, 2:string productId);
 	
