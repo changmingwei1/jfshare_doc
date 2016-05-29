@@ -54,27 +54,6 @@ struct BuyInfo {
 	12:optional i32  fromBatch,
 }
 
-/*支付订单信息*/
-struct PayOrderInfo {
-	/*买家ID*/
-	1:i32 userId,           
-	
-	/*买家名称*/
-	2:string userName,
-	
-	/*卖家ID*/
-	3:i32 sellerId,
-	
-	/*卖家Name*/
-	4:string sellerName,
-	
-	/*支付订单金额，单位元*/
-	5:string amount,
-	
-	/*[必填]交易类别码  Z0010:扫码支付*/
-	6:string tradeCode
-}
-
 /*订单确认结果*/
 struct OrderConfirmResult {
 	1:result.Result result,
@@ -176,14 +155,13 @@ struct ExchangeRuleResult {
 
 /* 交易服务 */
 service TradeServ {
+        /* 订单确认 */
+        OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
 
-	 /* 订单确认 */
-    OrderConfirmResult orderConfirm(1:BuyInfo buyInfo);
+        /*线下订单确认*/
+        OrderConfirmResult orderConfirmOffline(1:BuyInfo buyInfo);
 
-    /*线下订单确认*/
-    OrderConfirmResult orderConfirmOffline(1:BuyInfo buyInfo);
-
-    /* 买家商品历史购买量 */
+        /* 买家商品历史购买量 */
 	result.StringResult buyCount(1:i32 userId, 2:string productId);
 	
 	/*获取兑换规则*/
@@ -194,8 +172,4 @@ service TradeServ {
     
 	/*计算可抵多少现金*/
 	ExchangeResult score2cash(1:ExchangeParam param);
-	
-	/* 线下扫码支付订单生成 */
-   OrderConfirmResult payOrderCreate(1:PayOrderInfo payOrderInfo);
-	
 }
