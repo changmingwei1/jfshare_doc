@@ -645,8 +645,17 @@ service OrderServ{
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
 	
 	/*查询订单列表(管理中心)*/
-	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions)
+	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions);
 	
+
+	/* 线下订单详情(买卖双方)*/
+	OrderDetailResult queryOrderDetailOffline(1:i32 userType, 2:i32 userId, 3:string orderId);
+
+        /*查询线下订单列表(买卖双方)*/
+	OrderProfileResult orderProfileQueryOffline(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions); 
+
+
+
 	/*卖家查询扫码支付订单列表*/
 	ScanOrderListResult queryScanOrders(1:QueryScanOrderParam param)
 	
