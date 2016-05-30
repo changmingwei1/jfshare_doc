@@ -1,4 +1,4 @@
-namespace java com.jfshare.finagle.thrift.aftersale
+﻿namespace java com.jfshare.finagle.thrift.aftersale
 
 include "result.thrift"
 include "pagination.thrift"
@@ -29,6 +29,8 @@ struct AfterSale {
 	11:string approveComment,
 	/* 审核处理时间*/
 	12:string approveTime
+	/* 用户下单时间  yyyy-MM-dd HH:mm:ss*/
+	13:string orderTime,  
 }
 
 
@@ -67,6 +69,14 @@ struct AfterSaleOrderResult{
     2:list<AfterSaleOrder> afterSaleOrders,
     3:pagination.Pagination pagination
 }
+/* 查询售后订单参数*/
+struct AfterSaleOrderParam{
+	1:i32 userId,/* 用户ID*/
+    2:string orderId,/* 订单ID*/
+    3:i32 sellerId,/*卖家ID*/
+    4:string startTime,/* 时间格式yyyyMMddHHmmss*/
+    5:string endTime,/*时间格式 yyyyMMddHHmmss*/
+}
 
 service AfterSaleServ {
     /* 申请售后 */
@@ -78,5 +88,5 @@ service AfterSaleServ {
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
 
     /* 查询售后订单*/
-    AfterSaleOrderResult queryAfterSaleOrder(1:i32 userType, 2:i32 userId, 3:pagination.Pagination pagination);
+    AfterSaleOrderResult queryAfterSaleOrder(1:AfterSaleOrderParam param, 2:pagination.Pagination pagination);
 }

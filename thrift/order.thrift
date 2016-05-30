@@ -227,6 +227,7 @@ struct Order {
 	36:optional i32 thirdScore,
 	/*运费扩展信息  JSON*/
 	37:optional string postageExt,
+       38:optional i32 orderType,
 }
 
 /*订单查询条件*/
@@ -535,6 +536,53 @@ struct ExportOrderResult {
   4:optional list<ExportOrderInfo> exportOrderInfo
 }
 
+struct QueryScanOrderParam {
+	1:string startDate,
+	2:i32 sellerId,
+	/*每页的条数*/
+	3: i32 count,         
+
+	/*第几页*/
+	4: i32 curPage
+	
+}
+
+struct ScanOrderDetail {
+	//交易订单号
+	1:string orderId
+	//收款方式
+	2:string payTypeDesc,
+	/*支付时间*/
+	3:string paytime,
+	/*支付金额*/
+	4:string amount,
+	/*买家id*/
+	5:string userId
+}
+
+struct ScanOrderListResult{
+	1:result.Result result,
+	/*总数量*/
+	2:i32 total,          
+
+	/*页数*/
+	3:i32 pageCount,    
+
+	/*每页数量*/
+	4:i32 count,          
+
+	/*第几页*/
+	5:i32 curPage,             
+
+	6:list<ScanOrderDetail> scanOrderList,
+	
+	7:string totalAmount
+}
+
+struct ScanOrderDetailResult {
+	
+}
+
 /*订单服务*/
 /*
   userType: 1（买家）、2（卖家）、3 (系统)
@@ -595,6 +643,26 @@ service OrderServ{
 
        /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
+	
+	/*查询订单列表(管理中心)*/
+	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions);
+	
+
+	/* 线下订单详情(买卖双方)*/
+	OrderDetailResult queryOrderDetailOffline(1:i32 userType, 2:i32 userId, 3:string orderId);
+
+        /*查询线下订单列表(买卖双方)*/
+	OrderProfileResult orderProfileQueryOffline(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions); 
+
+
+
+	/*卖家查询扫码支付订单列表*/
+	ScanOrderListResult queryScanOrders(1:QueryScanOrderParam param)
+	
+	/*扫码支付订单明细*/
+	ScanOrderDetailResult queryScanOrderDetail(1:i32 sellerId, 2:string orderId)
+	
+	
 }
 
 

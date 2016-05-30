@@ -27,7 +27,9 @@ struct Seller {
     18:string address,
     19:string mobile,
     20:string tel,
-    21:string email
+    21:string email,
+    /* 注册时间*/
+    22:string createTime,
 }
 
 /*登陆请求参数*/
@@ -65,6 +67,24 @@ struct SellerListResult {
       3:pagination.Pagination pagination
 }
 
+/*查询会员信息列表*/
+struct SellerVip{
+	1:string favimg,  /*头像*/
+	2:string username, /*用户名*/
+	3:string regedate,  /*日期*/
+}
+
+/*查询会员信息列表返回结果*/
+struct SellerVipResult{
+	  1:result.Result result,
+	  2:i32 vipTotal,
+      3:list<SellerVip> vipList,
+      4:pagination.Pagination pagination
+}
+
+
+
+
 /*卖家服务*/
 service SellerServ {
     /*查询卖家*/
@@ -100,4 +120,12 @@ service SellerServ {
 	
 	/*重置卖家密码*/
     result.Result resetSellerPwd(1:string newPwd, 2:Seller seller);	
+    /*增加会员信息*/
+    result.Result insertUserSellerReal(1:string userId, 2:string sellerId);
+    
+    /*删除会员信息*/
+    result.Result deleteUserSellerRealByuserId(1:string userId);
+    
+    /*查看会员信息*/
+    SellerVipResult querySellerVipList(1:string sellerId, 2:pagination.Pagination pagination)	
 }
