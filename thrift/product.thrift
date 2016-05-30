@@ -187,6 +187,10 @@ struct ProductCard {
 	4:string password,
 	/* 商品sku编码 */
 	5:string skuNum,
+	/* 买家ID */
+    6:optional i32 buyerId,
+    /* 验证时间 */
+    7:optional string checkTime
 }
 
 struct ProductCardView {
@@ -244,6 +248,8 @@ struct ProductCardParam {
 	3:i32 num,
 	/* 商品sku编码 */
 	4:string skuNum,
+	/* 买家ID */
+	5:optional i32 buyerId
 }
 
 struct ProductCardImportParam {
@@ -311,7 +317,7 @@ struct AldCaptchaItem {
 	/*商品名称*/
 	2:string productName,
 	/*已销售*/
-	3:i32 aldsold,
+	3:i32 aldSold,
 	/*已验证*/
 	4:i32 aldCaptcha
 }
@@ -322,7 +328,7 @@ struct DayAldCaptchaItem {
 	/*商品名称*/
 	2:string productName,
 	/*已销售*/
-	3:i32 aldsold,
+	3:i32 aldSold,
 	/*已验证*/
 	4:i32 aldCaptcha,
 	/*日期*/
@@ -332,7 +338,7 @@ struct DayAldCaptchaItem {
 struct CaptchaListResult {
 	1:result.Result result,
 	2:i32 yedNum,
-	3:i32 thmonNum,
+	3:i32 monNum,
 	4:pagination.Pagination pagination,
 	5:list<AldCaptchaItem> itemList
 }
@@ -340,24 +346,17 @@ struct CaptchaListResult {
 struct DayCaptchaListResult {
 	1:result.Result result,
 	/*当月销售总数*/
-	2:i32 thsoldNum,
+	2:i32 soldNum,
 	/*当月验证总数*/
-	3:i32 thmonNum,
+	3:i32 checkedNum,
 	4:pagination.Pagination pagination,
 	5:list<DayAldCaptchaItem> itemList
 }
 
-struct CaptchaDetal {
-	1:string captchaDate,
-	2:ProductCard card,
-	3:string mobile,
-	4:string nikeName
-}
-
-struct CaptchaDetalResult{
+struct CaptchaDetailResult{
 	1:result.Result result,
 	2:string productName,
-	3:list<CaptchaDetal> captchaDetals
+	3:list<ProductCard> productCards
 	
 }
 
@@ -429,8 +428,8 @@ service ProductServ {
 	
 	/*查询卖家虚拟商品验证列表*/
 	CaptchaListResult queryCaptchaList(1:CaptchaQueryParam param);
-	/*查询卖家虚拟商品验证列表—按月统计每天的验证总数(纬度：1:单个商品， 2全部商品．  查询条件：按月)*/
-   DayCaptchaListResult queryCaptchaTotalList(1:CaptchaQueryParam param);
-   /*卖家虚拟商品验证列表明细*/
-   CaptchaDetalResult queryCaptchaDetails(1:CaptchaQueryParam param);
+	/*查询卖家虚拟商品验证列表—按月统计每天的验证总数( 查询条件：按月)*/
+    DayCaptchaListResult queryCaptchaTotalList(1:CaptchaQueryParam param);
+    /*卖家虚拟商品验证列表明细*/
+    CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
 }
