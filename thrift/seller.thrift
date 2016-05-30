@@ -27,7 +27,9 @@ struct Seller {
     18:string address,
     19:string mobile,
     20:string tel,
-    21:string email
+    21:string email,
+    /* 注册时间*/
+    22:string createTime,
 }
 
 /*登陆请求参数*/
