@@ -505,83 +505,6 @@ struct BatchDeliverParam {
 	4:string fileKey
 }
 
-struct ExportOrderInfo {
-  /*主键*/
-  1:optional i32 id, 
-  /*卖家Id*/
-  2:optional i32 sellerId,
-  /*导出时间*/
-  3:string createTime,
-  /*导入、导出状态: -1异常, 0正在进行, 1成功，2 终止，3 部分失败，4 其他情况*/
-  4:i32 opState, 
-   /*下载key路径*/
-  5:string opUrl,
-   /*查询条件*/
-  6:OrderQueryConditions conditions,
-  /*实际成功记录数*/
-  7:optional i32 actualCount,
-   /*总应处理记录数*/
-  8:optional i32 totalCount,
-  /*文件系统类型*/
-  9:optional i32 fsType
-}
-
-/*订单导出结果*/
-struct ExportOrderResult {
-  1:result.Result result,
-  /*总数量*/
-  2:optional i32 total,        
-  /*总页数*/
-  3:optional i32 pageCount,
-  4:optional list<ExportOrderInfo> exportOrderInfo
-}
-
-struct QueryScanOrderParam {
-	1:string startDate,
-	2:i32 sellerId,
-	/*每页的条数*/
-	3: i32 count,         
-
-	/*第几页*/
-	4: i32 curPage
-	
-}
-
-struct ScanOrderDetail {
-	//交易订单号
-	1:string orderId
-	//收款方式
-	2:string payTypeDesc,
-	/*支付时间*/
-	3:string paytime,
-	/*支付金额*/
-	4:string amount,
-	/*买家id*/
-	5:string userId
-}
-
-struct ScanOrderListResult{
-	1:result.Result result,
-	/*总数量*/
-	2:i32 total,          
-
-	/*页数*/
-	3:i32 pageCount,    
-
-	/*每页数量*/
-	4:i32 count,          
-
-	/*第几页*/
-	5:i32 curPage,             
-
-	6:list<ScanOrderDetail> scanOrderList,
-	
-	7:string totalAmount
-}
-
-struct ScanOrderDetailResult {
-	
-}
 
 /*订单服务*/
 /*
@@ -608,9 +531,7 @@ service OrderServ{
 	
 	/*取消订单(买家、系统)*/
 	result.Result cancelOrder(1:i32 userType, 2:i32 userId, 3:string orderId, 4:i32 reason)     
-
-	/*查询导出订单信息*/
-	ExportOrderResult queryExportOrderInfo(1:i32 sellerId, 2:OrderQueryConditions conditions)	
+	
 
 	/*查询订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQuery(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions)  
@@ -638,8 +559,11 @@ service OrderServ{
 	/*支付进度查询*/
 	PayStateResult payState(1:PayState payState);
 
-       /*批量导出订单*/
+       /*批量导出订单(卖家中心)*/
 	result.StringResult batchExportOrder(1:i32 sellerId, 2:OrderQueryConditions conditions);
+	
+	/*批量导出订单(管理中心)*/
+	result.StringResult batchExportOrderFull(1:OrderQueryConditions conditions);
 
        /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
@@ -653,16 +577,6 @@ service OrderServ{
 
         /*查询线下订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQueryOffline(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions); 
-
-
-
-	/*卖家查询扫码支付订单列表*/
-	ScanOrderListResult queryScanOrders(1:QueryScanOrderParam param)
-	
-	/*扫码支付订单明细*/
-	ScanOrderDetailResult queryScanOrderDetail(1:i32 sellerId, 2:string orderId)
-	
-	
 }
 
 
