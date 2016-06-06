@@ -563,7 +563,10 @@ service OrderServ{
 	result.StringResult batchExportOrder(1:i32 sellerId, 2:OrderQueryConditions conditions);
 	
 	/*批量导出订单(管理中心)*/
-	result.StringResult batchExportOrderFull(1:OrderQueryConditions conditions);
+	result.StringResult batchExportOrderFull(1:	OrderQueryConditions conditions);
+	
+	/*批量导出订单(卖家中心)*/
+	result.StringResult getExportOrderResult(1:string queryKey);
 
        /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
