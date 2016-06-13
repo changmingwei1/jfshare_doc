@@ -54,10 +54,12 @@ struct LoginLog {
     2:string tokenId, /*令牌标识*/
     3:string ip,
     4:string browser, /*浏览器标识*/
-    5:i32 fromSource, /*终端标识   Ios:1 Android:2 Web:3 H5:4*/
+    5:i32 fromSource, /*终端标识*/
     6:i32 loginAuto, /*是否自动登录*/
     7:string loginTime,
     8:string logoutTime,
+    9:i32 clientType, /*客户端标识   Android:1 Ios:2  H5:3 Web:4 */
+    10:string version,
 }
 
 struct BuyerResult{
@@ -83,10 +85,10 @@ service BuyerServ {
     /*登陆*/
     BuyerResult login(1:Buyer buyer, 2:LoginLog loginLog);
 
-    /*登陆*/
+    /*普通登陆*/
     BuyerResult newLogin(1:Buyer buyer, 2:LoginLog loginLog);
 
-    /*登陆*/
+    /*短信登陆*/
     BuyerResult smsLogin(1:Buyer buyer, 2:LoginLog loginLog);
 
     /*注销*/
