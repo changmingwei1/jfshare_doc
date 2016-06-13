@@ -54,7 +54,7 @@ struct LoginLog {
     2:string tokenId, /*令牌标识*/
     3:string ip,
     4:string browser, /*浏览器标识*/
-    5:i32 fromSource, /*终端标识*/
+    5:i32 fromSource, /*终端标识   Ios:1 Android:2 Web:3 H5:4*/
     6:i32 loginAuto, /*是否自动登录*/
     7:string loginTime,
     8:string logoutTime,
