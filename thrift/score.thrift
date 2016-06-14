@@ -329,11 +329,8 @@ service ScoreServ {
 
     /* 查询积分交易明细*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
-
-    /* 查询积分交易记录*/
-    ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
-    /* 查询积分记录20160510 */
-
+ 
+    /* 查询积分列表20160510 */
     ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
     /* 兑出积分查询20160512_1 */
     CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
