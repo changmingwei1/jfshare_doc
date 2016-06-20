@@ -58,6 +58,8 @@ struct LoginLog {
     6:i32 loginAuto, /*是否自动登录*/
     7:string loginTime,
     8:string logoutTime,
+    9:i32 clientType, /*客户端标识   Android:1 Ios:2  H5:3 Web:4 */
+    10:string version,
 }
 
 struct BuyerResult{
@@ -83,10 +85,10 @@ service BuyerServ {
     /*登陆*/
     BuyerResult login(1:Buyer buyer, 2:LoginLog loginLog);
 
-    /*登陆*/
+    /*普通登陆*/
     BuyerResult newLogin(1:Buyer buyer, 2:LoginLog loginLog);
 
-    /*登陆*/
+    /*短信登陆*/
     BuyerResult smsLogin(1:Buyer buyer, 2:LoginLog loginLog);
 
     /*注销*/
