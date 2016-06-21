@@ -336,7 +336,8 @@ service ScoreServ {
     CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
     /* 兑出积分调用接口20160512_2 */
     ResponseCachResult cachAmountCall(1:CachAmountCallParam param);   
-    StatusResult cachAmountCall(1:CachAmountCallParam param);   
     /* 兑入积分调用接口20160516_1 */
     ResponseScoreResult enterAmountCall(1:ScoreRequestParam param);
+    /* 获取1000次redis */
+    result.StringResult getRedisbyKey(1:string key);
 }
