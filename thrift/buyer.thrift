@@ -20,6 +20,7 @@ struct ThirdpartyUser{
 	5:string accountNo,
 	6:string extInfo
 }
+
 struct Buyer {
     1:i32 userId,
     2:string loginName,
@@ -70,6 +71,25 @@ struct BuyerResult{
     5:optional ThirdpartyUser thirdUser,
     6:optional AuthInfo authInfo
 }
+
+/*======第三方登陆========*/
+struct ValidateInfo{
+    1:i32 thirdType,
+    2:string custId,
+    3:string accessToken,
+    4:string openId,
+    5:optional string valiNum,/*验证码*/
+    6:optional string valiNumType /*验证类型*/
+}
+
+struct UserInfoThird{
+	1:string custId,
+	2:string mobile,
+	3:i32 thirdType,
+	4:string extInfo
+}
+
+/*=================*/
 
 /*买家服务*/
 service BuyerServ {
@@ -126,4 +146,11 @@ service BuyerServ {
 
     /* 验证鉴权 */
     result.Result validAuth(1:LoginLog loginLog, 2:AuthInfo authInfo);
+    
+    /*=================第三方注册登录=======*/
+    /*第三方账号登陆*/
+    BuyerResult thirdUserSignin(1:LoginLog loginLog, 2:UserInfoThird UserThird, 3:ValidateInfo validateInfo);
+    
+    /*账号是否已注册及登陆*/
+    BuyerResult isExitsThirdUser(1:LoginLog loginLog, 2:ValidateInfo validateInfo);
 }
