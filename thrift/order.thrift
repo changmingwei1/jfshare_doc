@@ -228,6 +228,7 @@ struct Order {
 	/*运费扩展信息  JSON*/
 	37:optional string postageExt,
        38:optional i32 orderType,
+	   39:optional string thirdPrice
 }
 
 /*订单查询条件*/
