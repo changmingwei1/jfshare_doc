@@ -107,7 +107,9 @@ struct PostageTemplate {
     /* 分组： 1：商品邮费模板  2：店铺邮费模板 */
     6:i32 templateGroup,
     /* 模板描述 */
-    7:optional string templateDesc
+    7:optional string templateDesc,
+	/* 是否使用： 1：使用  2：未使用 */
+	8:optional i32 isUsed
 }
 
 /* 查询邮费模板参数 */
@@ -156,7 +158,7 @@ struct SellerPostageReturn {
 	1:i32 sellerId,
 	/* 邮费 */
 	2:string postage,
-	/* 商家邮费模板信息 */
+	/* 商家邮费模板描述 */
 	3:optional string postageTemplate
 }
 
