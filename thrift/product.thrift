@@ -356,7 +356,8 @@ struct DayCaptchaListResult {
 struct CaptchaDetailResult{
 	1:result.Result result,
 	2:string productName,
-	3:list<ProductCard> productCards
+	3:list<ProductCard> productCards,
+	4:pagination.Pagination pagination
 	
 }
 
