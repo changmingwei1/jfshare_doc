@@ -51,10 +51,24 @@ struct AfterSaleQueryParam {
     8:optional list<string> orderIdList,
 }
 
-/* 获取用户积分数量 */
+/* 售后订单个数查询参数 */
+struct AfterSaleQueryCountParam {
+    /* 卖家ID */
+    1:i32 sellerId,
+    /* 售后状态 根据实际情况定义  如 1：新建（待审核）   2：审核通过  3：审核不通过  99：已完成 */
+    2:i32 state,
+}
+
+/* 查询售后 */
 struct AfterSaleResult {
     1:result.Result result,
     2:list<AfterSale> afterSaleList
+}
+
+/* 查询申请售后订单数量 */
+struct AfterSaleCountResult {
+    1:result.Result result,
+    2:i32 count,
 }
 
 struct AfterSaleOrder{
@@ -85,7 +99,11 @@ service AfterSaleServ {
 
     /* 查询售后 */
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
+    
+    /* 查询申请售后订单数量 */
+    AfterSaleCountResult queryAfterSaleCount(1:AfterSaleQueryCountParam param);
 
     /* 查询售后订单*/
     AfterSaleOrderResult queryAfterSaleOrder(1:AfterSaleOrderParam param, 2:pagination.Pagination pagination);
+		
 }

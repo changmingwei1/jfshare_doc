@@ -153,4 +153,7 @@ service BuyerServ {
     
     /*账号是否已注册及登陆*/
     BuyerResult isExitsThirdUser(1:LoginLog loginLog, 2:ValidateInfo validateInfo);
+    
+    /*HTTS请求方法*/
+    BuyerResult requestHttps(1:string url,2:string extInfo);
 }

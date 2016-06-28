@@ -36,6 +36,11 @@ struct PayRes {
     2:string resUrl, /*支付返回结果*/
 }
 
+/*支付结果查询参数*/
+struct payRetQueryParams {
+	1:optional string payId
+}
+
 /*支付处理结果*/
 struct PayRet {
     1:string payId,  /*本平台交易流水号*/
@@ -63,4 +68,7 @@ service PayServ {
 
         /*接收第三方支付结果*/
 	result.StringResult payNotify(1:PayRes payRes);
+	
+		/*支付结果查询*/
+	result.StringResult queryPayResult(1:payRetQueryParams params);
 }
