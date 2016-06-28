@@ -101,7 +101,7 @@ service AfterSaleServ {
     AfterSaleResult queryAfterSale(1:AfterSaleQueryParam param);
     
     /* 查询申请售后订单数量 */
-    AfterSaleCountResult queryAfterSaleCount(1:AfterSaleQueryCountParam param);
+    AfterSaleCountResult queryAfterSaleCount(1:AfterSaleQueryCountParam  param);
 
     /* 查询售后订单*/
     AfterSaleOrderResult queryAfterSaleOrder(1:AfterSaleOrderParam param, 2:pagination.Pagination pagination);
