@@ -305,7 +305,7 @@ struct CaptchaQueryParam {
 	/*分页条件*/
 	2:pagination.Pagination pagination,
 	
-	/*查询月份 格式:yyyyMM*/
+	/*查询月份 格式:yyyy-MM*/
 	3:optional string monthQuery,
 	/*商品id*/
 	4:optional string productId
@@ -449,7 +449,7 @@ service ProductServ {
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
 
     /* 使用虚拟商品卡密， 需要sellerId和cardNumber */
-	result.Result useProductCard(1:ProductCard productCard);
+	ProductCardResult useProductCard(1:ProductCard productCard);
 	
 	
 	
