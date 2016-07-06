@@ -305,10 +305,20 @@ struct CaptchaQueryParam {
 	/*分页条件*/
 	2:pagination.Pagination pagination,
 	
-	/*查询月份 格式:yyyyMM*/
+	/*查询月份 格式:yyyy-MM*/
 	3:optional string monthQuery,
 	/*商品id*/
 	4:optional string productId
+}
+
+struct CaptchaDayQueryParam {
+	/*买家id*/
+	1:i32 sellerId,
+	/*分页条件*/
+	2:pagination.Pagination pagination,
+	
+	/*查询日期 格式:yyyy-MM-dd */
+	3:optional string date
 }
 
 struct AldCaptchaItem {
@@ -320,6 +330,13 @@ struct AldCaptchaItem {
 	3:i32 aldSold,
 	/*已验证*/
 	4:i32 aldCaptcha
+}
+
+struct DayAldCaptchaCount {
+	/* 日期 */
+	1:string date,
+	/* 验证总数 */
+	2:i32 checkedTotalNum
 }
 
 struct DayAldCaptchaItem {
@@ -343,6 +360,7 @@ struct CaptchaListResult {
 	5:list<AldCaptchaItem> itemList
 }
 
+
 struct DayCaptchaListResult {
 	1:result.Result result,
 	/*当月销售总数*/
@@ -350,7 +368,13 @@ struct DayCaptchaListResult {
 	/*当月验证总数*/
 	3:i32 checkedNum,
 	4:pagination.Pagination pagination,
-	5:list<DayAldCaptchaItem> itemList
+	5:list<DayAldCaptchaCount> dayAldCaptchaCountList
+}
+
+struct DayCaptchaProductResult {
+	1:result.Result result,
+	2:pagination.Pagination pagination,
+	3:list<DayAldCaptchaItem> itemList
 }
 
 struct CaptchaDetailResult{
@@ -425,12 +449,19 @@ service ProductServ {
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
 
     /* 使用虚拟商品卡密， 需要sellerId和cardNumber */
-	result.Result useProductCard(1:ProductCard productCard);
+	ProductCardResult useProductCard(1:ProductCard productCard);
+	
+	
 	
 	/*查询卖家虚拟商品验证列表*/
 	CaptchaListResult queryCaptchaList(1:CaptchaQueryParam param);
+	
 	/*查询卖家虚拟商品验证列表—按月统计每天的验证总数( 查询条件：按月)*/
     DayCaptchaListResult queryCaptchaTotalList(1:CaptchaQueryParam param);
+	
+	/* 根据日期查询商品每天验证码数据 */
+	DayCaptchaProductResult queryCaptchaDayTotalList(1:CaptchaDayQueryParam param);
+	
     /*卖家虚拟商品验证列表明细*/
     CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
 }
