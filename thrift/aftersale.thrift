@@ -80,7 +80,8 @@ struct AfterSaleOrder{
 struct AfterSaleOrderResult{
     1:result.Result result,
     2:list<AfterSaleOrder> afterSaleOrders,
-    3:pagination.Pagination pagination
+    3:list<AfterSale> afterSaleList,
+    4:pagination.Pagination pagination
 }
 /* 查询售后订单参数*/
 struct AfterSaleOrderParam{
