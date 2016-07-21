@@ -239,6 +239,11 @@ struct ProductCardStatisticsParam {
 	2:string productName
 }
 
+struct ProductCardSkuStatisticsParam {
+	1:i32 sellerId,
+	2:string productId
+}
+
 struct ProductCardParam {
     /* 商品ID */
 	1:string productId,
@@ -256,7 +261,9 @@ struct ProductCardImportParam {
     /* 卖家ID */
 	1:i32 sellerId,
 	/* 文件路径 */
-	2:string path
+	2:string path,
+	/* 商品ID，用于验证 */
+	3:string productId
 }
 
 struct ProductCardResult {
@@ -444,6 +451,9 @@ service ProductServ {
 
 	/* 查询虚拟商品卡密统计列表，管理专用 */
 	ProductCardStatisticsResult statisticsProductCard(1:ProductCardStatisticsParam param, 2:pagination.Pagination pagination);
+	
+	/* 查询虚拟商品每个sku卡密统计列表，管理专用 */
+	ProductCardStatisticsResult statisticsSkuProductCard(1:ProductCardSkuStatisticsParam param, 2:pagination.Pagination pagination);
 
 	/* 查询单个虚拟商品卡密列表，管理专用 */
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
