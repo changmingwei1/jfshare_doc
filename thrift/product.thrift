@@ -392,6 +392,72 @@ struct CaptchaDetailResult{
 	
 }
 
+/*========================== 第三方商品相关结构 ===========================*/
+
+struct ThirdPartyProductQueryParam{
+	/* 商家名称 */
+	1:string sellerName,
+	/* 商品名称 */
+	2:string productName,
+	/* 商品状态 0：全部， 1：在售， 2：下架 */
+	3:i32 productState,
+	/* 商品库存 0：全部， 1：全区有货， 2：部分缺货， 3：全区缺货 */
+	4:i32 productStock,
+	/* 价格变化 0：全部， 1：上升， 2：下降， 3：持平 */
+	5:i32 priceChange,
+	/* 提报状态 0：全部， 1：已提报， 2：未提报 */
+	6:i32 offerState
+}
+
+struct ThirdPartyProduct{
+    /* 聚分享商品ID */
+	1:string productId,
+	/* 第三方商品ID */
+	2:string thirdPartyProductId,
+	/* 商家名称 */
+	3:string sellerName,
+	/* 商品商家编码 */
+	4:string sellerClassNum,
+	/* 结算价 */
+	5:string curPrice,
+	/* 价格变化 1：上升， 2：下降， 3：持平 */
+	6:i32 priceChange,
+	/* 库存，json格式 {"华北":1520,"华东":2548,"华南":1426} */
+	7:string productStockJson,
+	/* 商品状态 1：在售， 2：下架 */
+	8:i32 productState,
+	/* 提报状态 1：已提报， 2：未提报 */
+	9:i32 offerState,
+	/* 更新时间 */
+	10:string updateTime
+}
+
+struct ThirdPartyProductQueryResult{
+	1:result.Result result,
+	2:list<ThirdPartyProduct> thirdPartyProductList
+	
+}
+
+
+struct ThirdPartyProductLog{
+	/* 商品状态 1：在售， 2：下架 */
+	1:i32 productState,
+	/* 结算价 */
+	2:string curPrice,
+	/* 更新时间 */
+	3:string updateTime
+}
+
+struct ThirdPartyProductLogParam{
+	/* 第三方商品ID */
+	1:string thirdPartyProductId
+}
+
+struct ThirdPartyProductLogResult {
+	1:result.Result result,
+	2:list<ThirdPartyProductLog> logs
+}
+
 
 /*商品基本信息*/
 service ProductServ {
@@ -462,7 +528,6 @@ service ProductServ {
 	ProductCardResult useProductCard(1:ProductCard productCard);
 	
 	
-	
 	/*查询卖家虚拟商品验证列表*/
 	CaptchaListResult queryCaptchaList(1:CaptchaQueryParam param);
 	
@@ -474,4 +539,14 @@ service ProductServ {
 	
     /*卖家虚拟商品验证列表明细*/
     CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
+	
+	/*========================== 第三方商品相关接口 ============================*/
+	/* 查询同步过来的商品 */
+	ThirdPartyProductQueryResult queryThirdPartyProduct(1:ThirdPartyProductQueryParam param, 2:pagination.Pagination pagination);
+	
+	/* 获取操作日志 */
+	ThirdPartyProductLogResult getThirdPartyProductLog(1:ThirdPartyProductLogParam param, 2:pagination.Pagination pagination);
+	
+	/* 提报商品 */
+	result.StringResult offerThirdPartyProduct(1:ThirdPartyProduct thirdPartyProduct);
 }
