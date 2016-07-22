@@ -434,7 +434,8 @@ struct ThirdPartyProduct{
 
 struct ThirdPartyProductQueryResult{
 	1:result.Result result,
-	2:list<ThirdPartyProduct> thirdPartyProductList
+	2:list<ThirdPartyProduct> thirdPartyProductList,
+	3:pagination.Pagination pagination
 	
 }
 
@@ -455,7 +456,8 @@ struct ThirdPartyProductLogParam{
 
 struct ThirdPartyProductLogResult {
 	1:result.Result result,
-	2:list<ThirdPartyProductLog> logs
+	2:list<ThirdPartyProductLog> logs,
+	3:pagination.Pagination pagination
 }
 
 
