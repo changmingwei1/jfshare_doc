@@ -113,5 +113,5 @@ service MessageServ{
     AppUpgradeResultStr getAppUpgradeInfoStr(1:GetUpgradeParamStr param);
     
     /*推送消息by sdk*/
-    result.Result pushMessageInfo(1:i32 userId, 2:PushMessage message);
+    result.Result pushMessageInfo(1:string userId, 2:PushMessage message);
 }
