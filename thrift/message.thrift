@@ -108,7 +108,10 @@ service MessageServ{
     /* 更新客户端升级信息 */
     result.Result updateAppUpgradeInfo(1:AppUpgradeInfo info);
     
-    /* 新版-查询升级信息
+    /* ---------新版-查询升级信息
      /* 查询升级信息 */
     AppUpgradeResultStr getAppUpgradeInfoStr(1:GetUpgradeParamStr param);
+    
+    /*推送消息by sdk*/
+    result.Result pushMessageInfo(1:i32 userId, 2:PushMessage message);
 }
