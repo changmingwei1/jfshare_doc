@@ -113,5 +113,6 @@ service MessageServ{
     AppUpgradeResultStr getAppUpgradeInfoStr(1:GetUpgradeParamStr param);
     
     /*推送消息by sdk*/
-    result.Result pushMessageInfo(1:string userId, 2:PushMessage message);
+    /*orderType 10:待支付 30:待发货 40:待收货 50:已完成*/
+    result.Result pushMessageInfo(1:string userId, 2:PushMessage message, 3:optional string orderType);
 }
