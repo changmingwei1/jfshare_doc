@@ -46,7 +46,9 @@ struct Buyer {
     22:string remark,
     23:i32 serial,
     24:string createTime,
-    25:string lastUpdateTime
+    25:string lastUpdateTime,
+	26:i32 state,
+	27:i32 clientType
 }
 
 /*登陆请求参数*/
