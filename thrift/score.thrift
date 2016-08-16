@@ -236,9 +236,9 @@ struct RelaAccountRequestParam{
     /* 客户编号 */
     7:string OutCustID,
     /* Token */
-    8:string Token,
+    8:string ToKen,
     /* 过期时间 */
-    9:string ExpTime, 
+    9:string ExceedTime, 
 }
 
 /* 绑定账号接口返回结果*/
