@@ -15,7 +15,9 @@ struct BatchActivity {
         8:string endTime,
         9:string curStatus,
         10:string password,
-        11:string multiRechargeEnable;
+        11:string multiRechargeEnable,
+	12:i32 UsedCount,
+	13:i32 SendCount,
 
 }
 
@@ -66,7 +68,8 @@ struct ActivityResult {
 /**  多件产品的结果集*/
 struct ActivityBatchResult {
 	1:result.Result result,
-	2:list<BatchActivity> activityList
+	2:list<BatchActivity> activityList,
+	3:pagination.Pagination pagination
 }
 
 
@@ -94,6 +97,7 @@ struct CardResult {
 struct CardBatchResult {
 	1:result.Result result,
 	2:list<BatchCardRecord> cardList
+	3:pagination.Pagination pagination
 }
 
 /*  单个批次活动充值记录的查询参数
@@ -117,6 +121,7 @@ struct CardRecordResult {
 struct CardRecordBatchResult {
 	1:result.Result result,
 	2:list<BatchRechargeCardRecord> rechargeCardRecordList
+	3:pagination.Pagination pagination
 }
 
 /**   导出 excel */
@@ -156,9 +161,9 @@ struct DirectRechargeResult {
       3:i32 failedNum;/*失败条数*/
 }
 /**  定向充值参数 */
-struct RechargeParams {
+struct ToRechargeParams {
       1:string validataStr; /*定向充值密码*/
-      2:string FilePath; /*文件路径*/
+      2:string filePath; /*文件路径*/
       3:string activityId; /*活动Id*/
 }
 
@@ -197,6 +202,6 @@ service ScoreCardServ {
   result.Result validataPassword(1:string validataStr);
   
   /*定向充值*/
-  DirectRechargeResult directRecharge(1:RechargeParams params);
+  DirectRechargeResult directRecharge(1:ToRechargeParams params);
 
 }
