@@ -97,6 +97,21 @@ struct UserInfoThird{
 
 /*=================*/
 
+/*H5第三方登陆请求参数*/
+struct H5ThirdLoginParam{
+	1:string appCode,/*应用编码*/
+	2:string requestDate,/*请求时间*/
+	3:string sign,/*签名*/
+	4:string mobile,/*设配号*/
+	5:string wayType,/*用户渠道来源*/
+	6:string redirectUrl,/*重定向URL*/	
+}
+/*H5第三方登陆返回结果*/
+struct H5ThirdLoginResult{
+	1:result.Result result,
+    2:string url
+}
+
 /*买家服务*/
 service BuyerServ {
     /*查询登录名是否存在*/
@@ -150,7 +165,9 @@ service BuyerServ {
 	/*账号是否绑定第三方账号*/
     BuyerResult isBindThirdParty(1:string thirdType, 2:LoginLog loginLog);
     
+    
     /* 获取鉴权信息*/
+    
     AuthInfoResult getAuthInfo(1:AuthInfo authInfo, 2:Buyer buyer, 3:LoginLog loginLog);
 
     /* 验证鉴权 */
@@ -166,5 +183,7 @@ service BuyerServ {
     /*HTTS请求方法*/
     BuyerResult requestHttps(1:string url,2:string extInfo);
     
+    /*H5第三方登陆*/
+    H5ThirdLoginResult H5ThirdLogin(1:H5ThirdLoginParam param);
     
 }
