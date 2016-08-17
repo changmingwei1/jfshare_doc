@@ -38,7 +38,7 @@ struct BatchCardRecord {
 struct BatchRechargeCardRecord {
     1:i32 id;
     2:i32 activityId;
-    3:i32 cardId,
+    3:string cardName,
     4:i32 pieceValue,
     5:string rechargeType,
     6:i32 userId,
@@ -186,7 +186,7 @@ service ScoreCardServ {
 	CardResult queryCardById(1:i32  cardId);
 
 	/*查询某个活动卡 充值记录 */
-	CardRecordBatchResult queryRechargeCards(1:i32  activityId,2:CardRechargeCardParam param, 3:pagination.Pagination pagination);
+	CardRecordBatchResult queryRechargeCards(1:i32  userId, 2:pagination.Pagination pagination);
 
 	/*查询根据id 的已充值的卡片记录*/
 	CardRecordResult queryRechargeCardById(1:i32  rechargeCardId);
