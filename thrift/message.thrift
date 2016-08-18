@@ -108,11 +108,7 @@ service MessageServ{
     /* 更新客户端升级信息 */
     result.Result updateAppUpgradeInfo(1:AppUpgradeInfo info);
     
-    /* ---------新版-查询升级信息
+    /* 新版-查询升级信息
      /* 查询升级信息 */
     AppUpgradeResultStr getAppUpgradeInfoStr(1:GetUpgradeParamStr param);
-    
-    /*推送消息by sdk*/
-    /*orderType 10:待支付 30:待发货 40:待收货 50:已完成*/
-    result.Result pushMessageInfo(1:string userId, 2:PushMessage message, 3:optional string orderType);
 }

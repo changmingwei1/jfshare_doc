@@ -80,7 +80,7 @@ struct ScoreUser {
     4:i32 amount,
 }
 
-/* 查询积分列表参数20160510 */
+/* 查询积分列表参数*/
 struct ScoreUserQueryParam {
     /* 用户ID */
     1:i32 userId,
@@ -94,7 +94,7 @@ struct ScoreUserQueryParam {
     5:i32 amount,
 }
 
-/* 查询积分列表返回结果20160510 */
+/* 查询积分列表返回结果*/
 struct ScoreUserResult {
     1:result.Result result,
     2:list<ScoreUser> scoreUsers,
@@ -102,7 +102,7 @@ struct ScoreUserResult {
     3:pagination.Pagination pagination
 }
 
-/* 兑出积分查询结构20160512_1 */
+/* 兑出积分查询结构*/
 struct CachAmount {
     /* 总积分 */
     1:i32 totalAmount,
@@ -110,19 +110,19 @@ struct CachAmount {
     2:i32 CachAmount,
 }
 
-/* 兑出积分查询参数20160512_1 */
+/* 兑出积分查询参数*/
 struct CachAmountQueryParam {
     /* 用户ID */
     1:i32 userId, 
 }
 
-/* 兑出积分查询返回结果20160512_1 */
+/* 兑出积分查询返回结果*/
 struct CachAmountResult {
     1:result.Result result,
     2:CachAmount cachAmount,
 }
 
-/* 兑出积分调用接口结构20160512_2 */
+/* 兑出积分调用接口结构*/
 struct ReponseCach {
      /* 应用编码 */
     1:string AppCode,
@@ -136,7 +136,7 @@ struct ReponseCach {
     5:string ErrMsg,
 }
 
-/* 兑出积分调用接口参数20160512_2 */
+/* 兑出积分调用接口参数*/
 struct CachAmountCallParam {
     /* 用户ID */
     1:i32 userId,
@@ -145,13 +145,13 @@ struct CachAmountCallParam {
     /* 手机号 */
     3:string mobile, 
 }
-/* 兑出积分调用接口返回结果20160512_2 */
+/* 兑出积分调用接口返回结果*/
 struct ResponseCachResult {
     1:result.Result result,
     2:ReponseCach reponseCach,
 }
 
-/* 兑入积分调用接口结构20160516_1 */
+/* 兑入积分调用接口结构*/
 struct ResponseScore {
     /* 应用编码 */
     1:string AppCode,
@@ -164,7 +164,7 @@ struct ResponseScore {
     /* 响应描述 */
     5:string ErrMsg,
 }
-/* 兑入积分调用接口参数20160516_1 */
+/* 兑入积分调用接口参数*/
 struct ScoreRequestParam {
     /* 应用编码 */
     1:string AppCode,
@@ -193,11 +193,60 @@ struct ScoreRequestParam {
     /* 过期时间 */
     13:string ExpTime,   
 }
-/* 兑出积分兑入接口返回结果20160516_1 */
+/* 兑出积分兑入接口返回结果*/
 struct ResponseScoreResult {
     1:result.Result result,
     2:ResponseScore responseScore,
 }
+
+/*用户绑定账号关系*/
+struct ScoreAccount{
+    /*用户ID*/
+    1:i32 userId,
+    /*绑定账号*/
+    2:string account,
+    /*绑定时间*/
+    3:string createTime,
+    /*绑定账号类型*/
+    4:string type,
+    /*绑定账号状态  0：已绑定 1：未绑定*/
+    5:string state
+}
+/*校验用户是否绑定兑出账号返回结果*/
+struct ScoreAccountResult{
+    1:result.Result result,
+    2:ScoreAccount scoreAccount
+    3:optional bool value,
+}
+
+/*兑入账号绑定请求参数*/
+struct RelaAccountRequestParam{
+	/* 应用编码 */
+    1:string AppCode,
+    /* 请求时间 */
+    2:string RequestDate,
+    /* 数据签名 */
+    3:string Sign,
+    /* 业务编号 */
+    4:string SpID,
+    /* 设备号 */
+    5:string DeviceNo,
+    /* 设备类型 */
+    6:string DeviceType,
+    /* 客户编号 */
+    7:string OutCustID,
+    /* Token */
+    8:string ToKen,
+    /* 过期时间 */
+    9:string ExceedTime, 
+}
+
+/* 绑定账号接口返回结果*/
+struct ResponseRelaAcoountResult {
+    1:result.Result result,
+    2:ResponseScore ResponseScore,
+}
+
 service ScoreServ {
     /* 收入积分 */
     result.StringResult income(1:ScoreTrade scoreTrade);
@@ -205,18 +254,23 @@ service ScoreServ {
     result.StringResult expenditure(1:ScoreTrade scoreTrade);
     /* 查询积分 */
     ScoreResult getScore(1:i32 userId);
-
     /* 查询积分交易明细*/
     ScoreTradeResult queryScoreTrade(1:ScoreTradeQueryParam param, 2:pagination.Pagination pagination);
- 
-    /* 查询积分列表20160510 */
+    /* 查询积分列表*/
     ScoreUserResult queryScoreUser(1:ScoreUserQueryParam param, 2:pagination.Pagination pagination);
-    /* 兑出积分查询20160512_1 */
+    /* 兑出积分查询*/
     CachAmountResult queryCachAmount(1:CachAmountQueryParam param); 
-    /* 兑出积分调用接口20160512_2 */
+    /* 兑出积分调用接口*/
     ResponseCachResult cachAmountCall(1:CachAmountCallParam param);   
-    /* 兑入积分调用接口20160516_1 */
+    /* 兑入积分调用接口*/
     ResponseScoreResult enterAmountCall(1:ScoreRequestParam param);
     /* 获取1000次redis */
     result.StringResult getRedisbyKey(1:string key,2:i32 count);
+     /*用户是否绑定兑出账号*/
+    ScoreAccountResult isUserIdRela(1:i32 userId);
+    /*账号是否绑定*/
+    ScoreAccountResult isAccountRela(1:string account); 
+    /*电信账号绑定接口*/
+    ResponseRelaAcoountResult relaAccountCall(1:RelaAccountRequestParam param);
+    
 }
