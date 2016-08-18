@@ -416,20 +416,24 @@ struct ThirdPartyProduct{
 	2:string thirdPartyProductId,
 	/* 第三方商家标识  1：我买网 */
 	3:i32 thirdPartyIdentify,
+	/* 商品名称 */
+	4:string name,
+	/* 商品图片 */
+	5:string imgKey,
 	/* 商品商家编码 */
-	4:string sellerClassNum,
+	6:string sellerClassNum,
 	/* 结算价 */
-	5:string curPrice,
+	7:string curPrice,
 	/* 价格变化 1：上升， 2：下降， 3：持平 */
-	6:i32 priceState,
+	8:i32 priceState,
 	/* 库存，json格式 {"华北":1520,"华东":2548,"华南":1426} */
-	7:string stockInfo,
+	9:string stockInfo,
 	/* 商品状态 300：在售， 101：下架 */
-	8:i32 activeState,
+	10:i32 activeState,
 	/* 提报状态 1：已提报， 2：未提报 */
-	9:i32 offerState,
+	11:i32 offerState,
 	/* 更新时间 */
-	10:string updateTime
+	12:string updateTime
 }
 
 struct ThirdPartyProductQueryResult{
