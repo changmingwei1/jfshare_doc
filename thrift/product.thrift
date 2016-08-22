@@ -392,6 +392,7 @@ struct CaptchaDetailResult{
 	
 }
 
+/*========================== 第三方商品相关结构 ===========================*/
 
 struct ThirdPartyProductQueryParam{
 	/* 第三方商家标识 0：全部， 1：我买网 */
@@ -535,7 +536,6 @@ service ProductServ {
 	ProductCardResult useProductCard(1:ProductCard productCard);
 	
 	
-	
 	/*查询卖家虚拟商品验证列表*/
 	CaptchaListResult queryCaptchaList(1:CaptchaQueryParam param);
 	
@@ -547,4 +547,17 @@ service ProductServ {
 	
     /*卖家虚拟商品验证列表明细*/
     CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
+	
+	/*========================== 第三方商品相关接口 ============================*/
+	/* 查询同步过来的商品 */
+	ThirdPartyProductQueryResult queryThirdPartyProduct(1:ThirdPartyProductQueryParam param, 2:pagination.Pagination pagination);
+	
+	/* 获取操作日志 */
+	ThirdPartyProductLogResult getThirdPartyProductLog(1:ThirdPartyProductLogParam param, 2:pagination.Pagination pagination);
+	
+	/* 提报商品 */
+	result.StringResult offerThirdPartyProduct(1:ThirdPartyProduct thirdPartyProduct);
+	
+	/* 导出第三方商品 */
+	result.StringResult exportThirdPartyProduct(1:ThirdPartyProductQueryParam param);
 }
