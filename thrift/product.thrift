@@ -475,7 +475,7 @@ service ProductServ {
 	/*查询商品sku*/
 	ProductSkuResult queryProductSku(1:string productId);
 
-	/*查询商品指定sku*/
+	/*查询商品指定sku 不用了 */
 	ProductResult queryHotSKU(1:string productId, 2:string skuNum, 3:ProductRetParam param);
 
 	/*查询商品指定sku*/
@@ -496,7 +496,7 @@ service ProductServ {
 	/* 商品概要信息列表查询*/
 	ProductSurveyResult productSurveyQuery(1:ProductSurveyQueryParam param);
 
-	/* 按点击量查询商品列表 */
+	/* 按点击量查询商品列表 不用了 */
 	ProductSurveyResult productSurveyQueryByClick(1:ProductSurveyQueryParam param);
 
 	/* 管理后台查询商品概要信息列表查询*/
@@ -523,13 +523,13 @@ service ProductServ {
 	/* 查询虚拟商品卡密，根据transactionId，查询卡密信息 */
 	ProductCardResult queryProductCard(1:ProductCardParam param);
 
-	/* 查询虚拟商品卡密统计列表，管理专用 */
+	/* 查询虚拟商品卡密统计列表，卖家管理专用 */
 	ProductCardStatisticsResult statisticsProductCard(1:ProductCardStatisticsParam param, 2:pagination.Pagination pagination);
 	
-	/* 查询虚拟商品每个sku卡密统计列表，管理专用 */
+	/* 查询虚拟商品每个sku卡密统计列表，卖家管理专用 */
 	ProductCardStatisticsResult statisticsSkuProductCard(1:ProductCardSkuStatisticsParam param, 2:pagination.Pagination pagination);
 
-	/* 查询单个虚拟商品卡密列表，管理专用 */
+	/* 查询单个虚拟商品卡密列表，卖家管理专用 */
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
 
     /* 使用虚拟商品卡密， 需要sellerId和cardNumber */
