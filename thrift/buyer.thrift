@@ -147,7 +147,7 @@ service BuyerServ {
 	/*获取用户信息BY用户ID*/
     BuyerResult getBuyer(1:Buyer buyer);
     
-    /*获取用户信息*/
+    /*获取用户信息根据手机号*/
     BuyerResult getBuyerInfo(1:Buyer buyer);
     
     /*批量获取用户信息*/
