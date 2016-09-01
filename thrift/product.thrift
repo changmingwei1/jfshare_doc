@@ -82,11 +82,13 @@ struct Product {
     /* 邮费模板ID */
     25:optional i32 postageId,
     /* 第三方积分抵现比率 如:10，1分抵10分钱*/
-    26:optional string thirdExchangeRate
+    26:optional string thirdExchangeRate,
 
-
-
-
+	/* 第三方商家标识  1：我买网 */
+	27:optional i32 thirdPartyIdentify,
+	/* 第三方商品ID */
+	28:optional string thirdPartyProductId
+	
 
 }
 
