@@ -144,8 +144,11 @@ service BuyerServ {
     /*找回密码*/
     result.StringResult pwdFind(1:i32 findWay, 2:string account);
 	
-	/*获取用户信息*/
+	/*获取用户信息BY用户ID*/
     BuyerResult getBuyer(1:Buyer buyer);
+    
+    /*获取用户信息*/
+    BuyerResult getBuyerInfo(1:Buyer buyer);
     
     /*批量获取用户信息*/
     BuyerListResult getListBuyer(1:optional list<i32> userIdList);
