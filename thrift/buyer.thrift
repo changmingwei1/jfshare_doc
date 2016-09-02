@@ -111,6 +111,11 @@ struct H5ThirdLoginResult{
 	1:result.Result result,
     2:string url
 }
+/*校验用户是否为广东限购手机号返回结果*/
+struct PurchaseMobileResult{
+    1:result.Result result,
+    2:optional bool value,
+}
 
 /*买家服务*/
 service BuyerServ {
@@ -188,5 +193,8 @@ service BuyerServ {
     
     /*H5第三方登陆*/
     H5ThirdLoginResult H5ThirdLogin(1:H5ThirdLoginParam param);
+    
+    /*广东电信账号是否限购*/
+    PurchaseMobileResult isPurchaseMobile(1:string mobile); 
     
 }
