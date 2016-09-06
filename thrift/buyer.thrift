@@ -99,17 +99,14 @@ struct UserInfoThird{
 
 /*H5第三方登陆请求参数*/
 struct H5ThirdLoginParam{
-	1:string appCode,/*应用编码*/
-	2:string requestDate,/*请求时间*/
-	3:string sign,/*签名*/
-	4:string mobile,/*设配号*/
-	5:string wayType,/*用户渠道来源*/
-	6:string redirectUrl,/*重定向URL*/	
+	1:string reuestXml  /*请求xml*/	
 }
 /*H5第三方登陆返回结果*/
 struct H5ThirdLoginResult{
-	1:result.Result result,
-    2:string url
+	1:result.Result result, /*返回结果*/
+    2:i32 userId, /*用户ID*/
+    3:string token, /*TOKEN*/
+    4:string ppInfo /*ppInfo*/
 }
 /*校验用户是否为广东限购手机号返回结果*/
 struct PurchaseMobileResult{
