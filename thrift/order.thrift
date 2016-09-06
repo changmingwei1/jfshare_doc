@@ -506,6 +506,13 @@ struct BatchDeliverParam {
 	4:string fileKey
 }
 
+struct orderSellerQueryParam{
+1:string mobile, 	/*买家手机号*/
+2:i32 sellerId, 	/*卖家ID*/
+3:sring orderId,	/*订单ID*/
+4:string startTime, /*开始时间*/
+5:string endTime	/*结束时间*/
+}
 
 /*订单服务*/
 /*
@@ -581,6 +588,10 @@ service OrderServ{
 
         /*查询线下订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQueryOffline(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions); 
+	
+	/*查询线下卖家订单列表(卖家中心)*/
+	OrderProfileResult orderSellerQueryOffline(1：orderSellerQueryParam); 
+
 }
 
 
