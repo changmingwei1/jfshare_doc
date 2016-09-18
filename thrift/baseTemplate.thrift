@@ -172,7 +172,8 @@ struct CalculatePostageParam {
 
 struct SellerPostageTemplateParam {
 	/* 卖家ID */
-	1:list<i32> sellerIds
+	1:list<i32> sellerIds,
+	2:string type	/*暂时没用*/
 }
 
 
