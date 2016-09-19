@@ -205,7 +205,13 @@ struct ProductCardView {
 	/* 是否已发放  1：未发放 2：已发放 3：已使用 */
 	4:i32 state,
 	/* 商品sku编码 */
-	5:string skuNum
+	5:string skuNum,
+	/*发放账号*/
+	6:optional string sendAccount,
+	/*发放时间*/
+	7:optional string sendTime,
+	/**验证时间**/
+	8:optional string validateTime
 }
 
 struct ProductCardViewParam {
@@ -218,7 +224,17 @@ struct ProductCardViewParam {
 	/* 是否已发放  0：全部  1：未发放 2：已发放 3：已使用 */
 	4:i32 state,
 	/* 商品sku编码 */
-	5:string skuNum
+	5:string skuNum,
+	/*发放开始时间*/
+	6:optional string sendBeginTime,
+	/**发放结束时间**/
+	7:optional string sendEndTime,
+	/*验证开始时间*/
+	8:optional string validateBeginTime,
+	/*验证结束时间*/
+	9:optional string validateEndTime,
+	/**发放账号*/
+	10:optional string sendAccount
 }
 
 struct ProductCardStatistics {
