@@ -68,6 +68,71 @@ struct CommissionerResult {
 	  4:optional bool value,
 }
 
+struct ModuleConfig{
+	1:string id,
+	2:string moduleName,/*模块名称*/
+	3:string moduleDesc,/*模块描述*/
+	4:string moduleType,/*模块类型  1:商品  2：品牌*/
+	5:string create_time,/*创建时间*/
+	6:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
+	7:string relaseStatus,/*发布状态*/
+}
+
+/*模块配置返回结果*/
+struct ModuleConfigResult{
+	1:result.Result result,
+	2:list<ModuleConfig> moduleConfigList
+}
+
+/*模块配置请求参数*/
+struct ModuleConfigParam{
+	1:string moduleName,/*模块名称*/
+	2:string moduleType,/*模块类型  1:商品  2：品牌*/
+	3:string create_time,/*创建时间*/
+	4:string relaseStatus,/*发布状态  0：未发布 1：已发布*/
+	5:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
+}
+
+struts ModuleConfigDetail{
+	1:string id,/*序号*/
+	2:string moduleId,/*模块ID*/
+	3:string createTime,/*创建时间*/
+	4:string relaId,/*关联ID*/
+	5:string relaImgkey,/*关联图片*/
+	6:string productRuleId,/*商品规则ID*/
+	7:string relaSort,/*位置排序号*/
+	8:string updateTime,/*更新时间*/	
+}
+
+/*模块配置明细返回结果*/
+struts ModuleConfigDetailResult{
+	1:result.Result result,
+	2:list<ModuleConfigDetail> ModuleConfigDetailList
+	
+}
+
+/*模块配置明细请求参数*/
+struts ModuleConfigDetailParam{
+	1:string moduleId,/*模块ID*/
+	2:string createTime,/*创建时间*/
+	3:string relaId,/*关联ID*/
+	4:string relaImgkey,/*关联图片*/
+	5:string productRuleId,/*商品规则ID*/
+	6:string relaSort,/*位置排序号*/
+}
+
+/*发布返回结果*/
+struct relaseResult{
+      1:result.Result result,
+	  2:string type,/*发布类型*/
+	  3:string relaseCount,/*发布图片数量*/
+}
+
+/*发布请求参数*/
+struct relaseParam{
+    1:list<ModuleConfigDetail> ModuleConfigDetailList
+}
+
 /*service*/
 service ManagerServ{
 	/*记录变更商品状态变更日志*/
@@ -103,4 +168,12 @@ service ManagerServ{
 	/* 查询广告图 */
 	slotImage.QuerySlotImageResult querySlotImageOne(1:i32 id);
 	
+	/* 查询模块 */
+	ModuleConfigResult  queryModuleConfig(ModuleConfigParam param);
+	
+	/* 查询模块配置明细*/
+	ModuleConfigDetailResult  queryModuleConfigDetail(ModuleConfigDetailParam param);
+	
+	/*发布模块*/
+	relaseResult relase(relaseParam param);
 }
