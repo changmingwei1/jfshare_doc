@@ -548,6 +548,9 @@ service ProductServ {
 	
 	/* 查询虚拟商品每个sku卡密统计列表，卖家管理专用 */
 	ProductCardStatisticsResult statisticsSkuProductCard(1:ProductCardSkuStatisticsParam param, 2:pagination.Pagination pagination);
+	
+	/*导出卡密列表*/
+	result.StringResult ExportStatisticsSkuProductCard(1:ProductCardViewParam param);
 
 	/* 查询单个虚拟商品卡密列表，卖家管理专用 */
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
