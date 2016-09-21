@@ -133,6 +133,12 @@ struct relaseParam{
     1:list<ModuleConfigDetail> ModuleConfigDetailList
 }
 
+/*导入请求参数*/
+struct ImportParam{
+	1:string filePath,	/*获取excel文件的全路径*/
+	2:string moduleId	/*模块ID*/
+}
+
 /*====================================================原有的不动====================================================*/
 
 
@@ -220,13 +226,16 @@ service ManagerServ{
 	slotImage.QuerySlotImageResult querySlotImageOne(1:i32 id);
 	
 	/* 查询模块 */
-	ModuleConfigResult  queryModuleConfig(ModuleConfigParam param);
+	ModuleConfigResult  queryModuleConfig(1:ModuleConfigParam param);
 	
 	/* 查询模块配置明细*/
-	ModuleConfigDetailResult  queryModuleConfigDetail(ModuleConfigDetailParam param);
+	ModuleConfigDetailResult  queryModuleConfigDetail(1:ModuleConfigDetailParam param);
 	
 	/*发布模块*/
-	relaseResult relase(relaseParam param);
+	relaseResult relase(1:relaseParam param);
+	
+	/*导入商品或品牌*/
+	ModuleConfigDetailResult importExcel(1:ImportParam param);
 	
 	/*====================================================原有的不动====================================================*/
 	
@@ -250,4 +259,5 @@ service ManagerServ{
 	
 	/*查询各端轮播图列表*/
 	AdvertSlotListResult queryAdvertSlotList();
+	
 }
