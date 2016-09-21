@@ -133,6 +133,57 @@ struct relaseParam{
     1:list<ModuleConfigDetail> ModuleConfigDetailList
 }
 
+/*====================================================原有的不动====================================================*/
+
+
+struct AdvertSlotImage{
+	1:i32 id,
+	2:string imgKey,	/*图片key*/
+	3:i32 advertId,		/*广告位id, H5&APP or PC or OTHERS*/
+	4:string slotName,	/*广告位名称*/
+	5:string remark,	/*广告位描述*/
+	6:string jump,		/*跳转地址链接*/
+	7:i32 isOnline,		/*状态,是否在线  1:在线 2:不在线*/
+	8:i32 sort,			/*排序标识*/
+	9:string startTime,	/*上线时间*/
+	10:string endTime,	/*下线时间*/
+	11:string createTime/*创建时间*/
+}
+
+struct AdvertSlot{
+	1:i32 advertId,
+	2:string slotName,
+	3:i32 count,
+	4:string createTime,
+	5:string type
+}
+
+struct AdvertSlotImageParam{
+	1:i32 advertId,
+	2:i32 fromSource, 	/* 1前端 2管理中心,在node层去管理,前端不用传 */
+	3:i32 type			/* 1主站 2APP&H5,需要相应端口传参*/
+}
+
+struct AdvertSlotImageListResult{
+    1:result.Result result,
+	2:optional list<AdvertSlotImage> slotImageList
+}
+
+struct AdvertSlotImageResult{
+    1:result.Result result,
+	2:optional AdvertSlotImage slotImage
+}
+
+struct AdvertSlotImageListParam{
+	1:list<AdvertSlotImage> slotImageList,
+	2:i32 advertId
+}
+
+struct AdvertSlotListResult{
+	1:result.Result result,
+	2:list<AdvertSlot> slotList
+}
+
 /*service*/
 service ManagerServ{
 	/*记录变更商品状态变更日志*/
@@ -176,4 +227,27 @@ service ManagerServ{
 	
 	/*发布模块*/
 	relaseResult relase(relaseParam param);
+	
+	/*====================================================原有的不动====================================================*/
+	
+	/* 保存广告位图片 */
+	result.Result saveAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/* 修改广告位图片 */
+	result.Result updateAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/* 查询广告位图片列表 -- 前端/管理中心 */
+	AdvertSlotImageListResult queryAdvertSlotImageList(1:AdvertSlotImageParam param);
+	
+	/* 查询广告位图片 */
+	AdvertSlotImageResult queryAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/*删除广告位图片*/
+	result.Result deleteAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/*统一发布图片*/
+	result.Result publishAdvertSlot(1:AdvertSlotImageListParam param);
+	
+	/*查询各端轮播图列表*/
+	AdvertSlotListResult queryAdvertSlotList();
 }
