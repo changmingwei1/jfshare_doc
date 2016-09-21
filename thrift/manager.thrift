@@ -69,7 +69,7 @@ struct CommissionerResult {
 }
 
 struct ModuleConfig{
-	1:string id,
+	1:i32 id,
 	2:string moduleName,/*模块名称*/
 	3:string moduleDesc,/*模块描述*/
 	4:string moduleType,/*模块类型  1:商品  2：品牌*/
@@ -94,7 +94,7 @@ struct ModuleConfigParam{
 }
 
 struct ModuleConfigDetail{
-	1:string id,/*序号*/
+	1:i32 id,/*序号*/
 	2:string moduleId,/*模块ID*/
 	3:string createTime,/*创建时间*/
 	4:string relaId,/*关联ID*/
