@@ -550,7 +550,7 @@ service ProductServ {
 	ProductCardStatisticsResult statisticsSkuProductCard(1:ProductCardSkuStatisticsParam param, 2:pagination.Pagination pagination);
 	
 	/*导出卡密列表*/
-	result.StringResult ExportStatisticsSkuProductCard(1:ProductCardViewParam param);
+	result.StringResult exportStatisticsSkuProductCard(1:ProductCardViewParam param);
 
 	/* 查询单个虚拟商品卡密列表，卖家管理专用 */
 	ProductCardViewListResult queryProductCardViewList(1:ProductCardViewParam param, 2:pagination.Pagination pagination);
