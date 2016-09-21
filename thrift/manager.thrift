@@ -93,7 +93,7 @@ struct ModuleConfigParam{
 	5:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
 }
 
-struts ModuleConfigDetail{
+struct ModuleConfigDetail{
 	1:string id,/*序号*/
 	2:string moduleId,/*模块ID*/
 	3:string createTime,/*创建时间*/
@@ -105,14 +105,14 @@ struts ModuleConfigDetail{
 }
 
 /*模块配置明细返回结果*/
-struts ModuleConfigDetailResult{
+struct ModuleConfigDetailResult{
 	1:result.Result result,
 	2:list<ModuleConfigDetail> ModuleConfigDetailList
 	
 }
 
 /*模块配置明细请求参数*/
-struts ModuleConfigDetailParam{
+struct ModuleConfigDetailParam{
 	1:string moduleId,/*模块ID*/
 	2:string createTime,/*创建时间*/
 	3:string relaId,/*关联ID*/
