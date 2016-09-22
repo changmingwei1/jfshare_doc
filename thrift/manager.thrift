@@ -73,7 +73,7 @@ struct ModuleConfig{
 	2:string moduleName,/*模块名称*/
 	3:string moduleDesc,/*模块描述*/
 	4:string moduleType,/*模块类型  1:商品  2：品牌*/
-	5:string create_time,/*创建时间*/
+	5:string createTime,/*创建时间*/
 	6:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
 	7:string relaseStatus,/*发布状态*/
 }
@@ -86,11 +86,12 @@ struct ModuleConfigResult{
 
 /*模块配置请求参数*/
 struct ModuleConfigParam{
-	1:string moduleName,/*模块名称*/
-	2:string moduleType,/*模块类型  1:商品  2：品牌*/
-	3:string create_time,/*创建时间*/
-	4:string relaseStatus,/*发布状态  0：未发布 1：已发布*/
-	5:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
+	1:i32 id,/*模块ID*/
+	2:string moduleName,/*模块名称*/
+	3:string moduleType,/*模块类型  1:商品  2：品牌*/
+	4:string createTime,/*创建时间*/
+	5:string relaseStatus,/*发布状态  0：未发布 1：已发布*/
+	6:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
 }
 
 struct ModuleConfigDetail{
@@ -122,21 +123,30 @@ struct ModuleConfigDetailParam{
 }
 
 /*发布返回结果*/
-struct relaseResult{
+struct RelaseResult{
       1:result.Result result,
 	  2:string type,/*发布类型*/
 	  3:string relaseCount,/*发布图片数量*/
 }
 
 /*发布请求参数*/
-struct relaseParam{
+struct RelaseParam{
     1:list<ModuleConfigDetail> ModuleConfigDetailList
 }
 
 /*导入请求参数*/
 struct ImportParam{
 	1:string filePath,	/*获取excel文件的全路径*/
-	2:string moduleId	/*模块ID*/
+	2:string moduleId,	/*模块ID*/
+	3:string moduleType	/*模块类型*/
+}
+
+/*导入返回结果*/
+struct ImportResult{
+	1:result.Result result,
+	2:list<ModuleConfigDetail> ModuleConfigDetailList,/*模块配置明细列表*/
+	3:i32 impCount,/*导入成功条数*/
+	
 }
 
 /*====================================================原有的不动====================================================*/
@@ -232,10 +242,10 @@ service ManagerServ{
 	ModuleConfigDetailResult  queryModuleConfigDetail(1:ModuleConfigDetailParam param);
 	
 	/*发布模块*/
-	relaseResult relase(1:relaseParam param);
+	RelaseResult relase(1:RelaseParam param);
 	
 	/*导入商品或品牌*/
-	ModuleConfigDetailResult importExcel(1:ImportParam param);
+	ImportResult importExcel(1:ImportParam param);
 	
 	/*====================================================原有的不动====================================================*/
 	
