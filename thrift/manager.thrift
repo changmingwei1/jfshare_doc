@@ -131,7 +131,8 @@ struct RelaseResult{
 
 /*发布请求参数*/
 struct RelaseParam{
-    1:list<ModuleConfigDetail> ModuleConfigDetailList
+    1:list<ModuleConfigDetail> ModuleConfigDetailList,
+    2:string moduleType, /*模块类型*/
 }
 
 /*导入请求参数*/
@@ -149,6 +150,17 @@ struct ImportResult{
 	
 }
 
+/*添加图片请求参数*/
+struct QueryImgkeyParam{
+	1:string relaId,	/*商品或品牌ID*/
+	2:string moduleType	/*模块类型*/
+}
+
+/*添加图片请求参数*/
+struct QueryImgkeyResult{
+	1:result.Result result,
+	2:string imgKey	/*图片key*/
+}
 /*====================================================原有的不动====================================================*/
 
 
@@ -246,6 +258,9 @@ service ManagerServ{
 	
 	/*导入商品或品牌*/
 	ImportResult importExcel(1:ImportParam param);
+	
+	/*查看单个商品或者品牌imgkey--添加*/
+	QueryImgkeyResult queryImgkey(1:QueryImgkeyParam param);
 	
 	/*====================================================原有的不动====================================================*/
 	
