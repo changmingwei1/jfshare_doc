@@ -485,7 +485,36 @@ struct ThirdPartyProductLogResult {
 	2:list<ThirdPartyProductLog> logs,
 	3:pagination.Pagination pagination
 }
+ /* 验码记录查询参数*/
+struct CheckCodeListParam{
+	 /* 发放账号 */
+	1:optional string sendAmount,
+	2:optional string checkBeginTime,
+	3:optional string checkEndTime,
+	4:optional string sellerId,
+	5:optional string sellerName,
+	6:optional string productId,
+	7:optional string productName
+}
 
+struct CheckCode{
+	1:string sellerId,
+	2:string sellerName,
+	3:string productId,
+	4:string productName,
+	5:string skuNum,
+	6:string skuName,
+	7:string cardName,
+	8:string password,
+	9:string sendAmount,
+	10:string checkTime
+}
+
+struct CheckCodeListResult{
+	1:result.Result result,
+	2:list<CheckCode> checkCodeList,
+	3:pagination.Pagination pagination
+}
 
 /*商品基本信息*/
 service ProductServ {
@@ -570,6 +599,8 @@ service ProductServ {
 	
     /*卖家虚拟商品验证列表明细*/
     CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
+	/*管理中心的验码记录(卖家中心也可以共用)*/
+	CheckCodeListResult queryCheckCodeList(1:CheckCodeListParam param,2:pagination.Pagination pagination);
 	
 	/*========================== 第三方商品相关接口 ============================*/
 	/* 查询同步过来的商品 */
