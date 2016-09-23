@@ -601,6 +601,9 @@ service ProductServ {
     CaptchaDetailResult queryCaptchaDetails(1:CaptchaQueryParam param);
 	/*管理中心的验码记录(卖家中心也可以共用)*/
 	CheckCodeListResult queryCheckCodeList(1:CheckCodeListParam param,2:pagination.Pagination pagination);
+	/**管理中心验码记录导出**/
+	result.StringResult exportCheckCodeList(1:CheckCodeListParam param);
+
 	
 	/*========================== 第三方商品相关接口 ============================*/
 	/* 查询同步过来的商品 */
