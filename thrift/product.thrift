@@ -488,7 +488,7 @@ struct ThirdPartyProductLogResult {
  /* 验码记录查询参数*/
 struct CheckCodeListParam{
 	 /* 发放账号 */
-	1:optional string sendAmount,
+	1:optional string sendAccount,
 	2:optional string checkBeginTime,
 	3:optional string checkEndTime,
 	4:optional string sellerId,
@@ -506,7 +506,7 @@ struct CheckCode{
 	6:string skuName,
 	7:string cardName,
 	8:string password,
-	9:string sendAmount,
+	9:string sendAccount,
 	10:string checkTime
 }
 
