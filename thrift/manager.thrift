@@ -68,6 +68,150 @@ struct CommissionerResult {
 	  4:optional bool value,
 }
 
+struct ModuleConfig{
+	1:i32 id,
+	2:string moduleName,/*模块名称*/
+	3:string moduleDesc,/*模块描述*/
+	4:string moduleType,/*模块类型  1:商品  2：品牌*/
+	5:string createTime,/*创建时间*/
+	6:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
+	7:string relaseStatus,/*发布状态*/
+}
+
+/*模块配置返回结果*/
+struct ModuleConfigResult{
+	1:result.Result result,
+	2:list<ModuleConfig> moduleConfigList
+}
+
+/*模块配置请求参数*/
+struct ModuleConfigParam{
+	1:i32 id,/*模块ID*/
+	2:string moduleName,/*模块名称*/
+	3:string moduleType,/*模块类型  1:商品  2：品牌*/
+	4:string createTime,/*创建时间*/
+	5:string relaseStatus,/*发布状态  0：未发布 1：已发布*/
+	6:string relaseChannel,/*发布渠道  app：移动端      h5：H5端      web:PC端*/
+}
+
+struct ModuleConfigDetail{
+	1:i32 id,/*序号*/
+	2:string moduleId,/*模块ID*/
+	3:string createTime,/*创建时间*/
+	4:string relaId,/*关联ID*/
+	5:string relaImgkey,/*关联图片*/
+	6:string productRuleId,/*商品规则ID*/
+	7:string relaSort,/*位置排序号*/
+	8:string updateTime,/*更新时间*/	
+}
+
+/*模块配置明细返回结果*/
+struct ModuleConfigDetailResult{
+	1:result.Result result,
+	2:list<ModuleConfigDetail> ModuleConfigDetailList
+	
+}
+
+/*模块配置明细请求参数*/
+struct ModuleConfigDetailParam{
+	1:string moduleId,/*模块ID*/
+	2:string createTime,/*创建时间*/
+	3:string relaId,/*关联ID*/
+	4:string relaImgkey,/*关联图片*/
+	5:string productRuleId,/*商品规则ID*/
+	6:string relaSort,/*位置排序号*/
+}
+
+/*发布返回结果*/
+struct RelaseResult{
+      1:result.Result result,
+	  2:string type,/*发布类型*/
+	  3:string relaseCount,/*发布图片数量*/
+}
+
+/*发布请求参数*/
+struct RelaseParam{
+    1:list<ModuleConfigDetail> ModuleConfigDetailList,
+    2:string moduleType, /*模块类型*/
+}
+
+/*导入请求参数*/
+struct ImportParam{
+	1:string filePath,	/*获取excel文件的全路径*/
+	2:string moduleId,	/*模块ID*/
+	3:string moduleType	/*模块类型*/
+}
+
+/*导入返回结果*/
+struct ImportResult{
+	1:result.Result result,
+	2:list<ModuleConfigDetail> ModuleConfigDetailList,/*模块配置明细列表*/
+	3:i32 impCount,/*导入成功条数*/
+	
+}
+
+/*添加图片请求参数*/
+struct QueryImgkeyParam{
+	1:string relaId,	/*商品或品牌ID*/
+	2:string moduleType	/*模块类型*/
+}
+
+/*添加图片请求参数*/
+struct QueryImgkeyResult{
+	1:result.Result result,
+	2:string imgKey	/*图片key*/
+}
+/*====================================================原有的不动====================================================*/
+
+
+struct AdvertSlotImage{
+	1:i32 id,
+	2:string imgKey,	/*图片key*/
+	3:i32 advertId,		/*广告位id, H5&APP or PC or OTHERS*/
+	4:string slotName,	/*广告位名称*/
+	5:string remark,	/*广告位描述*/
+	6:string jump,		/*跳转地址链接*/
+	7:i32 isOnline,		/*状态,是否在线  1:在线 2:不在线*/
+	8:i32 sort,			/*排序标识*/
+	9:string startTime,	/*上线时间*/
+	10:string endTime,	/*下线时间*/
+	11:string createTime/*创建时间*/
+}
+
+struct AdvertSlot{
+	1:i32 advertId,
+	2:string slotName,
+	3:i32 count,
+	4:string createTime,
+	5:string type
+}
+
+struct AdvertSlotImageParam{
+	1:i32 advertId,
+	2:i32 fromSource, 	/* 1前端 2管理中心,在node层去管理,前端不用传 */
+	3:i32 type			/* 1主站 2APP&H5,需要相应端口传参*/
+}
+
+struct AdvertSlotImageListResult{
+    1:result.Result result,
+	2:optional list<AdvertSlotImage> slotImageList
+}
+
+struct AdvertSlotImageResult{
+    1:result.Result result,
+	2:optional AdvertSlotImage slotImage
+}
+
+struct AdvertSlotImageListParam{
+	1:list<AdvertSlotImage> slotImageList,
+	2:i32 advertId
+}
+
+struct AdvertSlotListResult{
+	1:result.Result result,
+	2:list<AdvertSlot> slotList
+}
+
 /*service*/
 service ManagerServ{
 	/*记录变更商品状态变更日志*/
@@ -102,5 +246,43 @@ service ManagerServ{
 	
 	/* 查询广告图 */
 	slotImage.QuerySlotImageResult querySlotImageOne(1:i32 id);
+	
+	/* 查询模块 */
+	ModuleConfigResult  queryModuleConfig(1:ModuleConfigParam param);
+	
+	/* 查询模块配置明细*/
+	ModuleConfigDetailResult  queryModuleConfigDetail(1:ModuleConfigDetailParam param);
+	
+	/*发布模块*/
+	RelaseResult relase(1:RelaseParam param);
+	
+	/*导入商品或品牌*/
+	ImportResult importExcel(1:ImportParam param);
+	
+	/*查看单个商品或者品牌imgkey--添加*/
+	QueryImgkeyResult queryImgkey(1:QueryImgkeyParam param);
+	
+	/*====================================================原有的不动====================================================*/
+	
+	/* 保存广告位图片 */
+	result.Result saveAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/* 修改广告位图片 */
+	result.Result updateAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/* 查询广告位图片列表 -- 前端/管理中心 */
+	AdvertSlotImageListResult queryAdvertSlotImageList(1:AdvertSlotImageParam param);
+	
+	/* 查询广告位图片 */
+	AdvertSlotImageResult queryAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/*删除广告位图片*/
+	result.Result deleteAdvertSlotImage(1:AdvertSlotImage slotImage);
+	
+	/*统一发布图片*/
+	result.Result publishAdvertSlot(1:AdvertSlotImageListParam param);
+	
+	/*查询各端轮播图列表*/
+	AdvertSlotListResult queryAdvertSlotList();
 	
 }
