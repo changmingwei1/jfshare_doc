@@ -138,6 +138,44 @@ struct ProductSurvey {
     17:optional i32 postageId
 }
 
+/* 主页搜索的结果*/
+struct ProductSearch {
+	1:string productId,	
+	2:string productName,
+	3:i32 subjectId,
+	4:i32 brandId,   
+	5:string maxOrgPrice,  
+	6:string maxCurPrice,         
+	7:i32 activeStock,
+	8:i32 totalSales, 
+	9:i32 activeState,
+	10:string imgUrl,
+	11:optional string viceName,
+	12:optional string createTime,
+	13:optional i32 sellerId,
+	14:optional i32 type,
+	15:optional i64 clickRate,
+	/* 仓库， 可以存多个，多个以英文 “,” 隔开*/
+	16:optional string storehouseIds,
+	/* 邮费模板ID */
+	17:optional i32 postageId,
+	18:optional string minOrgPrice,
+	19:optional string minCurPrice
+}
+/*主页搜索的参数*/
+struct ProductSearchParam {
+/* 排序： 1:按创建时间降序   2:按现价降序   3:按现价升序  4:按点击量降序*/
+	1:i32 type
+	2:pagination.Pagination pagination,
+}
+/*主页搜索的结果集**/
+struct ProductSearchResult {
+      1:result.Result result,
+      2:optional pagination.Pagination pagination,
+      3:optional list<ProductSearch> productSearchList
+}
+
+
 struct ProductSurveyQueryParam {
 	1:i32 sellerId,
     2:optional string productId,
@@ -151,6 +189,7 @@ struct ProductSurveyQueryParam {
 	9:optional list<i32> subjectIdList,
 	10:optional list<string> productIdList
 }
+
 
 struct ProductSurveyQueryBatchParam {
 	1:list<string> productIds,
@@ -544,6 +583,10 @@ service ProductServ {
 
 	/* 商品概要信息列表查询*/
 	ProductSurveyResult productSurveyQuery(1:ProductSurveyQueryParam param);
+
+	/* 商品搜索---主站--从es中去*/
+	ProductSurveyResult searchProduct(1:ProductSurveyQueryParam param);
+
 
 	/* 按点击量查询商品列表 不用了 */
 	ProductSurveyResult productSurveyQueryByClick(1:ProductSurveyQueryParam param);
