@@ -89,6 +89,8 @@ struct SellerVipResult{
 service SellerServ {
     /*查询卖家*/
     SellerResult querySeller(1:i32 sellerId, 2:SellerRetParam param);  
+     /*查询卖家*/
+    SellerListResult querySellerBySeller(1:Seller seller);  
     
     SellerListResult querySellerList(1:Seller seller, 2:pagination.Pagination pagination);
      /*批量查询卖家*/
