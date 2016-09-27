@@ -165,8 +165,9 @@ struct ProductSearch {
 /*主页搜索的参数*/
 struct ProductSearchParam {
 /* 排序： 1:按创建时间降序   2:按现价降序   3:按现价升序  4:按点击量降序*/
-	1:i32 type
-	2:pagination.Pagination pagination,
+	1:i32 type,
+	2:string keyword,
+	3:pagination.Pagination pagination
 }
 /*主页搜索的结果集**/
 struct ProductSearchResult {
