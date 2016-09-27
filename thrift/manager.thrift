@@ -165,7 +165,8 @@ struct QueryImgkeyResult{
 /*按规则查看商品参数*/
 struct QueryProductRuleImgkeyParam{
 	1:string moduleId,	/*模块ID*/
-	2:string ruleType	/*规则类型*/
+	2:string ruleType,	/*规则类型*/
+	3:i32 count	/*显示商品个数*/
 }
 /*====================================================原有的不动====================================================*/
 
