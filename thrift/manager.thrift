@@ -161,6 +161,12 @@ struct QueryImgkeyResult{
 	1:result.Result result,
 	2:string imgKey	/*图片key*/
 }
+
+/*按规则查看商品参数*/
+struct QueryProductRuleImgkeyParam{
+	1:string moduleId,	/*模块ID*/
+	2:string ruleType	/*规则类型*/
+}
 /*====================================================原有的不动====================================================*/
 
 
@@ -261,6 +267,9 @@ service ManagerServ{
 	
 	/*查看单个商品或者品牌imgkey--添加*/
 	QueryImgkeyResult queryImgkey(1:QueryImgkeyParam param);
+	
+	/*按规则查询商品图片*/
+	ModuleConfigDetailResult queryProductRuleImgkey(1:QueryProductRuleImgkeyParam param);
 	
 	/*====================================================原有的不动====================================================*/
 	
