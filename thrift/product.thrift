@@ -585,7 +585,7 @@ service ProductServ {
 	ProductSurveyResult productSurveyQuery(1:ProductSurveyQueryParam param);
 
 	/* 商品搜索---主站--从es中去*/
-	ProductSurveyResult searchProduct(1:ProductSurveyQueryParam param);
+	ProductSearchResult searchProduct(1:ProductSearchParam param);
 
 
 	/* 按点击量查询商品列表 不用了 */
