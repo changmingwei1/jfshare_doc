@@ -506,12 +506,18 @@ struct BatchDeliverParam {
 	4:string fileKey
 }
 
-struct orderSellerQueryParam{
-1:string mobile, 	/*买家手机号*/
-2:i32 sellerId, 	/*卖家ID*/
-3:sring orderId,	/*订单ID*/
-4:string startTime, /*开始时间*/
-5:string endTime	/*结束时间*/
+/*管理中心批量发货，以卖家区分orderList*/
+struct SellerBatchDeliverParam{
+	1:i32 sellerId,
+	2:BatchDeliverParam param
+}
+
+struct OrderSellerQueryParam{
+	1:string mobile, 	/*买家手机号*/
+	2:i32 sellerId, 	/*卖家ID*/
+	3:string orderId,	/*订单ID*/
+	4:string startTime, /*开始时间*/
+	5:string endTime	/*结束时间*/
 }
 
 /*订单服务*/
@@ -538,8 +544,7 @@ service OrderServ{
 	result.Result confirmReceipt(1:i32 userType, 2:i32 userId, 3:string orderId)   
 	
 	/*取消订单(买家、系统)*/
-	result.Result cancelOrder(1:i32 userType, 2:i32 userId, 3:string orderId, 4:i32 reason)     
-	
+	result.Result cancelOrder(1:i32 userType, 2:i32 userId, 3:string orderId, 4:i32 reason)     	
 
 	/*查询订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQuery(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions)  
@@ -567,7 +572,7 @@ service OrderServ{
 	/*支付进度查询*/
 	PayStateResult payState(1:PayState payState);
 
-       /*批量导出订单(卖家中心)*/
+    /*批量导出订单(卖家中心)*/
 	result.StringResult batchExportOrder(1:i32 sellerId, 2:OrderQueryConditions conditions);
 	
 	/*批量导出订单(管理中心)*/
@@ -576,21 +581,23 @@ service OrderServ{
 	/*批量导出订单(卖家中心)*/
 	result.StringResult getExportOrderResult(1:string queryKey);
 
-       /*批量发货*/
+    /*批量发货*/
 	BatchDeliverResult batchDeliverOrder(1:i32 sellerId, 2:BatchDeliverParam param); 
+	
+	/*批量发货(管理中心)*/
+	BatchDeliverResult batchDeliverOrderForManager(1:list<SellerBatchDeliverParam> param); 
 	
 	/*查询订单列表(管理中心)*/
 	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions);
 	
-
 	/* 线下订单详情(买卖双方)*/
 	OrderDetailResult queryOrderDetailOffline(1:i32 userType, 2:i32 userId, 3:string orderId);
 
-        /*查询线下订单列表(买卖双方)*/
+    /*查询线下订单列表(买卖双方)*/
 	OrderProfileResult orderProfileQueryOffline(1:i32 userType, 2:i32 userId, 3:OrderQueryConditions conditions); 
 	
 	/*查询线下卖家订单列表(卖家中心)*/
-	OrderProfileResult orderSellerQueryOffline(1：orderSellerQueryParam); 
+	OrderProfileResult orderSellerQueryOffline(1:OrderSellerQueryParam param); 
 
 }
 
