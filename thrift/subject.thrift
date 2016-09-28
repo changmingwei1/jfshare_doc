@@ -393,6 +393,10 @@ service SubjectServ{
 	/*查询归属类目子集树结构，仅包含直属下级节点，查询一级时，参数subjectId为： 0  */
 	SubjectTreeResult getSubTree(1:i32 subjectId);
 	
+	
+	/*查询下挂商品的归属类目子集树结构，仅包含直属下级节点，查询一级时，参数subjectId为： 0  */
+	SubjectTreeResult getSubTreeRelaProduct(1:i32 subjectId);
+	
 	/*查询归属类目子集树结构(类目管理页面专用)，仅包含直属下级节点，查询一级时，参数subjectId为： 0  */
 	SubjectTreeResult getSubTreeForManage(1:i32 subjectId);
 	
