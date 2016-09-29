@@ -403,6 +403,7 @@ service SubjectServ{
 	/*根据id查询，查询此节点所属路径*/
 	SubjectTreeResult getSuperTree(1:i32 subjectId);
 	
+	
 	/*根据id查询，批量查询此节点所属路径*/
 	SubjectTreeBatchResult getBatchSuperTree(1:list<i32> subjectIds);
 	
@@ -492,4 +493,7 @@ service SubjectServ{
 	SubjectAttributeResult querySubjectAttribute(1:SubjectAttributeQueryParam param);
 	/*某一类目属性应用于同级同父节点的其他类目*/
 	result.Result applyAttributeToSuperAll(1:SubjectInfo subject);
+	
+/************************* 以下是类目下挂商品***********************/	
+	result.Result reloadSubPro(1:i32 subjectId); 
 }
