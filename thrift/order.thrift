@@ -508,7 +508,8 @@ struct BatchDeliverParam {
 
 struct SellerBatchDeliverParam{
 	1:i32 sellerId,
-	2:BatchDeliverParam param
+	2:i32 deliverType,
+	3:Order order
 }
 
 struct OrderSellerQueryParam{
