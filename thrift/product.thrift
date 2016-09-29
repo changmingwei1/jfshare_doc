@@ -121,8 +121,8 @@ struct ProductSurvey {
 	2:string productName,
 	3:i32 subjectId,
 	4:i32 brandId,   
-	5:string orgPrice,  
-	6:string curPrice,         
+	5:string minOrgPrice,  
+	6:string minCurPrice,         
 	7:i32 activeStock,
 	8:i32 totalSales, 
 	9:i32 activeState,
@@ -133,9 +133,12 @@ struct ProductSurvey {
 	14:optional i32 type,
 	15:optional i64 clickRate,
 	/* 仓库， 可以存多个，多个以英文 “,” 隔开*/
-    16:optional string storehouseIds,
-    /* 邮费模板ID */
-    17:optional i32 postageId
+	16:optional string storehouseIds,
+	/* 邮费模板ID */
+	17:optional i32 postageId,
+	18:optional string maxOrgPrice,
+	19:optional string maxCurPrice,
+	20:optional string sellerName
 }
 
 /* 主页搜索的结果*/
