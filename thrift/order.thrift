@@ -506,7 +506,6 @@ struct BatchDeliverParam {
 	4:string fileKey
 }
 
-/*管理中心批量发货，以卖家区分orderList*/
 struct SellerBatchDeliverParam{
 	1:i32 sellerId,
 	2:BatchDeliverParam param
