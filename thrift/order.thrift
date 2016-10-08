@@ -345,10 +345,19 @@ struct  OrderQueryConditions{
 
     /*导出来源：0 普通导出，1发货导出*/
 	33:optional i32 downType,
+	
 	/*订单列表*/
 	34:optional list<string> orderIds,
-				/*商家ID列表*/
-	35:optional list<string> sellerIds
+	
+	/*商家ID列表*/
+	35:optional list<string> sellerIds,
+	
+	/*收货人电话*/
+	36:string receiverMobile,
+	
+	/*收货人姓名*/
+	37:string receiverName
+	
 }
 
 struct OrderCount {
