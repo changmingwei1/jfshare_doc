@@ -294,7 +294,8 @@ struct ProductCardStatistics {
 	/* 商品sku编码 */
 	7:string skuNum,
 	8:optional string sendNum,
-	9:optional string checkedNum
+	9:optional string checkedNum,
+	10:optional string skuName
 }
 
 struct ProductCardStatisticsParam {
