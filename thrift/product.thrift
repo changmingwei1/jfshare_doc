@@ -97,6 +97,11 @@ struct ProductResult {
       2:optional Product product
 }
 
+struct ProductBatchListResult {
+      1:result.Result result,
+      2:optional list<Product> productList
+}
+
 struct ProductBatchResult {
 	1:result.Result result,
 	2:list<Product> productList
@@ -560,10 +565,17 @@ struct CheckCodeListResult{
 	3:pagination.Pagination pagination
 }
 
+struct QueryBatchProductParam{
+	1:list<string> idList
+}
+
 /*商品基本信息*/
 service ProductServ {
 	/*查询商品*/
 	ProductResult queryProduct(1:string productId, 2:ProductRetParam param);
+
+	/*查询商品批量*/
+	ProductBatchListResult queryBatchProduct(1:QueryBatchProductParam queryBatchProductParam, 2:ProductRetParam productRetParam);
 
 	/*查询商品sku*/
 	ProductSkuResult queryProductSku(1:string productId);
