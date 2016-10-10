@@ -352,11 +352,14 @@ struct  OrderQueryConditions{
 	/*商家ID列表*/
 	35:optional list<string> sellerIds,
 	
+	/*订单来源*/
+	36:optional i32 fromSource,
+	
 	/*收货人电话*/
-	36:string receiverMobile,
+	37:string receiverMobile,
 	
 	/*收货人姓名*/
-	37:string receiverName
+	38:string receiverName
 	
 }
 
