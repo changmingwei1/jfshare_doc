@@ -403,7 +403,6 @@ service SubjectServ{
 	/*根据id查询，查询此节点所属路径*/
 	SubjectTreeResult getSuperTree(1:i32 subjectId);
 	
-	
 	/*根据id查询，批量查询此节点所属路径*/
 	SubjectTreeBatchResult getBatchSuperTree(1:list<i32> subjectIds);
 	

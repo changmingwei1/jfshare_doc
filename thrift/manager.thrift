@@ -102,17 +102,22 @@ struct ModuleConfigDetail{
 	5:string relaImgkey,/*关联图片*/
 	6:string productRuleId,/*商品规则ID*/
 	7:string relaSort,/*位置排序号*/
-	8:string updateTime,/*更新时间*/	
+	8:string updateTime,/*更新时间*/
+	9:string curPrice,/*商品价格*/	
+	10:string orgPrice,/*商品原价*/	
+	11:string title,/*品牌或者商品标题*/	
 }
 
-/*模块配置明细返回结果*/
+
+/*模块配置明细返回结果--管理中心*/
 struct ModuleConfigDetailResult{
 	1:result.Result result,
 	2:list<ModuleConfigDetail> ModuleConfigDetailList
 	
 }
 
-/*模块配置明细请求参数*/
+
+/*模块配置明细请求参数--管理中心*/
 struct ModuleConfigDetailParam{
 	1:string moduleId,/*模块ID*/
 	2:string createTime,/*创建时间*/
@@ -121,6 +126,7 @@ struct ModuleConfigDetailParam{
 	5:string productRuleId,/*商品规则ID*/
 	6:string relaSort,/*位置排序号*/
 }
+
 
 /*发布返回结果*/
 struct RelaseResult{
@@ -160,6 +166,9 @@ struct QueryImgkeyParam{
 struct QueryImgkeyResult{
 	1:result.Result result,
 	2:string imgKey	/*图片key*/
+	3:string curPrice,/*商品价格*/	
+	4:string orgPrice,/*商品原价*/	
+	5:string title,/*品牌或者商品标题*/
 }
 
 /*按规则查看商品参数*/
@@ -257,8 +266,11 @@ service ManagerServ{
 	/* 查询模块 */
 	ModuleConfigResult  queryModuleConfig(1:ModuleConfigParam param);
 	
-	/* 查询模块配置明细*/
+	/* 查询模块配置明细--管理中心*/
 	ModuleConfigDetailResult  queryModuleConfigDetail(1:ModuleConfigDetailParam param);
+	
+	/* 查询模块配置明细--买家首页*/
+	ModuleConfigDetailResult  queryModuleConfigDetailForBuyer(1:ModuleConfigDetailParam param);
 	
 	/*发布模块*/
 	RelaseResult relase(1:RelaseParam param);
@@ -287,6 +299,7 @@ service ManagerServ{
 	AdvertSlotImageResult queryAdvertSlotImage(1:AdvertSlotImage slotImage);
 	
 	/*删除广告位图片*/
+	
 	result.Result deleteAdvertSlotImage(1:AdvertSlotImage slotImage);
 	
 	/*统一发布图片*/
