@@ -345,8 +345,22 @@ struct  OrderQueryConditions{
 
     /*导出来源：0 普通导出，1发货导出*/
 	33:optional i32 downType,
+	
 	/*订单列表*/
-	34:optional list<string> orderIds
+	34:optional list<string> orderIds,
+	
+	/*商家ID列表*/
+	35:optional list<string> sellerIds,
+	
+	/*订单来源*/
+	36:optional i32 fromSource,
+	
+	/*收货人电话*/
+	37:string receiverMobile,
+	
+	/*收货人姓名*/
+	38:string receiverName
+	
 }
 
 struct OrderCount {
@@ -506,10 +520,10 @@ struct BatchDeliverParam {
 	4:string fileKey
 }
 
-/*管理中心批量发货，以卖家区分orderList*/
 struct SellerBatchDeliverParam{
 	1:i32 sellerId,
-	2:BatchDeliverParam param
+	2:i32 deliverType,
+	3:Order order
 }
 
 struct OrderSellerQueryParam{
