@@ -492,4 +492,7 @@ service SubjectServ{
 	SubjectAttributeResult querySubjectAttribute(1:SubjectAttributeQueryParam param);
 	/*某一类目属性应用于同级同父节点的其他类目*/
 	result.Result applyAttributeToSuperAll(1:SubjectInfo subject);
+	
+/************************* 以下是类目下挂商品***********************/	
+	result.Result reloadSubPro(1:i32 subjectId); 
 }
