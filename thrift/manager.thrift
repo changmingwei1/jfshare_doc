@@ -2,6 +2,7 @@ namespace java com.jfshare.finagle.thrift.manager
 
 include "slotImage.thrift"
 include "result.thrift"
+include "pagination.thrift"
 
 struct ProductOpt {
 
@@ -112,7 +113,8 @@ struct ModuleConfigDetail{
 /*模块配置明细返回结果--管理中心*/
 struct ModuleConfigDetailResult{
 	1:result.Result result,
-	2:list<ModuleConfigDetail> ModuleConfigDetailList
+	2:list<ModuleConfigDetail> ModuleConfigDetailList,
+	3:pagination.Pagination pagination
 	
 }
 
@@ -125,6 +127,7 @@ struct ModuleConfigDetailParam{
 	4:string relaImgkey,/*关联图片*/
 	5:string productRuleId,/*商品规则ID*/
 	6:string relaSort,/*位置排序号*/
+	7:pagination.Pagination pagination /*分页参数信息*/
 }
 
 
