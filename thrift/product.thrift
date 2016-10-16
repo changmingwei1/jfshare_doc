@@ -196,7 +196,8 @@ struct ProductSurveyQueryParam {
 	7:optional i32 subjectId,
 	8:optional i32 brandId,
 	9:optional list<i32> subjectIdList,
-	10:optional list<string> productIdList
+	10:optional list<string> productIdList,
+	11:optional string exprotPassword
 }
 
 
@@ -282,7 +283,8 @@ struct ProductCardViewParam {
 	/*验证结束时间*/
 	9:optional string validateEndTime,
 	/**发放账号*/
-	10:optional string sendAccount
+	10:optional string sendAccount,
+	11:optional string exportPassword
 }
 
 struct ProductCardStatistics {
@@ -543,7 +545,9 @@ struct CheckCodeListParam{
 	4:optional string sellerId,
 	5:optional string sellerName,
 	6:optional string productId,
-	7:optional string productName
+	7:optional string productName,
+
+
 }
 
 struct CheckCode{
@@ -663,6 +667,9 @@ service ProductServ {
 	CheckCodeListResult queryCheckCodeList(1:CheckCodeListParam param,2:pagination.Pagination pagination);
 	/**管理中心验码记录导出**/
 	result.StringResult exportCheckCodeList(1:CheckCodeListParam param);
+
+	/*商品导出*/
+	result.StringResult exportProduct(1:ProductSurveyQueryParam param);
 
 	
 	/*========================== 第三方商品相关接口 ============================*/
