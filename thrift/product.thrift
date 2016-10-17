@@ -143,7 +143,8 @@ struct ProductSurvey {
 	17:optional i32 postageId,
 	18:optional string maxOrgPrice,
 	19:optional string maxCurPrice,
-	20:optional string sellerName
+	20:optional string sellerName,
+	21:optional string subjectPath
 }
 
 /* 主页搜索的结果*/
