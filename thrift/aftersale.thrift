@@ -90,6 +90,9 @@ struct AfterSaleOrderParam{
     3:i32 sellerId,/*卖家ID*/
     4:string startTime,/* 时间格式yyyyMMddHHmmss*/
     5:string endTime,/*时间格式 yyyyMMddHHmmss*/
+    6:string payTimeStart,/* 时间格式yyyyMMddHHmmss*/
+    7:string payTimeEnd,/*时间格式 yyyyMMddHHmmss*/
+	8:i32 fromSource /*订单来源 聚分享pc=1,聚分享Android=2，聚分享ios=3，聚分享H5=4，百分尊享PC=5，百分尊享H5=6*/
 }
 
 service AfterSaleServ {
