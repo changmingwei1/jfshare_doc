@@ -272,5 +272,7 @@ service ScoreServ {
     ScoreAccountResult isAccountRela(1:string account); 
     /*电信账号绑定接口*/
     ResponseRelaAcoountResult relaAccountCall(1:RelaAccountRequestParam param);
+    /* 删除redis的key */
+    result.StringResult delRedisbyKey(1:string key);
     
 }
