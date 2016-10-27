@@ -592,6 +592,10 @@ service OrderServ{
 	/*批量导出订单(管理中心)*/
 	result.StringResult batchExportOrderFull(1:	OrderQueryConditions conditions);
 	
+	/*批量导出订单(管理中心--线下扫码)*/
+	result.StringResult batchExportOrderFullOffline(1:	OrderQueryConditions conditions);
+	
+	
 	/*批量导出订单(卖家中心)*/
 	result.StringResult getExportOrderResult(1:string queryKey);
 
