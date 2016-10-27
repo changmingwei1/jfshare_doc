@@ -534,6 +534,10 @@ struct OrderSellerQueryParam{
 	5:string endTime	/*结束时间*/
 }
 
+struct DeliverParam {
+	1:string path	/*文件的key值*/
+}
+
 /*订单服务*/
 /*
   userType: 1（买家）、2（卖家）、3 (系统)
@@ -604,6 +608,9 @@ service OrderServ{
 	
 	/*批量发货(管理中心)*/
 	BatchDeliverResult batchDeliverOrderForManager(1:list<SellerBatchDeliverParam> param); 
+	
+	/*批量发货(管理中心)--java层解析表格*/
+	BatchDeliverResult batchDeliverForManager(1:DeliverParam param); 
 	
 	/*查询订单列表(管理中心)*/
 	OrderProfileResult orderProfileQueryFull(1:OrderQueryConditions conditions);
