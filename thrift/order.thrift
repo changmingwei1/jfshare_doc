@@ -359,7 +359,9 @@ struct  OrderQueryConditions{
 	37:string receiverMobile,
 	
 	/*收货人姓名*/
-	38:string receiverName
+	38:string receiverName,
+	/*第三方支付单号*/
+	39:string payId
 	
 }
 
