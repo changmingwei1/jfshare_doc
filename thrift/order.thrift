@@ -626,6 +626,9 @@ service OrderServ{
 	/*查询线下卖家订单列表(卖家中心)*/
 	OrderProfileResult orderSellerQueryOffline(1:OrderSellerQueryParam param); 
 
+	/*订单同步接口到ES*/
+	result.StringResult synOrderES(1:string tableId,2:OrderQueryConditions conditions);
+	
 }
 
 
