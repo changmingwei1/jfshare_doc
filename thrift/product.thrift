@@ -478,7 +478,8 @@ struct ThirdPartyProductQueryParam{
 	/* 价格变化 0：全部， 1：上升， 2：下降， 3：持平 */
 	5:i32 priceState,
 	/* 提报状态 0：全部， 1：已提报， 2：未提报 */
-	6:i32 offerState
+	6:i32 offerState,
+	7:optional string productId
 }
 
 struct ThirdPartyProduct{
