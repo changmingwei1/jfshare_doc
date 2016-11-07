@@ -1,6 +1,7 @@
 namespace java com.jfshare.finagle.thrift.fileUpload
 
 include "result.thrift"
+include "pagination.thrift"
 
 struct FileParam{
 
@@ -16,13 +17,44 @@ struct FileParam{
          6:string excelKeyUrl, // 上传的excel文件
          7:bool notEncryptFlag,// excel里面的数据是未加密的标志位   --默认是加密状态--
          8:bool isTestFlag,// 是否是 测试---测试情况下 这里传递的 sellerId不是准确的!!
+         9:string sellerName	//商家名称,由第三方传递过来
 
 
 //        server      6:string FaceValue,//:		 		//卡券面值，单位分
 //   server生成      8:string orderId,// 供应商平台的订单号；若供应商平台无订单号，按照文件生成日期（YYYYMMDD）+四位序号（0001开始）的方式填写
 //     server生成    9:string sellerId // 	供应商在翼支付公司的商户编号。
 
+}
 
+struct AuditParam{
+	1:string id,	
+	2:i32 type 		/*审核标识  1:成功 ; 2:失败*/
+}
+
+struct QueryConditions{
+	1:string sellerName,	/*商家名称*/
+	2:string productName,	/*商品名称,支持模糊查询*/
+	3:i32 status	/*审核状态  0:全部 ; 1:通过 ; 2:不通过 ; 3:待审核*/
+}
+
+struct ThirdPartyCard{
+	1:string id,	
+	2:string orderId,	/*订单id*/
+	3:string sellerName,/*供应商*/
+	4:string productName,/*商品名称*/
+	5:string productNo,/*商品编码*/
+	6:i32 faceValue,/*卡券面值*/
+	7:i32 cardNumber,/*数量*/
+	8:string applyTime,/*申请审核的时间*/
+	9:string approveTime,/*审核时间*/
+	10:i32 status,/*审核状态*/
+	11:string expData/*有效期*/
+}
+
+struct ThirdPartyCardResultList{
+	1:result.Result result,
+	2:list<ThirdPartyCard> thirdPartyCards,
+	3:pagination.Pagination pagination
 }
 
 struct Recharge{
@@ -84,6 +116,12 @@ service FileForCardServ {
 	
 	/*接收key值,再传递给天翼*/
 	result.StringResult fileToTY(1:FileParam param);
+	
+	/*审核:通过则传给天翼; 不通过不传*/
+	result.Result auditPass(1:AuditParam param);
+	
+	/*查询第三方数据列表*/
+	ThirdPartyCardResultList queryCardsList(1:QueryConditions conditions, 2:pagination.Pagination pagination);
 	
 	/*添加充值记录*/
 	result.Result addRecharge(1:Recharge recharge);
