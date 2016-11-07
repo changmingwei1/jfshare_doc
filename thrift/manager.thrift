@@ -107,6 +107,7 @@ struct ModuleConfigDetail{
 	9:string curPrice,/*商品价格*/	
 	10:string orgPrice,/*商品原价*/	
 	11:string title,/*品牌或者商品标题*/	
+	12:string viceName/*品牌副标题*/
 }
 
 
