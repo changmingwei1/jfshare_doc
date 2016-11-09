@@ -275,4 +275,7 @@ service ScoreServ {
     /* 删除redis的key */
     result.StringResult delRedisbyKey(1:string key);
     
+    /*话费充值返还接口*/
+    result.StringResult returnScore(1:string orderId);
+    
 }
