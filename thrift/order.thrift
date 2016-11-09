@@ -228,7 +228,9 @@ struct Order {
 	/*运费扩展信息  JSON*/
 	37:optional string postageExt,
        38:optional i32 orderType,
-	   39:optional string thirdPrice
+	 39:optional string thirdPrice,
+	/*话费-流量-Q币充值状态，返回前台 add at 20161109*/
+	 40:optional string virRechargeState
 }
 
 /*订单查询条件*/
