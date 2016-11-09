@@ -234,7 +234,8 @@ service BaseTemplateServ{
 	result.Result setDefaultPostageTemplate(PostageTemplate postageTemplate);
 	/* 计算邮费 */
 	CalculatePostageResult calculatePostage(CalculatePostageParam param);
-	
+	/* 计算第三方的邮费 */
+	CalculatePostageResult calculateThirdPostage(CalculatePostageParam param);
 
 
     /* 添加邮费 */
