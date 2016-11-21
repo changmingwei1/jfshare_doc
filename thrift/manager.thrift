@@ -173,6 +173,7 @@ struct QueryImgkeyResult{
 	3:string curPrice,/*商品价格*/	
 	4:string orgPrice,/*商品原价*/	
 	5:string title,/*品牌或者商品标题*/
+	6:string viceName/*品牌副标题*/
 }
 
 /*按规则查看商品参数*/
