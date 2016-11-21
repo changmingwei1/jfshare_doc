@@ -192,7 +192,24 @@ struct CalculatePostageResult {
 	3:string totalPostage
 }
 
+/* 卖家维度邮费计算结果 和 商品维度计算结果  */
+struct Bean4Postage4Product {
+	/* 卖家ID */
+	1:i32 sellerId,
+	/* 邮费 */
+	4:map<string,string> maps,
+	2:string postage,
+	/* 商家邮费模板描述 */
+	3:optional string postageTemplate
+}
 
+
+/*根据产品id返回对应商品模板和商家运费模板*/
+struct Result4QueryPostageProAndSeller {
+	1:result.Result result,
+	/* 单个卖家邮费 */
+	2:list<Bean4Postage4Product> sellerPostageReturnList
+}
 
 
 service BaseTemplateServ{
@@ -250,4 +267,7 @@ service BaseTemplateServ{
 	/* PostageResult queryPostage(1:PostageQueryParam param); */
 	/* 获取邮费信息 */
     /* PostageResult getPostage(1:list<i32> postageIds); */
+
+    /*  查询产品运费信息 和 商家优惠运费信息,在用户产生订单的时候进行存放*/
+	Result4QueryPostageProAndSeller queryProductAndSellerPostage(CalculatePostageParam param);
 }
