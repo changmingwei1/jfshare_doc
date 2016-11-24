@@ -133,6 +133,20 @@ struct ManagerRefundResult{
 	3:string orderId, /*订单号*/
 }
 
+
+/*第三方订单信息返回结果*/
+struct GetPayOrderInfoResult{
+	1:result.Result result,
+	2:string appcode,		/*商家编号*/
+	3:string spid, /*接入业务*/
+	4:string requestNo,		/*请求流水*/
+	5:string payScore, /*抵扣积分*/
+	6:string status,		/*支付状态*/
+	7:string responseTime, /*返回时间*/
+	8:string MsgCode,  /*响应码  0000-成功，9999失败*/
+	9:string MsgContent,   /*响应消息*/
+}
+
 /*第三方支付服务*/
 service ThirdPayServ {
      /*第三方申请支付请求*/
@@ -155,4 +169,7 @@ service ThirdPayServ {
    	
    	/*管理中心申请退款*/
 	ManagerRefundResult managerRefund(1:ManagerRefundParam param);
+	
+	/*第三方订单信息查询*/
+	GetPayOrderInfoResult getPayOrderInfo(1:string requestXml);
 }
