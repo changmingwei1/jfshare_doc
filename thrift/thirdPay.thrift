@@ -60,7 +60,7 @@ struct ThirdPayRefundResult{
 struct QueryThirdPayApplyLogParam{
 	1:string startTime,/*开始时间*/
 	2:string endTime,/*结束时间*/
-	3:string timeType, /*时间类型  1:支付时间  2：退款时间*/
+	3:string timeType, /*时间类型  1:支付时间  2：退款时间  3:请求时间*/
 	4:string status, /*支付状态*/
 	5:string orderId,/*商家订单号*/
 	6:string thirdPayId,/*支付流水号*/
@@ -172,4 +172,8 @@ service ThirdPayServ {
 	
 	/*第三方订单信息查询*/
 	GetPayOrderInfoResult getPayOrderInfo(1:string requestXml);
+	
+	
+	/*15天自动关闭支付订单*/
+	result.Result confirmReceipt(1:string status, 2:string id);  
 }
