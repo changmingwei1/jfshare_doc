@@ -16,8 +16,9 @@ struct BatchActivity {
         9:string curStatus,
         10:string password,
         11:string multiRechargeEnable,
-	12:i32 UsedCount,
-	13:i32 SendCount,
+		12:i32 UsedCount,
+		13:i32 SendCount,
+		14:string channel,
 
 }
 
@@ -152,7 +153,8 @@ struct ActivityBean {
         /** 状态：0可用 1作废 2过期 */
         7:string curStatus,
         8:string password,
-        9:string multiRechargeEnable;
+        9:string multiRechargeEnable,
+        10:optional string channel   /*添加渠道字段*/
 
 }
 
@@ -273,47 +275,87 @@ struct GenerateParam {
 
 
 
+/**积分卡统计查询条件*/
+struct ActivityStatisticParam {
+       1:optional string channel,
+       2:optional string startTime,
+       3:optional string endTime,
+}
 
+
+
+
+/**积分卡导出条件*/
+struct ExprotParam {
+       1:optional string channel,
+       2:optional string startTime,
+       3:optional string endTime,
+}
+
+
+/*积分卡统计对象*/
+struct ActivityStatistic {
+        1:string createTime,/*时间*/
+        2:string pieceValue,/*面值 */
+        3:i32 sumTotalCount,/*总张数 */
+		4:string channel,/*渠道*/
+		5:i32 sumAmount,/*面值积分额*/
+		
+}
+
+/** 积分卡统计返回结果*/
+struct ActivityStatisticResult{
+	1:result.Result result,
+	2:list<ActivityStatistic> activityStatisticList,
+	3:pagination.Pagination pagination,
+	4:i32 sumScore
+}
+
+/*导出返回结果*/
+struct ExprotResult{
+	1:string path,
+	2:result.Result result,
+}
 
 /* 积分卡 功能*/
 service ScoreCardServ {
 
-    /**  创建批次活动 */
-    ActivityResult  createOneActivity(1:ActivityBean entity);
-
-	/*查询 批次产品*/
-	ActivityBatchResult queryActivities(1:ActivityQueryParam param,2:pagination.Pagination pagination);
-
-	/*查询单件批次产品*/
-	ActivityResult queryActivityById(1:i32  activityId);
-
-	/*查询某个活动下面所有卡片  */
-	CardBatchResult queryCards(1:i32  activityId,2:CardQueryParam param,  3:pagination.Pagination pagination);
-
-	/*查询根据id 的卡片记录*/
-	CardResult queryCardById(1:i32  cardId);
-
-	/*查询某个活动卡 充值记录 */
-	CardRecordBatchResult queryRechargeCards(1:i32  userId, 2:pagination.Pagination pagination);
-
-	/*查询根据id 的已充值的卡片记录*/
-	CardRecordResult queryRechargeCardById(1:i32  rechargeCardId);
-
-    /* 导出 卡号和卡密 的excel  不进行分页 */
-	ExcelExportResult exportExcelByqueryCards(1:i32  activityId,2:CardQueryParam param,3:string psd);
-
-	/*web主站--积分充值*/
-	result.StringResult recharge(1:RechargeParam param);
+		    /**  创建批次活动 */
+		    ActivityResult  createOneActivity(1:ActivityBean entity);
+		
+			/*查询 批次产品*/
+			ActivityBatchResult queryActivities(1:ActivityQueryParam param,2:pagination.Pagination pagination);
+		
+			/*查询单件批次产品*/
+			ActivityResult queryActivityById(1:i32  activityId);
+		
+			/*查询某个活动下面所有卡片  */
+			CardBatchResult queryCards(1:i32  activityId,2:CardQueryParam param,  3:pagination.Pagination pagination);
+		
+			/*查询根据id 的卡片记录*/
+			CardResult queryCardById(1:i32  cardId);
+		
+			/*查询某个活动卡 充值记录 */
+			CardRecordBatchResult queryRechargeCards(1:i32  userId, 2:pagination.Pagination pagination);
+		
+			/*查询根据id 的已充值的卡片记录*/
+			CardRecordResult queryRechargeCardById(1:i32  rechargeCardId);
+		
+		    /* 导出 卡号和卡密 的excel  不进行分页 */
+			ExcelExportResult exportExcelByqueryCards(1:i32  activityId,2:CardQueryParam param,3:string psd);
+		
+			/*web主站--积分充值*/
+			result.StringResult recharge(1:RechargeParam param);
+			
+			
+	        /*密码验证*/
+	      result.Result validataPassword(1:string validataStr);
+	  
+	      /*定向充值*/
+	      DirectRechargeResult directRecharge(1:ToRechargeParams params);
 	
-	
-        /*密码验证*/
-      result.Result validataPassword(1:string validataStr);
-  
-      /*定向充值*/
-      DirectRechargeResult directRecharge(1:ToRechargeParams params);
-
-      /*  作废一个有效批次活动*/
-      InvalidOneActivityResult invalidOneActivity(1:i32  activityId,2:string psd);
+	      /*  作废一个有效批次活动*/
+	      InvalidOneActivityResult invalidOneActivity(1:i32  activityId,2:string psd);
 
 
 
@@ -350,5 +392,11 @@ service ScoreCardServ {
 
         	/*领取红包*/
         	result.StringResult receiveRedbag(1:string encryActivityId, 2:string mobile);
-
+			
+			/*积分卡统计*/
+			ActivityStatisticResult activityStatistic(1:ActivityStatisticParam param,2:pagination.Pagination pagination);
+			
+			/*积分卡统计导出*/
+   			ExprotResult exprotActivityStatistic(1:ExprotParam param);
+			
 }
