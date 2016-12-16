@@ -115,6 +115,12 @@ struct PurchaseMobileResult{
     2:optional bool value,
 }
 
+/*解禁用用户权限*/
+struct IsDisableUseParam{
+	1:string serial, /*0 启用  1禁用*/
+    2:string userId, /*用户ID*/
+    3:string id,/*管理员ID*/
+}
 /*买家服务*/
 service BuyerServ {
     /*查询登录名是否存在*/
@@ -154,7 +160,7 @@ service BuyerServ {
     BuyerResult getBuyerInfo(1:Buyer buyer);
     
     /*批量获取用户信息*/
-    BuyerListResult getListBuyer(1:optional list<i32> userIdList);
+    BuyerListResult getListBuyer(1:list<i32> userIdList);
 	
 	/*更新用户信息*/
     result.Result updateBuyer(1:Buyer buyer);
@@ -194,5 +200,9 @@ service BuyerServ {
     
     /*广东电信账号是否限购*/
     PurchaseMobileResult isPurchaseMobile(1:string mobile); 
+    
+    
+    /*解/禁用用户权限*/
+    result.Result isDisableUser(1:IsDisableUseParam param);
     
 }
