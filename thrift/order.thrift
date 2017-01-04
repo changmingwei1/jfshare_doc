@@ -229,8 +229,10 @@ struct Order {
 	37:optional string postageExt,
        38:optional i32 orderType,
 	 39:optional string thirdPrice,
-	/*话费-流量-Q币充值状态，返回前台 add at 20161109*/
-	 40:optional string virRechargeState
+	/*话费-流量-Q币充值状态，返回前台 add at 20161109，卡密的发放状态*/
+	 40:optional string virRechargeState,
+	 /***第三方的订单号****/
+	 41:optional string thirdOrderId
 }
 
 /*订单查询条件*/
