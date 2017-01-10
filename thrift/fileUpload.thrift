@@ -134,6 +134,35 @@ service FileForCardServ {
 	
 	/*查询充值数据*/
 	RechargeListResult rechargeList(1:list<i32> states,2:string reqOutNo);
+
+
+
+	/*******************************游戏充值和Q币充值***************************************************/
+	/**根据游戏id和游戏名字首查询游戏**/
+	ThirdGameListResult queryGameList(1:ThirdGameParam param);
+	/*查詢服務器列表*/
+	GameAreaListResult queryGameAreaList(1:string thirdGameId);
+
+	/**查询用户角色**/
+	GameRoleResult queryGameRole(1:string account,2:string gamearea,3:string gameserver,4:string thirdGameId);
+
+	/****验证充值时候的游戏参数******/
+	result.Result validateRechargeGame(1:ThirdGameRechargeParam params);
 	
+	/***********根据订单id查询游戏充值结果***********/
 	
+	ThirdGameOrderListResult queryOrderList(1:ThirdGameOrderParam params);
+
+	/********游戏充值回调方法***************/
+	result.Result callBackGame(ThirdGameCallBackParam params);
+
+
+	/*******************************************************************************/
+
+
+	/*************************流量充值************************************/
+	/******流量充值，查询手机号归属地*****/
+	result.StringResult queryMobileDic(1:string mobile);
+
+	result.Result callBackFlow(1:string orderNo,2:string cstmOrderNo,3:string status,4:string msg);
 }
