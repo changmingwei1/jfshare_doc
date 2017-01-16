@@ -121,6 +121,17 @@ struct IsDisableUseParam{
     2:string userId, /*用户ID*/
     3:string id,/*管理员ID*/
 }
+
+struct SmsLoginEnterAmountParam{
+	1:string mobile,          /*登陆手机号*/
+	2:string encryptyParam,  /*加密参数*/
+	3:string captchaDesc,    /*短信验证码*/
+}
+
+struct SmsLoginEnterAmountResult{
+	1:result.Result result, /*返回结果*/
+    2:string url, /*返回url*/
+}
 /*买家服务*/
 service BuyerServ {
     /*查询登录名是否存在*/
@@ -204,5 +215,8 @@ service BuyerServ {
     
     /*解/禁用用户权限*/
     result.Result isDisableUser(1:IsDisableUseParam param);
+    
+    /*积分兑入短信登陆鉴权*/
+    SmsLoginEnterAmountResult smsLoginEnterAmount(1:SmsLoginEnterAmountParam param);
     
 }
