@@ -27,7 +27,8 @@ struct PayReq {
     11:string custId, /*第三方客户id*/
     12:string custType, /*第三方客户类型*/
     13:optional string procustID, /*第三方省份ID*/
-	14:optional i32 score2cashAmount /*积分抵现部分金额*/
+	14:optional i32 score2cashAmount, /*积分抵现部分金额*/
+	15:optional i32 userId, /*聚分享用户ID*/
 }
 
 /*支付返回参数*/
@@ -66,9 +67,12 @@ service PayServ {
         /*生成支付请求*/
 	result.StringResult payUrl(1:PayReq payReq);
 
-        /*接收第三方支付结果*/
+     /*接收第三方支付结果*/
 	result.StringResult payNotify(1:PayRes payRes);
 	
-		/*支付结果查询*/
+	/*接收招商一网通签名结果*/
+	result.StringResult payNotifySign(1:PayRes payRes);
+	
+	/*支付结果查询*/
 	result.StringResult queryPayResult(1:payRetQueryParams params);
 }
