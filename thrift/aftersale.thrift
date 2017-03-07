@@ -95,6 +95,36 @@ struct AfterSaleOrderParam{
 	8:i32 fromSource /*订单来源 聚分享pc=1,聚分享Android=2，聚分享ios=3，聚分享H5=4，百分尊享PC=5，百分尊享H5=6*/
 }
 
+/*退货成功退积分参数*/
+struct ReturnScoreParam{
+	1:string productId,/*商品ID*/
+    2:string orderId,/* 订单ID*/
+    3:i32 scoreAmount,/*操作积分额*/
+    4:string passWord,/*操作密码*/
+}
+
+/*退积分明细表*/
+struct ScoreBackProduct{
+	1:i32 id,/*主键*/
+    2:string productId,/*商品ID*/
+    3:i32 userId,/*订单使用积分额*/
+    4:string orderId,/*订单ID*/
+    5:i32 amount,/*商品单价积分*/
+    6:string createTime,/*订单邮费*/
+}
+
+/*查询退积分明细返回结果*/
+struct MaxReturnScoreResult{
+	1:i32 productFinishScore,/*商品已退积分*/
+    2:i32 orderFinishScore,/* 订单已退积分*/
+    3:i32 orderExchangeScore,/*订单使用积分额*/
+    4:string productPrice,/*商品单价积分*/
+    5:string orderPostage,/*订单邮费*/
+    6:list<ScoreBackProduct> sbpList, /*商品退积分集合*/
+    7:result.Result result,
+}
+
+
 service AfterSaleServ {
     /* 申请售后 */
     result.StringResult request(1:AfterSale afterSale);
@@ -109,5 +139,11 @@ service AfterSaleServ {
 
     /* 查询售后订单*/
     AfterSaleOrderResult queryAfterSaleOrder(1:AfterSaleOrderParam param, 2:pagination.Pagination pagination);
+    
+    /* 退货成功查询可退最大积分额*/
+    MaxReturnScoreResult queryMaxReturnScore(1:ReturnScoreParam param);
+    
+    /*退货成功退还积分*/
+    result.StringResult ReturnScore(1:ReturnScoreParam param);
 		
 }
