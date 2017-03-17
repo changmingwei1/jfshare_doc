@@ -485,7 +485,9 @@ struct PayParam {
 	4:optional i32 exchangeScore,
 
 	/*兑换多少现金*/
-	5:optional string exchangeCash
+	5:optional string exchangeCash,
+	/*客户端类型*/
+	6:optional string clientType
 }
 
 /*支付进度*/

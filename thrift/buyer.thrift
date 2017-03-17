@@ -218,5 +218,7 @@ service BuyerServ {
     
     /*积分兑入短信登陆鉴权*/
     SmsLoginEnterAmountResult smsLoginEnterAmount(1:SmsLoginEnterAmountParam param);
-    
+
+    /********第三方免登录 用于鹏淘内置h5的校验登录***********/
+    BuyerResult thirdSigninCheck(1:LoginLog loginLog, 2:UserInfoThird UserThird, 3:ValidateInfo validateInfo);
 }
