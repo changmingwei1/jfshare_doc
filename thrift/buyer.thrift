@@ -221,4 +221,8 @@ service BuyerServ {
 
     /********第三方免登录 用于鹏淘内置h5的校验登录***********/
     BuyerResult thirdSigninCheck(1:LoginLog loginLog, 2:UserInfoThird UserThird, 3:ValidateInfo validateInfo);
+
+    /*****提供给第三方的登录校验 token,mobileNo,openId,accessCode*******/
+    result.Result checkAppH5Token(1:string token,2:string mobileNo,3:string openId,4:string mac,5:string accessCode);
+
 }
