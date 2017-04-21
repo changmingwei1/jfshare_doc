@@ -229,10 +229,8 @@ struct Order {
 	37:optional string postageExt,
        38:optional i32 orderType,
 	 39:optional string thirdPrice,
-	/*话费-流量-Q币充值状态，返回前台 add at 20161109，卡密的发放状态*/
-	 40:optional string virRechargeState,
-	 /***第三方的订单号****/
-	 41:optional string thirdOrderId
+	 /*话费-流量-Q币充值状态，返回前台 add at 20161109*/
+	 40:optional string virRechargeState
 }
 
 /*订单查询条件*/
@@ -485,9 +483,7 @@ struct PayParam {
 	4:optional i32 exchangeScore,
 
 	/*兑换多少现金*/
-	5:optional string exchangeCash,
-	/*客户端类型*/
-	6:optional string clientType
+	5:optional string exchangeCash
 }
 
 /*支付进度*/
@@ -634,6 +630,14 @@ service OrderServ{
 
 	/*订单同步接口到ES*/
 	result.StringResult synOrderES(1:string tableId,2:OrderQueryConditions conditions);
+	
+	
+	/*-------------------话费、流量、q币充值、游戏状态更新调用------------*/
+	/*修改订单状态*/
+	result.Result updateOrderState4Charge(1:i32 userId, 2:string orderId);
+
+	/************校验订单是否真实有效，提供给深圳通使用*********/
+	result.StringResult checkOrder(1:string orderId,2:string mobile,3:string mac,4:i32 type);
 	
 }
 
