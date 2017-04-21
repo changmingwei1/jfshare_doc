@@ -47,7 +47,13 @@ struct Commissioner {
     1:i32 csId,
     2:string loginName,
     3:string csName,
-	4:string pwdEnc
+	4:string pwdEnc,
+	5:optional i32 deptId,
+	6:optional string mobile,
+	7:optional string email,
+	8:optional i32 validate,
+	9:optional string createTime,
+	10:optional string url
 }
 
 /*登陆请求参数*/
@@ -60,6 +66,8 @@ struct LoginLog {
     6:i32 loginAuto, /*是否自动登录*/
     7:string loginTime,
     8:string logoutTime,
+    9:optional i32 validate,
+    10:optional string url
 }
 
 struct CommissionerResult {
@@ -67,6 +75,12 @@ struct CommissionerResult {
       2:optional Commissioner cs,
 	  3:LoginLog loginLog,
 	  4:optional bool value,
+}
+
+struct CommissionerListResult {
+    1:result.Result result,
+	2:list<Commissioner> commissioners,
+	3:pagination.Pagination pagination
 }
 
 struct ModuleConfig{
@@ -233,13 +247,37 @@ struct AdvertSlotListResult{
 	2:list<AdvertSlot> slotList
 }
 
+
+struct FriendsPushResult{
+	1:result.Result result,
+	2:string img,
+	3:i32 value,
+	4:string friendsName,
+	5:string dateTime
+}
+
+struct FriendsPush{
+	1:string img,
+	2:string name,
+	3:string pushDate,
+	4:i32 value
+}
+
+struct FriendsPushListResult{
+	1:result.Result result,
+	2:list<FriendsPush> pushList,
+	3:pagination.Pagination pagination
+}
+
+
+
 /*service*/
 service ManagerServ{
 	/*记录变更商品状态变更日志*/
-	result.Result logProductOpt(1:ProductOpt productOpt)
+	result.Result logProductOpt(1:ProductOpt productOpt);
 	
 	/*查询商品状态变更日志*/
-	ProductOptResult queryProductOptRecords(1:QueryConditions conditions)
+	ProductOptResult queryProductOptRecords(1:QueryConditions conditions);
 	
 	/*查询登录名是否存在*/
     result.BoolResult isLoginNameExist(1:string loginName);
@@ -312,5 +350,40 @@ service ManagerServ{
 	
 	/*查询各端轮播图列表*/
 	AdvertSlotListResult queryAdvertSlotList();
+	/*====================================================管理员账号管理====================================================*/
 	
+	/**根据用户ID查询其权限列表**/
+	result.StringResult queryPermissionByCsId(1:i32 csId);
+	
+	/**查询全部客服信息**/
+	CommissionerListResult queryAllCommissioner(1:pagination.Pagination pagination);
+	
+	/**管理员查询单个客服信息**/
+   	 CommissionerResult queryCommissionerByCsId(1:i32 csId);
+		
+	/**管理员对具体客服信息进行修改**/
+	result.Result modifyCommissionerByCsId(1:Commissioner cs);
+	
+	/**管理员对客服密码进行修改 字段修改**/
+	result.Result resetCommissionerPwd(1:i32 csId,2:string newPwd);
+
+	/**管理员对客服状态进行更改**/
+	result.Result changeValidate(1:Commissioner cs);
+	
+	/**新增管理员*/
+	 result.Result insert(1:Commissioner cs);
+
+	 /**********************愚人节临时活动*****************************/
+
+	 /***获取活动的分享链接*******/
+	result.StringResult getShareUrl(1:string openId,2:string userId,3:string name,4:string img,5:string token);
+
+	/*******给朋友拼点********/
+	FriendsPushResult pushFriends(1:string selfOpenId,2:string selfName,3:string friendsOpenId,4:string friendUserId,5:string sign,6:string selfimg,7:string selfToken);
+
+	/******查询拼点的记录********/
+	FriendsPushListResult queryPushList(1:string userId,2:string openId,3:pagination.Pagination pagination);
+	/************查询积分总额******************/
+	FriendsPushResult queryTotalScore(1:string userId,2:string openId);
+
 }
