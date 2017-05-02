@@ -95,6 +95,46 @@ struct UserInfoThird{
 	4:string extInfo
 }
 
+
+/*微信第三方认证返回的个人信息*/
+struct Profile4WeiXin{
+	1:string openid,
+	2:string nickname,
+	3:string sex,
+	4:string province,
+	5:string city,
+	6:string country,
+	7:string headimgurl,
+	8:string unionid,
+	9:string privilege,
+	10:string access_token
+
+
+
+//	      public String  openid;
+//        public String  nickname;
+//        public String  sex;
+//        public String  province;
+//        public String  city;
+//        public String  country;
+//        public String  headimgurl;
+//        public String  unionid;
+//        public String  privilege;
+//        public String  access_token;
+
+
+}
+
+
+/**   获取个人信息 */
+struct WXProfileResult {
+      1:result.Result result,
+      2:optional Profile4WeiXin profile
+}
+
+
+
+
 /*=================*/
 
 /*H5第三方登陆请求参数*/
@@ -224,5 +264,12 @@ service BuyerServ {
 
     /*****提供给第三方的登录校验 token,mobileNo,openId,accessCode*******/
     result.Result checkAppH5Token(1:string token,2:string mobileNo,3:string openId,4:string mac,5:string accessCode);
+
+
+
+     /* 获取个人信息--- 根据手机号 去获取个人信息  */
+     WXProfileResult getProfileFromWeixin(1:string userId);
+     /* 获取个人信息--- 根据手机号 去获取个人信息  --根据code */
+     WXProfileResult getProfileFromWeixinByCode(1:string userId,2:string code);
 
 }
