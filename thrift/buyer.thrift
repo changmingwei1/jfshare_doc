@@ -126,10 +126,34 @@ struct Profile4WeiXin{
 }
 
 
+/*微信第三方认证返回的个人信息*/
+struct Config4WeiXin{
+	1:string url,
+	2:string jsapi_ticket,
+	3:string nonceStr,
+	4:string timestamp,
+	5:string signature
+
+//	      public String  url; //: '', // 必填，公众号的唯一标识
+//        public String  jsapi_ticket;//: , // 必填，生成签名的时间戳
+//        public String  nonceStr;//: '', // 必填，生成签名的随机串
+//        public  String  timestamp;//: '',// 必填，签名，见附录1
+//        public  String  signature;//: '',// 必填，签名，见附录1
+
+
+
+}
+
+
 /**   获取个人信息 */
 struct WXProfileResult {
       1:result.Result result,
       2:optional Profile4WeiXin profile
+}
+/**   jsApi 的微信config */
+struct WXConfigResult {
+      1:result.Result result,
+      2:optional Config4WeiXin config
 }
 
 
@@ -268,8 +292,10 @@ service BuyerServ {
 
 
      /* 获取个人信息--- 根据手机号 去获取个人信息  */
-     WXProfileResult getProfileFromWeixin(1:string userId);
+     WXProfileResult getProfileFromWeixinByUnionId(1:string unionId);
      /* 获取个人信息--- 根据手机号 去获取个人信息  --根据code */
-     WXProfileResult getProfileFromWeixinByCode(1:string userId,2:string code);
+     WXProfileResult getProfileFromWeixinByCode(1:string code);
+     /*  根据url 获取微信的 config  jsapi 需要的 */
+     WXConfigResult getWeiXinJSconfig(1:string url);
 
 }
